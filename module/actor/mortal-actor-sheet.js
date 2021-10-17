@@ -137,13 +137,21 @@ export class MortalActorSheet extends CoterieActorSheet {
         `<option value="${key}">${game.i18n.localize(value.name)}</option>`
       );
     }
-
+    let selectAbility
+  //    If rolling frenzy, the pop up won't have any select Ability 
+  if (dataset.label==game.i18n.localize("VTM5E.ResistingFrenzy")) 
+   selectAbility =  ""
+  else 
+   selectAbility =  `<div class="form-group">
+                      <label>${game.i18n.localize("VTM5E.SelectAbility")}</label>
+                      <select id="abilitySelect">${options}</select>
+                    </div>`;
     const template = `
       <form>
-          <div class="form-group">
-              <label>${game.i18n.localize("VTM5E.SelectAbility")}</label>
-              <select id="abilitySelect">${options}</select>
-          </div>  
+          `
+          + selectAbility + 
+           ` 
+          
           <div class="form-group">
               <label>${game.i18n.localize("VTM5E.Modifier")}</label>
               <input type="text" id="inputMod" value="0">
@@ -160,11 +168,13 @@ export class MortalActorSheet extends CoterieActorSheet {
         icon: '<i class="fas fa-check"></i>',
         label: game.i18n.localize("VTM5E.Roll"),
         callback: async (html) => {
+          if (dataset.name!=="frenzy") {
           const ability = html.find("#abilitySelect")[0].value;
           const abilityVal = this.actor.data.data.abilities[ability].value;
           const abilityName = game.i18n.localize(
             this.actor.data.data.abilities[ability].name
           );
+          }
 
           const modifier = parseInt(html.find("#inputMod")[0].value || 0);
           const difficulty = parseInt(html.find("#inputDif")[0].value || 0);
