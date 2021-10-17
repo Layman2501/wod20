@@ -209,6 +209,13 @@
             "powers": [],
             "visible": false
           },
+          
+          "necromancy": {
+            "name": "VTM5E.Necromancy",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
           "auspex": {
             "name": "VTM5E.Auspex",
             "value": 0,

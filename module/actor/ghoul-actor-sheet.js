@@ -74,6 +74,7 @@ export class GhoulActorSheet extends MortalActorSheet {
       rituals: [],
       ceremonies: [],
       thaumaturgy: [],
+      necromancy: [],
     };
 
     // Iterate through items, allocating to containers

@@ -178,10 +178,12 @@ Hooks.once("init", async function () {
       potence: "VTM5E.Potence",
       presence: "VTM5E.Presence",
       protean: "VTM5E.Protean",
+      thaumaturgy: "VTM5E.Thaumaturgy",
+      necromancy: "VTM5E.Necromancy",
       oblivion: "VTM5E.Oblivion",
       rituals: "VTM5E.Rituals",
       ceremonies: "VTM5E.Ceremonies",
-      thaumaturgy: "VTM5E.Thaumaturgy",
+      
     };
     // if (roll) {
     //   // if (key === "rituals") {

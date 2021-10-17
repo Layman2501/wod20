@@ -137,15 +137,23 @@ export class MortalActorSheet extends CoterieActorSheet {
         `<option value="${key}">${game.i18n.localize(value.name)}</option>`
       );
     }
-    let selectAbility
+  let specialty 
+  let selectAbility
   //    If rolling frenzy, the pop up won't have any select Ability 
   if (dataset.label==game.i18n.localize("VTM5E.ResistingFrenzy")) 
-   selectAbility =  ""
+   {
+    selectAbility =  ""
+    specialty =  ``
+  }
+
   else 
-   selectAbility =  `<div class="form-group">
+   {
+     selectAbility =  `<div class="form-group">
                       <label>${game.i18n.localize("VTM5E.SelectAbility")}</label>
                       <select id="abilitySelect">${options}</select>
                     </div>`;
+    specialty =  `<input id="specialty" type="checkbox"> Specialty </input>`
+  }
     const template = `
       <form>
           `
@@ -160,6 +168,7 @@ export class MortalActorSheet extends CoterieActorSheet {
               <label>${game.i18n.localize("VTM5E.Difficulty")}</label>
               <input type="text" min="0" id="inputDif" value="0">
           </div>
+          ` + specialty + `
       </form>`;
 
     let buttons = {};
@@ -175,6 +184,7 @@ export class MortalActorSheet extends CoterieActorSheet {
           );
           const modifier = parseInt(html.find("#inputMod")[0].value || 0);
           const difficulty = parseInt(html.find("#inputDif")[0].value || 0);
+          const specialty = parseInt(html.find("#specialty")[0]?.checked || false);
           const numDice =
             dataset.name !== "frenzy"
               ? abilityVal + parseInt(dataset.roll) + modifier
@@ -186,7 +196,8 @@ export class MortalActorSheet extends CoterieActorSheet {
               ? `${dataset.label} + ${abilityName}`
               : `${dataset.label}`,
             difficulty,
-            this.hunger
+            this.hunger, 
+            specialty
           );
           // this._vampireRoll(numDice, this.actor, `${dataset.label} + ${abilityName}`, difficulty)
         },

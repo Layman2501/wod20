@@ -7,6 +7,7 @@ export function rollDice(
   label = "",
   difficulty = 0,
   useHunger, 
+  specialty
   ) {
   const dice = numDice;
   console.log(dice);
@@ -20,12 +21,12 @@ export function rollDice(
   let fail = 0;
   let hungerFail = 0;
   let hungerCritFail = 0;
-  
+  console.log(specialty)
   rollResult.terms[0].results.forEach((dice) => {
     if (dice.result >= difficulty) {
-      // if (dice.result === 10) {
-      //   critSuccess += 2;
-      // } else
+      if (specialty && dice.result === 10) {
+        critSuccess += 2;
+      } else
       if (dice.result===1) {
         success==success-1
       }
