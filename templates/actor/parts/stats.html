@@ -1,6 +1,14 @@
 <div class="tab flex-center" data-group="primary" data-tab="stats">
   <label class="resource-label">{{localize "VTM5E.Attributes"}}</label>
-  <div class="abilities grid grid-3col flex-group-center">
+    {{setVar "generation" data.data.headers.generation}}
+    {{#le generation 7}}
+      {{setVar "loopLength" 10}}
+      {{setVar "colNum" 2}}
+    {{else}}
+      {{setVar "loopLength" 5 }}
+      {{setVar "colNum" 3}}
+    {{/le}}
+  <div class="abilities grid grid-{{colNum}}col flex-group-center">
     {{#each data.data.abilities as |ability key|}}
     <div class="ability flexrow flex-center">
       <label
@@ -16,16 +24,18 @@
         data-name="data.abilities.{{key}}.value"
       >
         <span class="resource-value-empty"></span>
-        {{#numLoop 5}}
+      
+        {{#numLoop ../loopLength}}
         <span class="resource-value-step" data-index="{{this}}"></span>
         {{/numLoop}}
+     
       </div>
     </div>
     {{/each}}
   </div>
 
   <label class="resource-label">{{localize "VTM5E.Skills"}}</label>
-  <div class="skills grid grid-3col flex-group-center">
+  <div class="skills grid grid-{{colNum}}col flex-group-center">
     {{#each data.data.skills as |skill key|}}
     <div class="skill flexrow flex-center">
       <label
@@ -41,7 +51,7 @@
         data-name="data.skills.{{key}}.value"
       >
         <span class="resource-value-empty"></span>
-        {{#numLoop 5}}
+        {{#numLoop ../loopLength}}
         <span class="resource-value-step" data-index="{{this}}"></span>
         {{/numLoop}}
       </div>

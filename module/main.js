@@ -103,6 +103,20 @@ Hooks.once("init", async function () {
     return str.charAt(0).toUpperCase() + str.slice(1);
   });
 
+  Handlebars.registerHelper('ge', function( a, b ){
+    var next =  arguments[arguments.length-1];
+    return (a >= b) ? next.fn(this) : next.inverse(this);
+  });
+  Handlebars.registerHelper('le', function( a, b ){
+    var next =  arguments[arguments.length-1];
+    console.log(a,b);
+    console.log((a <= b)) 
+    return (a <= b) ? next.fn(this) : next.inverse(this);
+    
+  });
+  Handlebars.registerHelper("setVar", function(varName, varValue, options) {
+    options.data.root[varName] = varValue;
+  });
   const capitalize = (s) => {
     if (typeof s !== "string") return "";
     return s.charAt(0).toUpperCase() + s.slice(1);

@@ -168,14 +168,11 @@ export class MortalActorSheet extends CoterieActorSheet {
         icon: '<i class="fas fa-check"></i>',
         label: game.i18n.localize("VTM5E.Roll"),
         callback: async (html) => {
-          if (dataset.name!=="frenzy") {
-          const ability = html.find("#abilitySelect")[0].value;
-          const abilityVal = this.actor.data.data.abilities[ability].value;
+          const ability = html.find("#abilitySelect")[0]?.value;
+          const abilityVal = this.actor.data.data.abilities[ability]?.value;
           const abilityName = game.i18n.localize(
-            this.actor.data.data.abilities[ability].name
+            this.actor.data.data.abilities[ability]?.name
           );
-          }
-
           const modifier = parseInt(html.find("#inputMod")[0].value || 0);
           const difficulty = parseInt(html.find("#inputDif")[0].value || 0);
           const numDice =

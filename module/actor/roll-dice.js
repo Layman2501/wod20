@@ -6,10 +6,11 @@ export function rollDice(
   actor,
   label = "",
   difficulty = 0,
-) {
+  useHunger, 
+  ) {
   const dice = numDice;
   console.log(dice);
-  const roll = new Roll(dice + "dvcs>5 + " + 0 + "dhcs>5", actor.data.data);
+  const roll = new Roll(dice + "dvcs>11 + " + 0 + "dhcs>11", actor.data.data);
   const rollResult = roll.evaluate();
   console.log(rollResult.terms[0].results);
   let difficultyResult = "<span></span>";
@@ -19,14 +20,19 @@ export function rollDice(
   let fail = 0;
   let hungerFail = 0;
   let hungerCritFail = 0;
-
+  
   rollResult.terms[0].results.forEach((dice) => {
-    if (dice.success) {
-      if (dice.result === 10) {
-        critSuccess += 2;
-      } else {
+    if (dice.result >= difficulty) {
+      // if (dice.result === 10) {
+      //   critSuccess += 2;
+      // } else
+      if (dice.result===1) {
+        success==success-1
+      }
+      else {
         success++;
       }
+
     } else {
       fail++;
     }

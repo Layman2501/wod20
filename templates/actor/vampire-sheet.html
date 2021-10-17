@@ -46,10 +46,9 @@
       {{!-- The grid classes are defined in scss/global/_grid.scss. To use, use
       both the "grid" and "grid-Ncol" class where "N" can be any number from 1
       to 12 and will create that number of columns. --}}
-      <div class="resources grid grid-4col">
-        {{> "systems/vtm5e-clone/templates/actor/parts/exp.html"}} {{>
-        "systems/vtm5e-clone/templates/actor/parts/hunger.html"}} {{>
-        "systems/vtm5e-clone/templates/actor/parts/rouse.html"}} {{>
+      <div class="resources grid grid-3col">
+        {{> "systems/vtm5e-clone/templates/actor/parts/exp.html"}} 
+        {{>"systems/vtm5e-clone/templates/actor/parts/rouse.html"}} {{>
         "systems/vtm5e-clone/templates/actor/parts/frenzy.html"}}
       </div>
     </div>
@@ -60,7 +59,7 @@
     <a class="item" data-tab="stats">{{localize "VTM5E.Stats"}}</a>
     <a class="item" data-tab="disciplines">{{localize "VTM5E.Disciplines"}}</a>
     <a class="item" data-tab="features">{{localize "VTM5E.Features"}}</a>
-    <a class="item" data-tab="blood">{{localize "VTM5E.Blood"}}</a>
+
     <a class="item" data-tab="description">{{localize "VTM5E.Description"}}</a>
     <a class="item" data-tab="other">{{localize "VTM5E.Other"}}</a>
   </nav>
@@ -72,8 +71,8 @@
     Tab --}} {{> "systems/vtm5e-clone/templates/actor/parts/disciplines.html"}}
     {{!-- Owned Features Tab --}} {{>
     "systems/vtm5e-clone/templates/actor/parts/features.html"}} {{!-- Blood Tab
-    --}} {{> "systems/vtm5e-clone/templates/actor/parts/blood.html"}} {{!--
-    Biography Tab --}} {{>
+    --}}
+     {{>
     "systems/vtm5e-clone/templates/actor/parts/biography.html"}} {{!-- Other Tab
     --}} {{> "systems/vtm5e-clone/templates/actor/parts/other.html"}}
   </section>
