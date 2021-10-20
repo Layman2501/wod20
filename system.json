@@ -6,7 +6,7 @@
   "minimumCoreVersion": "0.8.0",
   "compatibleCoreVersion": "0.8.8",
   "templateVersion": 3,
-  "author": "Ray Ji",
+  "author": "Majid, Mal, Ray Ji",
   "esmodules": ["module/main.js"],
   "styles": ["css/vtm5e.css"],
   "scripts": [],
