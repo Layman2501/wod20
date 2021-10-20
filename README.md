@@ -1,27 +1,26 @@
-# Vampire the Masquerade 5e System
+# Vampire the Masquerade V20 System
 
 [![Foundry Shield 0.8.8]][Foundry URL]
 [![MIT License]][MIT URL]
 [![GitHub Super-Linter]][Super-Linter URL]
 
-This system is for playing Vampire the Masquerade 5th edition on the Foundry Virtual Tabletop System.
+This system is for playing Vampire the Masquerade 20h edition on the Foundry Virtual Tabletop System.
 
-Licensed VtM5e materials will NOT be provided (list of disciplines, clans, etc.) as this is a system provided for public use for free.
 
-There is integration with Dice So Nice! To roll regular vampire dice, roll `1dv`. To roll Hunger dice, roll `1dh`. Replace the 1s with however many dice you want to roll for each type.
+Licensed materials will NOT be provided (list of disciplines, clans, etc.) as this is a system provided for public use for free.
+
+.
 
 ## Feedback
 
 Bugs reported as issues to this repo are greatly appreciate.
 
-Please reach out to me at weinerdolphin#3175 on Discord with issues, feature requests, etc.
-
-Please check the issues list before suggesting new features. :smiley:
 
 ## Credits
 
 Huge thanks to these folks for their contributions:
 
+* This system is modified version of Rayji96 [foundry-V5] for Foundary 
 * This sheet was initially based on the [boilerplate system] by @asacolips#1867
 * French localization started by @Lloyxide#6914
 * Help with french localization by [Lemantia]
