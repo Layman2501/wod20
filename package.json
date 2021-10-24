@@ -1,7 +1,7 @@
 {
-  "name": "vtm5e",
+  "name": "v20",
   "version": "1.6.0",
-  "description": "CSS compiler for the Vampire 5e system",
+  "description": "CSS compiler for the Vampire v20 system",
   "scripts": {
     "build": "gulp",
     "compile": "gulp css",

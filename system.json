@@ -1,7 +1,7 @@
 {
   "name": "vtm5e-clone",
-  "title": "Vampire the Masquerade 5e clone",
-  "description": "Vampire 5e system for Foundry VTT!",
+  "title": "Vampire 20th Anniversay Edition",
+  "description": "Vampire 20th system for Foundry VTT!",
   "version": "1.6.2",
   "minimumCoreVersion": "0.8.0",
   "compatibleCoreVersion": "0.8.8",
