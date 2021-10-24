@@ -25,6 +25,12 @@
         "health": {
           "aggravated": 0,
           "superficial": 0,
+          "lethal" : 0,
+          "max": 5
+        },
+
+        "bloodpool": {
+          "full": 0,
           "max": 5
         },
         "willpower": {
@@ -61,13 +67,13 @@
             "value": 1,
             "name": "VTM5E.Stamina"
           },
-          "composure": {
+          "apperance": {
             "value": 1,
-            "name": "VTM5E.Composure"
+            "name": "VTM5E.Apperance"
           },
-          "resolve": {
+          "perception": {
             "value": 1,
-            "name": "VTM5E.Resolve"
+            "name": "VTM5E.Perception"
           }
         },
         "virtues": {

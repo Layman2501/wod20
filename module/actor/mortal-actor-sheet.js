@@ -252,6 +252,7 @@ export class MortalActorSheet extends CoterieActorSheet {
   }
 
   _onSquareCounterChange(event) {
+
     event.preventDefault();
     const element = event.currentTarget;
     const index = Number(element.dataset.index);
@@ -265,17 +266,17 @@ export class MortalActorSheet extends CoterieActorSheet {
     const fulls = Number(data[states["-"]]) || 0;
     const halfs = Number(data[states["/"]]) || 0;
     const crossed = Number(data[states.x]) || 0;
-
+    const star = Number(data[states["*"]]) || 0;
     if (index < 0 || index > steps.length) {
       return;
     }
-
+  
     const allStates = ["", ...Object.keys(states)];
     const currentState = allStates.indexOf(oldState);
     if (currentState < 0) {
       return;
     }
-
+    console.log(currentState)
     const newState = allStates[(currentState + 1) % allStates.length];
     steps[index].dataset.state = newState;
 
@@ -301,7 +302,6 @@ export class MortalActorSheet extends CoterieActorSheet {
       obj[k] = Number(data[k]) || 0;
       return obj;
     }, {});
-
     this._assignToActorField(fields, newValue);
   }
 
@@ -317,14 +317,15 @@ export class MortalActorSheet extends CoterieActorSheet {
 
       const values = humanity
         ? new Array(fulls + halfs)
-        : new Array(halfs + crossed);
+        : new Array(halfs + crossed + fulls );
 
       if (humanity) {
         values.fill("-", 0, fulls);
         values.fill("/", fulls, fulls + halfs);
       } else {
         values.fill("/", 0, halfs);
-        values.fill("x", halfs, halfs + crossed);
+        values.fill("-", halfs, halfs + fulls )
+        values.fill("x", halfs + fulls, halfs + fulls + crossed);
       }
 
       $(this)

@@ -1,0 +1,14 @@
+<div class="resource flex-group-center Bloodpool">
+    <div class="flexrow">
+        <i class="fas fa-minus resource-control resource-minus" data-resource="bloodpool" data-action="minus"></i>
+        <label for="data.data.bloodpool" class="resource-label">{{localize "VTM5E.Bloodpool"}}</label>
+        <i class="fas fa-plus resource-control resource-plus" data-resource="bloodpool" data-action="plus"></i>
+    </div>
+    <div class="resource-content flexrow flex-center flex-between">
+        <div class="resource-counter" data-states="x:full" data-max="{{data.data.bloodpool.max}}" data-full="{{data.data.bloodpool.full}}" data-name="data.bloodpool">
+            {{#numLoop data.data.bloodpool.max}}
+            <span class="resource-counter-step" data-index="{{this}}" data-state=""></span>
+            {{/numLoop}}
+        </div>
+    </div>
+</div>

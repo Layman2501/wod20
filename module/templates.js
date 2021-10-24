@@ -15,6 +15,7 @@ export const preloadHandlebarsTemplates = async function () {
     "systems/vtm5e-clone/templates/actor/parts/frenzy.html",
     "systems/vtm5e-clone/templates/actor/parts/health.html",
     "systems/vtm5e-clone/templates/actor/parts/humanity.html",
+    "systems/vtm5e-clone/templates/actor/parts/bloodpool.html",
     "systems/vtm5e-clone/templates/actor/parts/profile-img.html",
     "systems/vtm5e-clone/templates/actor/parts/other.html",
     "systems/vtm5e-clone/templates/actor/parts/rouse.html",
