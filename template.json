@@ -67,15 +67,63 @@
             "value": 1,
             "name": "VTM5E.Stamina"
           },
-          "apperance": {
+          "Appearance": {
             "value": 1,
-            "name": "VTM5E.Apperance"
+            "name": "VTM5E.Appearance"
           },
           "perception": {
             "value": 1,
             "name": "VTM5E.Perception"
           }
         },
+        "weapons" : [
+          {
+            "attack" : "", 
+            "diff" : "", 
+            "damage" : "", 
+            "range" : "", 
+            "rate" : "", 
+            "clip": "", 
+            "conceal" : ""
+          }, 
+          {
+            "attack" : "", 
+            "diff" : "", 
+            "damage" : "", 
+            "range" : "", 
+            "rate" : "", 
+            "clip": "", 
+            "conceal" : ""
+          }, 
+          {
+            "attack" : "", 
+            "diff" : "", 
+            "damage" : "", 
+            "range" : "", 
+            "rate" : "", 
+            "clip": "", 
+            "conceal" : ""
+          }, 
+          {
+            "attack" : "", 
+            "diff" : "", 
+            "damage" : "", 
+            "range" : "", 
+            "rate" : "", 
+            "clip": "", 
+            "conceal" : ""
+          }, 
+          {
+            "attack" : "", 
+            "diff" : "", 
+            "damage" : "", 
+            "range" : "", 
+            "rate" : "", 
+            "clip": "", 
+            "conceal" : ""
+          }    
+
+        ], 
         "virtues": {
           "conscience": {
             "value": 1,

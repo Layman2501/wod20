@@ -47,7 +47,7 @@
   "VTM5E.Manipulation": "Manipulation",
   "VTM5E.Wits": "Wits",
   "VTM5E.Stamina": "Stamina",
-  "VTM5E.Apperance": "Apperance",
+  "VTM5E.Appearance": "Appearance",
   "VTM5E.Perception": "Perception",
   "VTM5E.Conscience/Conviction": "Conscience/Conviction",
   "VTM5E.Self-Control/Instinct": "Self-Control/Instinct",
@@ -188,5 +188,18 @@
   "VTM5E.Difficulty": "Difficulty?",
   "VTM5E.Rolling": "Rolling",
   "VTM5E.Cancel": "Cancel",
-  "VTM5E.SelectAbility": "Select Ability"
+  "VTM5E.SelectAbility": "Select Ability",
+  "VTM5E.Weapon" : "Weapon/Attack",
+  "VTM5E.Diff" : "Diff", 
+  "VTM5E.Damage": "Damage", 
+  "VTM5E.Range" : "Range", 
+  "VTM5E.Rate" : "Rate", 
+  "VTM5E.Clip" : "Clip", 
+  "VTM5E.Conceal" : "Conceal", 
+  "VTM5E.Armor" : "Armor", 
+  "VTM5E.Class" : "Class :", 
+  "VTM5E.Rating" : "Rating :", 
+  "VTM5E.Penalty" : "Penalty: ",
+  "VTM5E.Combat" : "Combat"
+
 }
