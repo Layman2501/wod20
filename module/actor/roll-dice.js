@@ -7,13 +7,34 @@ export function rollDice(
   label = "",
   difficulty = 0,
   useHunger, 
-  specialty
+  specialty, 
+  wound
   ) {
-  const dice = numDice;
-  console.log(dice);
+  
+  function healthModifier (wound) {
+      // pick health value from ordered key (see health.html for the order)
+      switch(true) {
+        case wound=="hurt": 
+          return -1
+        case wound=="injured": 
+          return -1
+        case wound=="wounded": 
+          return -2
+        case wound=="mauled": 
+          return -2 
+        case wound=="crippled": 
+          return -5
+        case wound=="incapacitated" : 
+          return -10000000
+        default: 
+          return 0
+      }
+  }
+  
+  let chanceDie = numDice + healthModifier(wound) <= 0
+  let dice = chanceDie ? 1 : numDice + healthModifier(wound);
   const roll = new Roll(dice + "dvcs>11 + " + 0 + "dhcs>11", actor.data.data);
   const rollResult = roll.evaluate();
-  console.log(rollResult.terms[0].results);
   let difficultyResult = "<span></span>";
   let success = 0;
   let critSuccess = 0;
@@ -21,7 +42,14 @@ export function rollDice(
   let fail = 0;
   let hungerFail = 0;
   let hungerCritFail = 0;
+  let chanceDieSuccess = false; 
   rollResult.terms[0].results.forEach((dice) => {
+    if (numDice+healthModifier(wound) <= 0 && dice.result===10)
+    { 
+      chanceDieSuccess=true
+      success++;
+    }
+    else
     if (dice.result >= difficulty) {
       if (specialty && dice.result === 10) {
         critSuccess += 2;
@@ -42,7 +70,7 @@ export function rollDice(
 
   let successRoll = false;
   if (difficulty !== 0) {
-    successRoll = totalSuccess >= difficulty;
+    successRoll = totalSuccess >= difficulty || chanceDieSuccess;
     difficultyResult = `( <span class="danger">${game.i18n.localize(
       "VTM5E.Fail"
     )}</span> )`;
@@ -76,7 +104,10 @@ export function rollDice(
         "VTM5E.PossibleBestialFailure"
       )}</p>`;
   }
-
+  if ( chanceDie )  {
+    label = label + 
+    `<p class="roll-content result-bestial"> Chance die </p>`;
+  }
   label =
     label +
     `<p class="roll-label result-success">${game.i18n.localize(

@@ -47,6 +47,7 @@
     <a class="item" data-tab="disciplines">{{localize "VTM5E.Disciplines"}}</a>
     <a class="item" data-tab="features">{{localize "VTM5E.Features"}}</a>
     <a class="item" data-tab="description">{{localize "VTM5E.Description"}}</a>
+    <a class="item" data-tab="combat">{{localize "VTM5E.Combat"}}</a>
     <a class="item" data-tab="other">{{localize "VTM5E.Other"}}</a>
   </nav>
 
@@ -58,6 +59,8 @@
     {{!-- Owned Features Tab --}} {{>
     "systems/vtm5e-clone/templates/actor/parts/features.html"}} {{!-- Biography
     Tab --}} {{> "systems/vtm5e-clone/templates/actor/parts/biography.html"}}
+    {{! -- Combat --}} 
+    {{> "systems/vtm5e-clone/templates/actor/parts/combat.html"}}
     {{!-- Other Tab --}} {{>
     "systems/vtm5e-clone/templates/actor/parts/other.html"}}
   </section>

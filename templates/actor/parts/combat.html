@@ -70,4 +70,31 @@
     </tr>
     {{/each}}
   </table>
+  <div> 
+  <h1> {{localize "VTM5E.Armor"}} </h1>
+  <input
+          name="data.armor.class"
+          type="text"
+          value="{{data.data.armor.class}}"
+          placeholder="{{localize 'VTM5E.Class'}}"
+  />
+  <input
+          name="data.armor.rating"
+          type="text"
+          value="{{data.data.armor.rating}}"
+          placeholder="{{localize 'VTM5E.Rating'}}"
+  />
+  <input
+          name="data.armor.penalty"
+          type="text"
+          value="{{data.data.armor.penalty}}"
+          placeholder="{{localize 'VTM5E.Penalty'}}"
+  />
+  <input
+          name="data.armor.description"
+          type="text"
+          value="{{data.data.armor.description}}"
+          placeholder="{{localize 'VTM5E.Description'}}"
+  />
+  </div>
 </div>

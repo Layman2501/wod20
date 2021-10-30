@@ -18,7 +18,7 @@ export const preloadHandlebarsTemplates = async function () {
     "systems/vtm5e-clone/templates/actor/parts/bloodpool.html",
     "systems/vtm5e-clone/templates/actor/parts/profile-img.html",
     "systems/vtm5e-clone/templates/actor/parts/other.html",
-    "systems/vtm5e-clone/templates/actor/parts/rouse.html",
+    "systems/vtm5e-clone/templates/actor/parts/rotschreck.html",
     "systems/vtm5e-clone/templates/actor/parts/stats.html",
     "systems/vtm5e-clone/templates/actor/parts/willpower.html",
     "systems/vtm5e-clone/templates/actor/parts/combat.html",

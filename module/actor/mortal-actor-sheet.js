@@ -131,19 +131,26 @@ export class MortalActorSheet extends CoterieActorSheet {
     const element = event.currentTarget;
     const dataset = element.dataset;
     let options = "";
-
     for (const [key, value] of Object.entries(this.actor.data.data.abilities)) {
       options = options.concat(
         `<option value="${key}">${game.i18n.localize(value.name)}</option>`
-      );
+        );
+      }
+      let healthOptions = ""
+      for (const [key, value] of Object.entries(this.actor.data.data.woundPenalties)) {
+        healthOptions = healthOptions.concat(
+          `<option value="${key}">${game.i18n.localize(value.name)}</option>`
+          );
     }
+  let wounded;
   let specialty 
   let selectAbility
-  //    If rolling frenzy, the pop up won't have any select Ability 
-  if (dataset.label==game.i18n.localize("VTM5E.ResistingFrenzy")) 
+  //    If rolling Rötschreck, the pop up won't have any select Ability 
+  if (dataset.noability=="true") 
    {
     selectAbility =  ""
     specialty =  ``
+    wounded = ""
   }
 
   else 
@@ -153,6 +160,10 @@ export class MortalActorSheet extends CoterieActorSheet {
                       <select id="abilitySelect">${options}</select>
                     </div>`;
     specialty =  `<input id="specialty" type="checkbox"> Specialty </input>`
+    wounded = `<div class="form-group">
+                <label>${game.i18n.localize("VTM5E.SelectWound")}</label>
+                <select id="woundSelect">${healthOptions}</select>
+              </div>`
   }
     const template = `
       <form>
@@ -168,7 +179,7 @@ export class MortalActorSheet extends CoterieActorSheet {
               <label>${game.i18n.localize("VTM5E.Difficulty")}</label>
               <input type="text" min="0" id="inputDif" value="0">
           </div>
-          ` + specialty + `
+          ` + wounded + specialty + `
       </form>`;
 
     let buttons = {};
@@ -181,23 +192,26 @@ export class MortalActorSheet extends CoterieActorSheet {
           const abilityVal = this.actor.data.data.abilities[ability]?.value;
           const abilityName = game.i18n.localize(
             this.actor.data.data.abilities[ability]?.name
-          );
+            );
+          const woundPenalty = html.find("#woundSelect")[0]?.value;
+          const woundPenaltyVal = this.actor.data.data.woundPenalties[woundPenalty]?.value;
+          const woundName = game.i18n.localize(
+            this.actor.data.data.woundPenalties[woundPenalty]?.name
+            );
           const modifier = parseInt(html.find("#inputMod")[0].value || 0);
           const difficulty = parseInt(html.find("#inputDif")[0].value || 0);
           const specialty = parseInt(html.find("#specialty")[0]?.checked || false);
-          const numDice =
-            dataset.name !== "frenzy"
-              ? abilityVal + parseInt(dataset.roll) + modifier
-              : parseInt(dataset.roll) + modifier;
+          const numDice = dataset.noability!=="true" ? abilityVal + parseInt(dataset.roll) + modifier : parseInt(dataset.roll) + modifier;
           rollDice(
             numDice,
             this.actor,
-            dataset.name !== "frenzy"
+            dataset.noability!=="true"
               ? `${dataset.label} + ${abilityName}`
               : `${dataset.label}`,
             difficulty,
             this.hunger, 
-            specialty
+            specialty,
+            woundPenaltyVal
           );
           // this._vampireRoll(numDice, this.actor, `${dataset.label} + ${abilityName}`, difficulty)
         },

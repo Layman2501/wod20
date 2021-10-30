@@ -176,7 +176,6 @@
   "VTM5E.RollingWillpower": "Rolling Willpower",
   "VTM5E.RollingRemorse": "Rolling Remorse",
   "VTM5E.RousingBlood": "Rousing Blood",
-  "VTM5E.ResistingFrenzy": "Resisting Frenzy",
   "VTM5E.CriticalSuccess": "Critical Success!",
   "VTM5E.Success": "Success!",
   "VTM5E.Successes": "Successes",
@@ -197,9 +196,21 @@
   "VTM5E.Clip" : "Clip", 
   "VTM5E.Conceal" : "Conceal", 
   "VTM5E.Armor" : "Armor", 
-  "VTM5E.Class" : "Class :", 
-  "VTM5E.Rating" : "Rating :", 
-  "VTM5E.Penalty" : "Penalty: ",
-  "VTM5E.Combat" : "Combat"
+  "VTM5E.Class" : "Class", 
+  "VTM5E.Rating" : "Rating", 
+  "VTM5E.Penalty" : "Penalty ",
+  "VTM5E.Combat" : "Combat",
+  "VTM5E.Bruised" : "Bruised", 
+  "VTM5E.Hurt": "Hurt", 
+  "VTM5E.Injured" : "Injured", 
+  "VTM5E.Wounded" : "Wounded", 
+  "VTM5E.Mauled" : "Mauled", 
+  "VTM5E.Crippled" : "Crippled", 
+  "VTM5E.Incapacitated" : "Incapacitated", 
+  "VTM5E.SelectWound" : "Wound Penalty",
+  "VTM5E.Rötschreck" : "Rötschreck", 
+  "VTM5E.ResistingRötschreck" : "Resisting Rötschreck", 
+  "VTM5E.ResistingFrenzy": "Resisting Frenzy", 
+  "VTM5E.Healthy" : "Healthy"
 
 }

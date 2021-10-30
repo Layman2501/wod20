@@ -38,6 +38,40 @@
           "superficial": 0,
           "max": 5
         },
+        "woundPenalties" : {
+          "healthy" : {
+            "value" : "healthy", 
+            "name" : "VTM5E.Healthy"
+          },
+          "bruised" : {
+            "value" : "bruised", 
+            "name" : "VTM5E.Bruised"
+          }, 
+          "hurt" : {
+            "value" : "hurt",
+            "name" : "VTM5E.Hurt"
+          }, 
+          "injured" : {
+            "value" : "injured",
+            "name" : "VTM5E.Injured"
+          }, 
+          "wounded" : {
+            "value" : "wounded",
+            "name" : "VTM5E.Wounded"
+          },
+          "mauled" : {
+            "value" : "mauled",
+            "name" : "VTM5E.Mauled"
+          }, 
+          "crippled" : {
+            "value" : "crippled", 
+            "name" : "VTM5E.Crippled"
+          }, 
+          "incapacitated" : {
+            "value" : "incapacitated", 
+            "name" : "VTM5E.Incapacitated"
+          }
+        }, 
         "abilities": {
           "strength": {
             "value": 1,
@@ -75,6 +109,12 @@
             "value": 1,
             "name": "VTM5E.Perception"
           }
+        },
+        "armor" : {
+          "class" : "", 
+          "rating" : "", 
+          "penalty" : "", 
+          "description" : ""
         },
         "weapons" : [
           {
