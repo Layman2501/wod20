@@ -16,16 +16,16 @@ export class VampireDie extends Die {
   /** @override */
   static getResultLabel(result) {
     return {
-      1: '<img src="systems/vtm5e-clone/assets/images/normal-fail.png" />',
-      2: '<img src="systems/vtm5e-clone/assets/images/diceimg_2.png" />',
-      3: '<img src="systems/vtm5e-clone/assets/images/normal-fail.png" />',
-      4: '<img src="systems/vtm5e-clone/assets/images/normal-fail.png" />',
-      5: '<img src="systems/vtm5e-clone/assets/images/diceimg_5.png" />',
-      6: '<img src="systems/vtm5e-clone/assets/images/normal-success.png" />',
-      7: '<img src="systems/vtm5e-clone/assets/images/normal-success.png" />',
-      8: '<img src="systems/vtm5e-clone/assets/images/normal-success.png" />',
-      9: '<img src="systems/vtm5e-clone/assets/images/normal-success.png" />',
-      10: '<img src="systems/vtm5e-clone/assets/images/normal-crit.png" />',
+      1: '<img src="systems/wod20/assets/images/normal-fail.png" />',
+      2: '<img src="systems/wod20/assets/images/diceimg_2.png" />',
+      3: '<img src="systems/wod20/assets/images/normal-fail.png" />',
+      4: '<img src="systems/wod20/assets/images/normal-fail.png" />',
+      5: '<img src="systems/wod20/assets/images/diceimg_5.png" />',
+      6: '<img src="systems/wod20/assets/images/normal-success.png" />',
+      7: '<img src="systems/wod20/assets/images/normal-success.png" />',
+      8: '<img src="systems/wod20/assets/images/normal-success.png" />',
+      9: '<img src="systems/wod20/assets/images/normal-success.png" />',
+      10: '<img src="systems/wod20/assets/images/normal-crit.png" />',
     }[result];
   }
 }
@@ -46,16 +46,16 @@ export class VampireHungerDie extends Die {
   /** @override */
   static getResultLabel(result) {
     return {
-      1: '<img src="systems/vtm5e-clone/assets/images/bestial-fail.png" />',
-      2: '<img src="systems/vtm5e-clone/assets/images/red-fail.png" />',
-      3: '<img src="systems/vtm5e-clone/assets/images/red-fail.png" />',
-      4: '<img src="systems/vtm5e-clone/assets/images/red-fail.png" />',
-      5: '<img src="systems/vtm5e-clone/assets/images/diceimg_5.png" />',
-      6: '<img src="systems/vtm5e-clone/assets/images/red-success.png" />',
-      7: '<img src="systems/vtm5e-clone/assets/images/red-success.png" />',
-      8: '<img src="systems/vtm5e-clone/assets/images/red-success.png" />',
-      9: '<img src="systems/vtm5e-clone/assets/images/red-success.png" />',
-      10: '<img src="systems/vtm5e-clone/assets/images/red-crit.png" />',
+      1: '<img src="systems/wod20/assets/images/bestial-fail.png" />',
+      2: '<img src="systems/wod20/assets/images/red-fail.png" />',
+      3: '<img src="systems/wod20/assets/images/red-fail.png" />',
+      4: '<img src="systems/wod20/assets/images/red-fail.png" />',
+      5: '<img src="systems/wod20/assets/images/diceimg_5.png" />',
+      6: '<img src="systems/wod20/assets/images/red-success.png" />',
+      7: '<img src="systems/wod20/assets/images/red-success.png" />',
+      8: '<img src="systems/wod20/assets/images/red-success.png" />',
+      9: '<img src="systems/wod20/assets/images/red-success.png" />',
+      10: '<img src="systems/wod20/assets/images/red-crit.png" />',
     }[result];
   }
 }

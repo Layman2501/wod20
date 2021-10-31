@@ -14,7 +14,7 @@ export class VampireActorSheet extends GhoulActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["vtm5e", "sheet", "actor", "vampire"],
-      template: "systems/vtm5e-clone/templates/actor/vampire-sheet.html",
+      template: "systems/wod20/templates/actor/vampire-sheet.html",
       width: 800,
       height: 700,
       tabs: [
@@ -35,8 +35,8 @@ export class VampireActorSheet extends GhoulActorSheet {
   /** @override */
   get template() {
     if (!game.user.isGM && this.actor.limited)
-      return "systems/vtm5e-clone/templates/actor/limited-sheet.html";
-    return "systems/vtm5e-clone/templates/actor/vampire-sheet.html";
+      return "systems/wod20/templates/actor/limited-sheet.html";
+    return "systems/wod20/templates/actor/vampire-sheet.html";
   }
 
   /* -------------------------------------------- */

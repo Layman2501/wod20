@@ -10,7 +10,7 @@ export class CoterieActorSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["vtm5e", "sheet", "actor", "coterie"],
-      template: "systems/vtm5e-clone/templates/actor/coterie-sheet.html",
+      template: "systems/wod20/templates/actor/coterie-sheet.html",
       width: 800,
       height: 700,
       tabs: [
@@ -32,8 +32,8 @@ export class CoterieActorSheet extends ActorSheet {
   /** @override */
   get template() {
     if (!game.user.isGM && this.actor.limited)
-      return "systems/vtm5e-clone/templates/actor/limited-sheet.html";
-    return "systems/vtm5e-clone/templates/actor/coterie-sheet.html";
+      return "systems/wod20/templates/actor/limited-sheet.html";
+    return "systems/wod20/templates/actor/coterie-sheet.html";
   }
 
   /* -------------------------------------------- */
@@ -117,7 +117,7 @@ export class CoterieActorSheet extends ActorSheet {
       const li = $(ev.currentTarget).parents(".item");
       const item = this.actor.getOwnedItem(li.data("itemId"));
       renderTemplate(
-        "systems/vtm5e-clone/templates/actor/parts/chat-message.html",
+        "systems/wod20/templates/actor/parts/chat-message.html",
         {
           name: item.data.name,
           img: item.data.img,

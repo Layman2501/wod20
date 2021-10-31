@@ -117,7 +117,7 @@ export function rollDice(
   rollResult.terms[0].results.forEach((dice) => {
     label =
       label +
-      `<img src="systems/vtm5e-clone/assets/images/diceimg_${dice.result}.png" alt="Normal Fail" class="roll-img normal-dice" />`;
+      `<img src="systems/wod20/assets/images/diceimg_${dice.result}.png" alt="Normal Fail" class="roll-img normal-dice" />`;
   });
 
   label = label + "<br>";

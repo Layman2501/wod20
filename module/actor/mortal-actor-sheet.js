@@ -14,7 +14,7 @@ export class MortalActorSheet extends CoterieActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["vtm5e", "sheet", "actor", "mortal"],
-      template: "systems/vtm5e-clone/templates/actor/mortal-sheet.html",
+      template: "systems/wod20/templates/actor/mortal-sheet.html",
       width: 800,
       height: 700,
       tabs: [
@@ -36,8 +36,8 @@ export class MortalActorSheet extends CoterieActorSheet {
   /** @override */
   get template() {
     if (!game.user.isGM && this.actor.limited)
-      return "systems/vtm5e-clone/templates/actor/limited-sheet.html";
-    return "systems/vtm5e-clone/templates/actor/mortal-sheet.html";
+      return "systems/wod20/templates/actor/limited-sheet.html";
+    return "systems/wod20/templates/actor/mortal-sheet.html";
   }
 
   /* -------------------------------------------- */

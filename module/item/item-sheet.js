@@ -23,7 +23,7 @@ export class VampireItemSheet extends ItemSheet {
 
   /** @override */
   get template() {
-    const path = "systems/vtm5e-clone/templates/item";
+    const path = "systems/wod20/templates/item";
     // Return a single sheet for all item types.
     // return `${path}/item-sheet.html`;
 
