@@ -90,20 +90,20 @@ export function rollDice(
         "VTM5E.CriticalSuccess"
       )}</p>`;
   }
-  if (!successRoll && difficulty > 0) {
-    label =
-      label +
-      `<p class="roll-content result-bestial">${game.i18n.localize(
-        "VTM5E.BestialFailure"
-      )}</p>`;
-  }
-  if (!successRoll && difficulty === 0) {
-    label =
-      label +
-      `<p class="roll-content result-bestial result-possible">${game.i18n.localize(
-        "VTM5E.PossibleBestialFailure"
-      )}</p>`;
-  }
+  //if (!successRoll && difficulty > 0) {
+  //label =
+    //  label +
+      //`<p class="roll-content result-bestial">${game.i18n.localize(
+      //  "VTM5E.BestialFailure"
+      //)}</p>`;
+    //  }
+  //if (!successRoll && difficulty === 0) {
+    //label =
+      //label +
+      ///`<p class="roll-content result-bestial result-possible">${game.i18n.localize(
+      //  "VTM5E.PossibleBestialFailure"
+      //)}</p>`;
+  //}
   if ( chanceDie )  {
     label = label + 
     `<p class="roll-content result-bestial"> Chance die </p>`;
