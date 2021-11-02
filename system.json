@@ -44,6 +44,6 @@
   "secondaryTokenAttribute": "",
   "url": "https://github.com/Layman2501/wod20",
   "manifest": "https://raw.githubusercontent.com/Layman2501/wod20/main/system.json",
-  "download": "https://github.com/Rayji96/foundry-V5/archive/foundryvtt_v5_v1.6.2.zip",
+  "download": "https://github.com/Layman2501/wod20/archive/refs/heads/main.zip",
   "license": "LICENSE.txt"
 }
