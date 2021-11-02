@@ -70,7 +70,7 @@ export function rollDice(
 
   let successRoll = false;
   if (difficulty !== 0) {
-    successRoll = totalSuccess >= difficulty || chanceDieSuccess;
+    successRoll = totalSuccess || chanceDieSuccess;
     difficultyResult = `( <span class="danger">${game.i18n.localize(
       "VTM5E.Fail"
     )}</span> )`;
