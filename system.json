@@ -42,8 +42,8 @@
   "gridUnits": "ft",
   "primaryTokenAttribute": "",
   "secondaryTokenAttribute": "",
-  "url": "https://github.com/Rayji96/foundry-V5/",
-  "manifest": "https://raw.githubusercontent.com/Rayji96/foundry-V5/main/system.json",
+  "url": "https://github.com/Layman2501/wod20",
+  "manifest": "https://raw.githubusercontent.com/Layman2501/wod20/main/system.json",
   "download": "https://github.com/Rayji96/foundry-V5/archive/foundryvtt_v5_v1.6.2.zip",
   "license": "LICENSE.txt"
 }
