@@ -3,13 +3,18 @@
     {{setVar "generation" data.data.headers.generation}}
     {{#le generation 7}}
       {{setVar "loopLength" 10}}
-      {{setVar "colNum" 2}}
+      {{setVar "colNum" 3}}
     {{else}}
       {{setVar "loopLength" 5 }}
       {{setVar "colNum" 3}}
     {{/le}}
   <div class="abilities grid grid-{{colNum}}col flex-group-center">
     {{#each data.data.abilities as |ability key|}}
+    <div>
+    <div class="resource-label">    
+    {{equal key "strength" "Physical"}}
+    {{equal key "charisma" "Social"}}
+    {{equal key "perception" "Mental"}} </div>
     <div class="ability flexrow flex-center">
       <label
         for="data.data.abilities.{{key}}.value"
@@ -28,8 +33,8 @@
         {{#numLoop ../loopLength}}
         <span class="resource-value-step" data-index="{{this}}"></span>
         {{/numLoop}}
-     
       </div>
+    </div>
     </div>
     {{/each}}
   </div>
@@ -37,6 +42,14 @@
   <label class="resource-label">{{localize "VTM5E.Skills"}}</label>
   <div class="skills grid grid-{{colNum}}col flex-group-center">
     {{#each data.data.skills as |skill key|}}
+    <div>
+    <div class="resource-label">
+    {{equal key "athletics" "Talents"}}
+    {{equal key "animal ken" "Skills"}}
+    {{equal key "academics" "Knowledges"}}
+
+    </div>
+
     <div class="skill flexrow flex-center">
       <label
         for="data.data.skills.{{key}}.value"
@@ -55,6 +68,7 @@
         <span class="resource-value-step" data-index="{{this}}"></span>
         {{/numLoop}}
       </div>
+    </div>
     </div>
     {{/each}}
   </div>

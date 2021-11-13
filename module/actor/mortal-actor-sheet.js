@@ -241,7 +241,7 @@ export class MortalActorSheet extends CoterieActorSheet {
     const dataset = element.dataset;
     const useHunger = this.hunger && dataset.useHunger === "1";
     const numDice = dataset.roll;
-
+    console.log(dataset.roll);
     rollDice(numDice, this.actor, `${dataset.label}`, 0, useHunger);
   }
 

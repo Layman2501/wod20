@@ -12,6 +12,7 @@ import { CoterieActorSheet } from "./actor/coterie-actor-sheet.js";
 import { MortalActorSheet } from "./actor/mortal-actor-sheet.js";
 import { GhoulActorSheet } from "./actor/ghoul-actor-sheet.js";
 import { VampireActorSheet } from "./actor/vampire-actor-sheet.js";
+//import { VampireDarkAgesSheet } from "./actor/vampire-da-actor-sheet.js";
 
 Hooks.once("init", async function () {
   console.log("Initializing Schrecknet...");
@@ -166,7 +167,12 @@ Hooks.once("init", async function () {
 
     return ret;
   });
-
+  Handlebars.registerHelper("minus", function (a, b) {
+    return a - b;
+  });
+  Handlebars.registerHelper("equal", function (a, b, label) {
+    return a == b ? label : "";
+  });
   Handlebars.registerHelper("getDisciplineName", function (key, roll = false) {
     const disciplines = {
       animalism: "VTM5E.Animalism",

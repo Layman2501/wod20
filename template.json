@@ -18,6 +18,9 @@
           "value": 0,
           "max": 0
         },
+        "humanityLabel" : {
+          "value" : "Humanity"
+        },
         "humanity": {
           "value": 0,
           "stains": 0
@@ -81,9 +84,9 @@
             "value": 1,
             "name": "VTM5E.Charisma"
           },
-          "intelligence": {
+          "perception": {
             "value": 1,
-            "name": "VTM5E.Intelligence"
+            "name": "VTM5E.Perception"
           },
           "dexterity": {
             "value": 1,
@@ -105,10 +108,11 @@
             "value": 1,
             "name": "VTM5E.Appearance"
           },
-          "perception": {
+          "intelligence": {
             "value": 1,
-            "name": "VTM5E.Perception"
+            "name": "VTM5E.Intelligence"
           }
+          
         },
         "armor" : {
           "class" : "", 
@@ -183,6 +187,7 @@
             "value": 0,
             "name": "VTM5E.Athletics"
           },
+       
           "animal ken": {
             "value": 0,
             "name": "VTM5E.AnimalKen"
@@ -199,10 +204,7 @@
             "value": 0,
             "name": "VTM5E.Etiquette"
           },
-          "awareness": {
-            "value": 0,
-            "name": "VTM5E.Awareness"
-          },
+         
           "craft": {
             "value": 0,
             "name": "VTM5E.Craft"

@@ -30,9 +30,8 @@ export function rollDice(
           return 0
       }
   }
-  
   let chanceDie = numDice + healthModifier(wound) <= 0
-  let dice = chanceDie ? 1 : numDice + healthModifier(wound);
+  let dice = chanceDie ? 1 : parseInt(numDice) + healthModifier(wound);
   const roll = new Roll(dice + "dvcs>11 + " + 0 + "dhcs>11", actor.data.data);
   const rollResult = roll.evaluate();
   let difficultyResult = "<span></span>";

@@ -4,10 +4,14 @@
   "VTM5E.Predator": "Predator",
 
   "VTM5E.Vampire": "Vampire",
+  "VTM5E.VampireDarkAges": "Vampire Dark Ages",
   "VTM5E.Coterie": "Coterie",
   "VTM5E.Ghoul": "Ghoul",
   "VTM5E.Mortal": "Mortal",
   "VTM5E.Domitor": "Domitor",
+  
+  "WOD20.Darkages": "Dark Ages",
+
 
   "VTM5E.Health": "Health",
   "VTM5E.Willpower": "Willpower",
@@ -52,7 +56,7 @@
   "VTM5E.Conscience/Conviction": "Conscience/Conviction",
   "VTM5E.Self-Control/Instinct": "Self-Control/Instinct",
   "VTM5E.Courage": "Courage",
-  "VTM5E.Skills": "Skills",
+  "VTM5E.Skills": "Abilities",
   "VTM5E.Athletics": "Athletics",
   "VTM5E.AnimalKen": "Animal Ken",
   "VTM5E.Academics": "Academics",
