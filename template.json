@@ -183,108 +183,128 @@
           }
         },
         "skills": {
-          "athletics": {
+         
+          "alertness": {
             "value": 0,
-            "name": "VTM5E.Athletics"
+            "name": "VTM5E.Alertness"
           },
-       
           "animal ken": {
             "value": 0,
             "name": "VTM5E.AnimalKen"
           },
-          "academics": {
+          
+           "academics": {
             "value": 0,
             "name": "VTM5E.Academics"
           },
-          "brawl": {
+          "athletics": {
             "value": 0,
-            "name": "VTM5E.Brawl"
+            "name": "VTM5E.Athletics"
           },
-          "etiquette": {
-            "value": 0,
-            "name": "VTM5E.Etiquette"
-          },
-         
           "craft": {
             "value": 0,
             "name": "VTM5E.Craft"
           },
-          "insight": {
+
+          "computer": {
             "value": 0,
-            "name": "VTM5E.Insight"
+            "name": "VTM5E.Computer"
           },
-          "finance": {
+
+          "awareness": {
             "value": 0,
-            "name": "VTM5E.Finance"
+            "name": "VTM5E.Awareness"
           },
           "drive": {
             "value": 0,
             "name": "VTM5E.Drive"
           },
-          "intimidation": {
+          "finance": {
             "value": 0,
-            "name": "VTM5E.Intimidation"
+            "name": "VTM5E.Finance"
+          },
+          "brawl": {
+            "value": 0,
+            "name": "VTM5E.Brawl"
+          },
+         
+          "etiquette": {
+            "value": 0,
+            "name": "VTM5E.Etiquette"
           },
           "investigation": {
             "value": 0,
             "name": "VTM5E.Investigation"
           },
+          "empathy": {
+            "value": 0,
+            "name": "VTM5E.Empathy"
+          },
           "firearms": {
             "value": 0,
             "name": "VTM5E.Firearms"
           },
-          "leadership": {
+          "law": {
             "value": 0,
-            "name": "VTM5E.Leadership"
+            "name": "VTM5E.Law"
           },
-          "medicine": {
+          "expression": {
             "value": 0,
-            "name": "VTM5E.Medicine"
+            "name": "VTM5E.Expression"
           },
           "larceny": {
             "value": 0,
             "name": "VTM5E.Larceny"
           },
-          "performance": {
+          "medicine": {
             "value": 0,
-            "name": "VTM5E.Performance"
+            "name": "VTM5E.Medicine"
           },
-          "occult": {
+          "intimidation": {
             "value": 0,
-            "name": "VTM5E.Occult"
+            "name": "VTM5E.Intimidation"
           },
           "melee": {
             "value": 0,
             "name": "VTM5E.Melee"
           },
-          "persuasion": {
+          "occult": {
             "value": 0,
-            "name": "VTM5E.Persuasion"
+            "name": "VTM5E.Occult"
+          },
+          "leadership": {
+            "value": 0,
+            "name": "VTM5E.Leadership"
+          },
+          "performance": {
+            "value": 0,
+            "name": "VTM5E.Performance"
           },
           "politics": {
             "value": 0,
             "name": "VTM5E.Politics"
           },
-          "stealth": {
-            "value": 0,
-            "name": "VTM5E.Stealth"
-          },
           "streetwise": {
             "value": 0,
             "name": "VTM5E.Streetwise"
           },
-          "science": {
+          "stealth": {
+            "value": 0,
+            "name": "VTM5E.Stealth"
+          },
+          "Science": {
             "value": 0,
             "name": "VTM5E.Science"
-          },
-          "survival": {
-            "value": 0,
-            "name": "VTM5E.Survival"
           },
           "subterfuge": {
             "value": 0,
             "name": "VTM5E.Subterfuge"
           },
+          "survival": {
+            "value": 0,
+            "name": "VTM5E.Survival"
+          },
+      
           "technology": {
             "value": 0,
             "name": "VTM5E.Technology"
