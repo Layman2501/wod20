@@ -1,6 +1,6 @@
 /* global game, mergeObject */
 
-import { VampireActorSheet } from "./vampire-actor-sheet.js";
+import { GhoulActorSheet } from "./ghoul-actor-sheet.js";
 import { getBloodPotencyValues, getBloodPotencyText } from "./blood-potency.js";
 import { rollDice } from "./roll-dice.js";
 
@@ -9,11 +9,11 @@ import { rollDice } from "./roll-dice.js";
  * @extends {GhoulActorSheet}
  */
 
-export class VampireDarkActorSheet extends VampireActorSheet {
+export class VampireDarkAgesSheet extends GhoulActorSheet {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["vtm5e", "sheet", "actor", "vampire"],
+      classes: ["vtm5e", "sheet", "actor", "vampire-da"],
       template: "systems/wod20/templates/actor/vampire-da-sheet.html",
       width: 800,
       height: 700,
@@ -44,12 +44,12 @@ export class VampireDarkActorSheet extends VampireActorSheet {
   /** @override */
   getData() {
     const data = super.getData();
-
-    data.sheetType = `${game.i18n.localize("VTM5E.VampireDarkAg")}`;
+    console.log(data);
+    data.sheetType = `${game.i18n.localize("VTM5E.VampireDarkAges")}`;
 
     // Prepare items.
     if (
-      this.actor.data.type === "vampire" ||
+      this.actor.data.type === "vampire-da" ||
       this.actor.data.type === "character"
     ) {
       this._prepareItems(data);

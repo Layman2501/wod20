@@ -15,7 +15,7 @@
     {{equal key "strength" "Physical"}}
     {{equal key "charisma" "Social"}}
     {{equal key "perception" "Mental"}} </div>
-    <div class="ability flexrow flex-center">
+    <div class="ability flexrow flex-center" style={{equal key "null" "display:none"}}  >
       <label
         for="data.data.abilities.{{key}}.value"
         class="resource-label vrollable"
@@ -81,6 +81,7 @@
         for="data.data.virtues.{{key}}.value"
         class="resource-label vrollable"
         data-roll="{{virtue.value}}"
+        data-noability="true"
         data-label="{{localize virtue.name}}"
         >{{localize virtue.name}}</label
       >
