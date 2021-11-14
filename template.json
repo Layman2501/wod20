@@ -1,7 +1,318 @@
 {
   "Actor": {
-    "types": ["character", "vampire", "ghoul", "mortal", "coterie"],
+    "types": ["character", "vampire", "ghoul", "mortal", "coterie", "vampire-da"],
     "templates": {
+      "vampire-da": {
+        "biography": "",
+        "equipment": "",
+        "notes": "",
+        "headers": {
+          "concept": "",
+          "chronicle": "",
+          "ambition": "",
+          "desire": "",
+          "touchstones": "",
+          "tenets": ""
+        },
+        "exp": {
+          "value": 0,
+          "max": 0
+        },
+        "humanityLabel" : {
+          "value" : "Humanity"
+        },
+        "humanity": {
+          "value": 0,
+          "stains": 0
+        },
+        "health": {
+          "aggravated": 0,
+          "superficial": 0,
+          "lethal" : 0,
+          "max": 5
+        },
+
+        "bloodpool": {
+          "full": 0,
+          "max": 5
+        },
+        "willpower": {
+          "aggravated": 0,
+          "superficial": 0,
+          "max": 5
+        },
+        "woundPenalties" : {
+          "healthy" : {
+            "value" : "healthy", 
+            "name" : "VTM5E.Healthy"
+          },
+          "bruised" : {
+            "value" : "bruised", 
+            "name" : "VTM5E.Bruised"
+          }, 
+          "hurt" : {
+            "value" : "hurt",
+            "name" : "VTM5E.Hurt"
+          }, 
+          "injured" : {
+            "value" : "injured",
+            "name" : "VTM5E.Injured"
+          }, 
+          "wounded" : {
+            "value" : "wounded",
+            "name" : "VTM5E.Wounded"
+          },
+          "mauled" : {
+            "value" : "mauled",
+            "name" : "VTM5E.Mauled"
+          }, 
+          "crippled" : {
+            "value" : "crippled", 
+            "name" : "VTM5E.Crippled"
+          }, 
+          "incapacitated" : {
+            "value" : "incapacitated", 
+            "name" : "VTM5E.Incapacitated"
+          }
+        }, 
+        "abilities": {
+          "strength": {
+            "value": 1,
+            "name": "VTM5E.Strength"
+          },
+          "charisma": {
+            "value": 1,
+            "name": "VTM5E.Charisma"
+          },
+          "perception": {
+            "value": 1,
+            "name": "VTM5E.Perception"
+          },
+          "dexterity": {
+            "value": 1,
+            "name": "VTM5E.Dexterity"
+          },
+          "manipulation": {
+            "value": 1,
+            "name": "VTM5E.Manipulation"
+          },
+          "wits": {
+            "value": 1,
+            "name": "VTM5E.Wits"
+          },
+          "stamina": {
+            "value": 1,
+            "name": "VTM5E.Stamina"
+          },
+          "Appearance": {
+            "value": 1,
+            "name": "VTM5E.Appearance"
+          },
+          "intelligence": {
+            "value": 1,
+            "name": "VTM5E.Intelligence"
+          }, 
+          "null" : {
+            "value" : 0, 
+            "name" : "VTM5E.Null"
+          }
+          
+        },
+        "armor" : {
+          "class" : "", 
+          "rating" : "", 
+          "penalty" : "", 
+          "description" : ""
+        },
+        "weapons" : [
+          {
+            "attack" : "", 
+            "diff" : "", 
+            "damage" : "", 
+            "range" : "", 
+            "rate" : "", 
+            "clip": "", 
+            "conceal" : ""
+          }, 
+          {
+            "attack" : "", 
+            "diff" : "", 
+            "damage" : "", 
+            "range" : "", 
+            "rate" : "", 
+            "clip": "", 
+            "conceal" : ""
+          }, 
+          {
+            "attack" : "", 
+            "diff" : "", 
+            "damage" : "", 
+            "range" : "", 
+            "rate" : "", 
+            "clip": "", 
+            "conceal" : ""
+          }, 
+          {
+            "attack" : "", 
+            "diff" : "", 
+            "damage" : "", 
+            "range" : "", 
+            "rate" : "", 
+            "clip": "", 
+            "conceal" : ""
+          }, 
+          {
+            "attack" : "", 
+            "diff" : "", 
+            "damage" : "", 
+            "range" : "", 
+            "rate" : "", 
+            "clip": "", 
+            "conceal" : ""
+          }    
+
+        ], 
+        "virtues": {
+          "conscience": {
+            "value": 1,
+            "name": "VTM5E.Conscience/Conviction"
+          },
+          "selfControl": {
+            "value": 1,
+            "name": "VTM5E.Self-Control/Instinct"
+          },
+          "courage": {
+            "value": 1,
+            "name": "VTM5E.Courage"
+          }
+        },
+        "skills": {
+         
+          "alertness": {
+            "value": 0,
+            "name": "VTM5E.Alertness"
+          },
+          "animal ken": {
+            "value": 0,
+            "name": "VTM5E.AnimalKen"
+          },
+          
+           "academics": {
+            "value": 0,
+            "name": "VTM5E.Academics"
+          },
+          "athletics": {
+            "value": 0,
+            "name": "VTM5E.Athletics"
+          },
+          "archery" : {
+            "value " : 0, 
+            "name" : "VTM5E.Archery"
+          },
+          "enigmas" : {
+            "value" : 0, 
+            "name" : "VTM5E.Enigmas"
+          },
+          "awareness": {
+            "value": 0,
+            "name": "VTM5E.Awareness"
+          },
+          "commerce" : {
+            "value" : 0, 
+            "name" : "VTM5E.Commerce"
+          },
+          "hearthWisdom" : {
+            "value" : 0, 
+            "name" : "VTM5E.HearthWisdom"
+          },
+          "brawl": {
+            "value": 0,
+            "name": "VTM5E.Brawl"
+          },
+          "craft": {
+            "value": 0,
+            "name": "VTM5E.Craft"
+          },
+          "investigation": {
+            "value": 0,
+            "name": "VTM5E.Investigation"
+          },
+          
+          "empathy": {
+            "value": 0,
+            "name": "VTM5E.Empathy"
+          },
+         
+          "etiquette": {
+            "value": 0,
+            "name": "VTM5E.Etiquette"
+          },
+          "law": {
+            "value": 0,
+            "name": "VTM5E.Law"
+          },
+          "expression": {
+            "value": 0,
+            "name": "VTM5E.Expression"
+          },
+          "melee": {
+            "value": 0,
+            "name": "VTM5E.Melee"
+          },
+          "medicine": {
+            "value": 0,
+            "name": "VTM5E.Medicine"
+          },
+          "intimidation": {
+            "value": 0,
+            "name": "VTM5E.Intimidation"
+          },
+          "performance": {
+            "value": 0,
+            "name": "VTM5E.Performance"
+          },
+          "occult": {
+            "value": 0,
+            "name": "VTM5E.Occult"
+          },
+          "leadership": {
+            "value": 0,
+            "name": "VTM5E.Leadership"
+          },
+          "ride" : {
+            "value" : 0, 
+            "name" : "VTM5E.Ride"
+          },
+          "politics": {
+            "value": 0,
+            "name": "VTM5E.Politics"
+          },
+          "legedermain" : {
+            "value" : 0, 
+            "name" : "VTM5E.Legedermain"
+          },
+          "stealth": {
+            "value": 0,
+            "name": "VTM5E.Stealth"
+          },
+          "seneschal" : {
+            "value" : 0, 
+            "name" : "VTM5E.Seneschal"
+          },
+          "subterfuge": {
+            "value": 0,
+            "name": "VTM5E.Subterfuge"
+          },
+          "survival": {
+            "value": 0,
+            "name": "VTM5E.Survival"
+          },
+          "theology" : {
+            "value" : 0, 
+            "name" : "VTM5E.Theology"
+          }
+        }
+      },
       "base": {
         "biography": "",
         "equipment": "",
@@ -111,6 +422,10 @@
           "intelligence": {
             "value": 1,
             "name": "VTM5E.Intelligence"
+          },
+          "null" : {
+            "value" : 0, 
+            "name" : "VTM5E.Null"
           }
           
         },
@@ -423,6 +738,25 @@
     },
     "vampire": {
       "templates": ["base", "disciplines"],
+      "headers": {
+        "predator": "",
+        "sire": "",
+        "generation": "",
+        "bane": ""
+      },
+      "blood": {
+        "potency": 0,
+        "resonance": ""
+      },
+      "clan": {
+        "value": ""
+      },
+      "hunger": {
+        "value": 1
+      }
+    },
+    "vampire-da": {
+      "templates": [ "disciplines", "vampire-da"],
       "headers": {
         "predator": "",
         "sire": "",

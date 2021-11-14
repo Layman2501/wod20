@@ -557,7 +557,12 @@
   margin: 1px;
   background: rgba(255, 255, 255, 0.5);
   border-radius: 3px;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%) !important;
+  border: unset !important;
+
 }
+
+
 
 .roll-img.hunger-dice {
   background: rgba(255, 230, 230, 0.5);
