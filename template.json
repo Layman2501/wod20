@@ -628,21 +628,14 @@
       },
       "disciplines": {
         "disciplines": {
+          "abombwe": {
+            "name": "VTM5E.Abombwe",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
           "animalism": {
             "name": "VTM5E.Animalism",
-            "value": 0,
-            "powers": [],
-            "visible": false
-          },
-          "thaumaturgy": {
-            "name": "VTM5E.Thaumaturgy",
-            "value": 0,
-            "powers": [],
-            "visible": false
-          },
-          
-          "necromancy": {
-            "name": "VTM5E.Necromancy",
             "value": 0,
             "powers": [],
             "visible": false
@@ -653,8 +646,32 @@
             "powers": [],
             "visible": false
           },
+          "bardo": {
+            "name": "VTM5E.Bardo",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
           "celerity": {
             "name": "VTM5E.Celerity",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
+          "chimerstry": {
+            "name": "VTM5E.Chimerstry",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
+          "daimonion": {
+            "name": "VTM5E.Daimonion",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
+          "dementation": {
+            "name": "VTM5E.Dementation",
             "value": 0,
             "powers": [],
             "visible": false
@@ -665,14 +682,43 @@
             "powers": [],
             "visible": false
           },
+          "flight": {
+            "name": "VTM5E.Flight",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
           "fortitude": {
             "name": "VTM5E.Fortitude",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },  "melpominee": {
+            "name": "VTM5E.Melpominee",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
+          "mytherceria": {
+            "name": "VTM5E.Mytherceria",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
+          "obeah": {
+            "name": "VTM5E.Obeah",
             "value": 0,
             "powers": [],
             "visible": false
           },
           "obfuscate": {
             "name": "VTM5E.Obfuscate",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
+          "obtenebration": {
+            "name": "VTM5E.Obtenebration",
             "value": 0,
             "powers": [],
             "visible": false
@@ -695,12 +741,75 @@
             "powers": [],
             "visible": false
           },
-          "oblivion": {
-            "name": "VTM5E.Oblivion",
+          "quietus": {
+            "name": "VTM5E.Quietus",
             "value": 0,
             "powers": [],
             "visible": false
           },
+          "sanguinus": {
+            "name": "VTM5E.Sanguinus",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
+          "serpentis": {
+                    "name": "VTM5E.Serpentis",
+                    "value": 0,
+                    "powers": [],
+                    "visible": false
+                  },
+          "spiritus": {
+            "name": "VTM5E.Spiritus",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
+          "temporis": {
+            "name": "VTM5E.Temporis",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
+          "thanatosis": {
+            "name": "VTM5E.Thanatosis",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
+
+          "valeren": {
+            "name": "VTM5E.Valeren",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },                                 
+          "vicissitude": {
+            "name": "VTM5E.Vicissitude",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
+          "visceratika": {
+            "name": "VTM5E.Visceratika",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
+          "thaumaturgy": {
+            "name": "VTM5E.Thaumaturgy",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
+          
+          "necromancy": {
+            "name": "VTM5E.Necromancy",
+            "value": 0,
+            "powers": [],
+            "visible": false
+          },
+          
           "rituals": {
             "name": "VTM5E.Rituals",
             "value": 0,
