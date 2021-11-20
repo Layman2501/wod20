@@ -70,6 +70,7 @@ export class GhoulActorSheet extends MortalActorSheet {
       daimonion: [],
       dementation: [],
       dominate: [],
+      flight: [],
       fortitude: [],
       melpominee: [],
       mytherceria: [],
@@ -100,6 +101,7 @@ export class GhoulActorSheet extends MortalActorSheet {
       if (i.type === "power") {
         // Append to disciplines.
         if (i.data.discipline !== undefined) {
+          console.log("that's the discipline", i.data.discipline);
           disciplines[i.data.discipline].push(i);
           if (!this.actor.data.data.disciplines[i.data.discipline].visible) {
             this.actor.update({

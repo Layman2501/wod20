@@ -183,7 +183,7 @@ Hooks.once("init", async function () {
       abombwe: "VTM5E.Abombwe",
       animalism: "VTM5E.Animalism",
       auspex: "VTM5E.Auspex",
-      bardo: "VTM5E.Barod",
+      bardo: "VTM5E.Bardo",
       celerity: "VTM5E.Celerity",
       chimerstry: "VTM5E.Chimerstry",
       daimonion: "VTM5E.Daimonion",

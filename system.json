@@ -21,21 +21,6 @@
       "lang": "fr",
       "name": "French",
       "path": "lang/fr.json"
-    },
-    {
-      "lang": "pt-BR",
-      "name": "Brazilian Portuguese",
-      "path": "lang/pt-BR.json"
-    },
-    {
-      "lang": "es",
-      "name": "Spanish",
-      "path": "lang/es.json"
-    },
-    {
-      "lang": "de",
-      "name": "German",
-      "path": "lang/de.json"
     }
   ],
   "gridDistance": 5,
