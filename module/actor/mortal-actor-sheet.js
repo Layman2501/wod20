@@ -120,7 +120,7 @@ export class MortalActorSheet extends CoterieActorSheet {
     // Rollable abilities.
     html.find(".vrollable").click(this._onRollDialog.bind(this));
   }
-  
+
   /**   * Handle clickable Vampire rolls.
    * @param {Event} event   The originating click event
    * @private
@@ -129,50 +129,39 @@ export class MortalActorSheet extends CoterieActorSheet {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
-    
-  let options = "";
-  for (const [key, value] of Object.entries(this.actor.data.data.abilities)) {
+
+    let options = "";
+    let healthOptions = "";
+
+    for (const [key, value] of Object.entries(this.actor.data.data.abilities)) {
       options = options.concat(
         `<option value="${key}">${game.i18n.localize(value.name)}</option>`
-        );
-      }
-  let healthOptions = ""
-  for (const [key, value] of Object.entries(this.actor.data.data.woundPenalties)) {
-        healthOptions = healthOptions.concat(
-          `<option value="${key}">${game.i18n.localize(value.name)}</option>`
-          );
-  }
-  let wounded;
-  let specialty;
-  let selectAbility;
+      );
+    }
 
-  //    If rolling Rötschreck, the pop up won't have any select Ability 
-  if (dataset.noability=="true") 
-   {
-    selectAbility =  ""
-    specialty =  ``
-    wounded = ""
- 
-  }
+    for (const [key, value] of Object.entries(
+      this.actor.data.data.woundPenalties
+    )) {
+      healthOptions = healthOptions.concat(
+        `<option value="${key}">${game.i18n.localize(value.name)}</option>`
+      );
+    }
+    const ability = dataset.noability !== "true";
+    let wounded = "";
+    let specialty = "";
+    let selectAbility = "";
 
-  else 
-   {
-    selectAbility =  `<div class="form-group">
-                      <label>${game.i18n.localize("VTM5E.SelectAbility")}</label>
-                      <select id="abilitySelect">${options}</select>
-                    </div>`;
-    specialty =  `<input id="specialty" type="checkbox"> Specialty </input>`
-    wounded = `<div class="form-group">
-                <label>${game.i18n.localize("VTM5E.SelectWound")}</label>
-                <select id="woundSelect">${healthOptions}</select>
-              </div>`
-  }
-    const template = `
+    //    If rolling Rötschreck, the pop up won't have any select Ability
+    const template =
+      `
       <form>
-          `
-          + selectAbility + 
-           ` 
-          
+          ` + (ability
+        ? `<div class="form-group">
+          <label>${game.i18n.localize("VTM5E.SelectAbility")}</label>
+          <select id="abilitySelect">${options}</select>
+        </div>`
+        : "") +
+          ` 
           <div class="form-group">
               <label>${game.i18n.localize("VTM5E.Modifier")}</label>
               <input type="text" id="inputMod" value="0">
@@ -181,12 +170,18 @@ export class MortalActorSheet extends CoterieActorSheet {
               <label>${game.i18n.localize("VTM5E.Difficulty")}</label>
               <input type="text" min="0" id="inputDif" value="0">
           </div>
-          ` + wounded + specialty +`
+          ` +
+          (ability
+        ? `<div class="form-group">
+          <label>${game.i18n.localize("VTM5E.SelectWound")}</label>
+          <select id="woundSelect">${healthOptions}</select>
+        </div> <input id="specialty" type="checkbox"> Specialty </input> `
+        : "") +
+          `
       </form>`;
 
     let buttons = {};
     buttons = {
-      
       draw: {
         icon: '<i class="fas fa-check"></i>',
         label: game.i18n.localize("VTM5E.Roll"),
@@ -195,25 +190,31 @@ export class MortalActorSheet extends CoterieActorSheet {
           const abilityVal = this.actor.data.data.abilities[ability]?.value;
           const abilityName = game.i18n.localize(
             this.actor.data.data.abilities[ability]?.name
-            );
+          );
           const woundPenalty = html.find("#woundSelect")[0]?.value;
-          const woundPenaltyVal = this.actor.data.data.woundPenalties[woundPenalty]?.value;
+          const woundPenaltyVal =
+            this.actor.data.data.woundPenalties[woundPenalty]?.value;
           const woundName = game.i18n.localize(
             this.actor.data.data.woundPenalties[woundPenalty]?.name
-            );
+          );
           const modifier = parseInt(html.find("#inputMod")[0].value || 0);
           const difficulty = parseInt(html.find("#inputDif")[0].value || 0);
-          const specialty = parseInt(html.find("#specialty")[0]?.checked || false);
-          const numDice = dataset.noability!=="true" ? abilityVal + parseInt(dataset.roll) + modifier : parseInt(dataset.roll) + modifier;
-          
+          const specialty = parseInt(
+            html.find("#specialty")[0]?.checked || false
+          );
+          const numDice =
+            dataset.noability !== "true"
+              ? abilityVal + parseInt(dataset.roll) + modifier
+              : parseInt(dataset.roll) + modifier;
+
           rollDice(
             numDice,
             this.actor,
-            dataset.noability!=="true"
+            dataset.noability !== "true"
               ? `${dataset.label} + ${abilityName}`
               : `${dataset.label}`,
             difficulty,
-            this.hunger, 
+            this.hunger,
             specialty,
             woundPenaltyVal
           );
@@ -227,7 +228,6 @@ export class MortalActorSheet extends CoterieActorSheet {
     };
 
     new Dialog({
-      
       title: game.i18n.localize("VTM5E.Rolling") + ` ${dataset.label}...`,
       content: template,
       buttons: buttons,
@@ -271,7 +271,6 @@ export class MortalActorSheet extends CoterieActorSheet {
   }
 
   _onSquareCounterChange(event) {
-
     event.preventDefault();
     const element = event.currentTarget;
     const index = Number(element.dataset.index);
@@ -289,13 +288,13 @@ export class MortalActorSheet extends CoterieActorSheet {
     if (index < 0 || index > steps.length) {
       return;
     }
-  
+
     const allStates = ["", ...Object.keys(states)];
     const currentState = allStates.indexOf(oldState);
     if (currentState < 0) {
       return;
     }
-    console.log(currentState)
+    console.log(currentState);
     const newState = allStates[(currentState + 1) % allStates.length];
     steps[index].dataset.state = newState;
 
@@ -336,15 +335,14 @@ export class MortalActorSheet extends CoterieActorSheet {
 
       const values = humanity
         ? new Array(fulls + halfs)
-        : new Array(halfs + crossed + fulls );
+        : new Array(halfs + crossed + fulls);
 
       if (humanity) {
         values.fill("-", 0, fulls);
         values.fill("/", fulls, fulls + halfs);
       } else {
         values.fill("/", 0, halfs);
-        values.fill("-", halfs, halfs + fulls )
-        values.fill("x", halfs + fulls, halfs + fulls + crossed);
+        values.fill("-", halfs, halfs + fulls);
       }
 
       $(this)
