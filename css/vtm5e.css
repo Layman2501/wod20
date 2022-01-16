@@ -341,11 +341,16 @@
   height: 40px;
   border-top: 1px solid #aaa;
   border-bottom: 1px solid #aaa;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between !important;
 }
 
 .vtm5e .tabs .item {
   line-height: 40px;
   font-weight: bold;
+  flex: 1;
 }
 
 .vtm5e .tabs .item.active {

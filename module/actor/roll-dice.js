@@ -1,7 +1,7 @@
 /* global ChatMessage, Roll, game */
 
 // Function to roll dice
-export function rollDice(
+export async  function rollDice(
   numDice,
   actor,
   label = "",
@@ -33,7 +33,7 @@ export function rollDice(
   let chanceDie = numDice + healthModifier(wound) <= 0
   let dice = chanceDie ? 1 : parseInt(numDice) + healthModifier(wound);
   const roll = new Roll(dice + "dvcs>11 + " + 0 + "dhcs>11", actor.data.data);
-  const rollResult = roll.evaluate();
+  await roll.evaluate();
   let difficultyResult = "<span></span>";
   let success = 0;
   let critSuccess = 0;
@@ -42,7 +42,7 @@ export function rollDice(
   let hungerFail = 0;
   let hungerCritFail = 0;
   let chanceDieSuccess = false; 
-  rollResult.terms[0].results.forEach((dice) => {
+  roll.terms[0].results.forEach((dice) => {
     if (numDice+healthModifier(wound) <= 0 && dice.result===10)
     { 
       chanceDieSuccess=true
@@ -113,7 +113,7 @@ export function rollDice(
       "VTM5E.Successes"
     )}: ${totalSuccess} ${difficultyResult}</p>`;
 
-  rollResult.terms[0].results.forEach((dice) => {
+  roll.terms[0].results.forEach((dice) => {
     label =
       label +
       `<img src="systems/wod20/assets/images/diceimg_${dice.result}.png" alt="Normal Fail" class="roll-img normal-dice" />`;
@@ -121,7 +121,7 @@ export function rollDice(
 
   label = label + "<br>";
 
-  rollResult.toMessage({
+  roll.toMessage({
     speaker: ChatMessage.getSpeaker({ actor: actor }),
     content: label,
   });

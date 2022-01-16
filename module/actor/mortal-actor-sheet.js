@@ -345,6 +345,7 @@ export class MortalActorSheet extends CoterieActorSheet {
         values.fill("/", 0, halfs);
         values.fill("-", halfs, halfs + fulls )
         values.fill("x", halfs + fulls, halfs + fulls + crossed);
+
       }
 
       $(this)
@@ -356,6 +357,8 @@ export class MortalActorSheet extends CoterieActorSheet {
           }
         });
     });
+    
+ 
   }
 
   _onResourceChange(event) {
