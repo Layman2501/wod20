@@ -167,22 +167,7 @@ export class MortalActorSheet extends CoterieActorSheet {
                 <select id="woundSelect">${healthOptions}</select>
               </div>`
   }
-    const template = `
-      <form>
-          `
-          + selectAbility + 
-           ` 
-          
-          <div class="form-group">
-              <label>${game.i18n.localize("VTM5E.Modifier")}</label>
-              <input type="text" id="inputMod" value="0">
-          </div>  
-          <div class="form-group">
-              <label>${game.i18n.localize("VTM5E.Difficulty")}</label>
-              <input type="text" min="0" id="inputDif" value="0">
-          </div>
-          ` + wounded + specialty +`
-      </form>`;
+    const template = 'systems/wod20/templates/dialogs/custom-roll.html'
 
     let buttons = {};
     buttons = {
@@ -209,30 +194,32 @@ export class MortalActorSheet extends CoterieActorSheet {
           rollDice(
             numDice,
             this.actor,
-            dataset.noability!=="true"
+            dataset.noability !== 'true'
               ? `${dataset.label} + ${abilityName}`
               : `${dataset.label}`,
             difficulty,
-            this.hunger, 
             specialty,
-            woundPenaltyVal
-          );
+            this.actor.data.data.health.state
+          )
           // this._vampireRoll(numDice, this.actor, `${dataset.label} + ${abilityName}`, difficulty)
-        },
+        }
       },
       cancel: {
         icon: '<i class="fas fa-times"></i>',
-        label: game.i18n.localize("VTM5E.Cancel"),
-      },
-    };
+        label: game.i18n.localize('VTM5E.Cancel')
+      }
+    }
 
-    new Dialog({
-      
-      title: game.i18n.localize("VTM5E.Rolling") + ` ${dataset.label}...`,
-      content: template,
-      buttons: buttons,
-      default: "draw",
-    }).render(true);
+    const abilities = Object.keys(this.actor.data.data.abilities)
+    console.log(abilities);
+    renderTemplate(template, { noability: dataset.noability, abilities }).then((content) => {
+      new Dialog({
+        title: game.i18n.localize('VTM5E.Rolling') + ` ${dataset.label}...`,
+        content,
+        buttons: buttons,
+        default: 'draw'
+      }).render(true)
+    })
   }
 
   /**
@@ -247,7 +234,7 @@ export class MortalActorSheet extends CoterieActorSheet {
     const useHunger = this.hunger && dataset.useHunger === "1";
     const numDice = dataset.roll;
     console.log(dataset.roll);
-    rollDice(numDice, this.actor, `${dataset.label}`, 0, useHunger);
+    rollDice(numDice, this.actor, `${dataset.label}`, 0);
   }
 
   _onCustomVampireRoll(event) {
@@ -266,7 +253,7 @@ export class MortalActorSheet extends CoterieActorSheet {
       const dice2 =
         this.actor.data.data.skills[dataset.dice2.toLowerCase()].value;
       const dicePool = dice1 + dice2;
-      rollDice(dicePool, this.actor, `${dataset.name}`, 0, this.hunger);
+      rollDice(dicePool, this.actor, `${dataset.name}`, 0);
     }
   }
 

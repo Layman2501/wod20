@@ -29,7 +29,7 @@
           "aggravated": 0,
           "superficial": 0,
           "lethal" : 0,
-          "max": 5
+          "max": 7
         },
 
         "bloodpool": {

@@ -110,6 +110,6 @@ export class VampireActorSheet extends GhoulActorSheet {
     }
 
     const dicePool = dice1 + dice2;
-    rollDice(dicePool, this.actor, `${item.data.name}`, 0, this.hunger);
+    rollDice(dicePool, this.actor, `${item.data.name}`, 0, false, this.actor.data.data.health.state);
   }
 }

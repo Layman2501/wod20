@@ -4,20 +4,31 @@
  * Extend the base Actor type by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
  */
+const WoundLevels = [
+  "healthy",
+  "bruised",
+  "hurt",
+  "injured",
+  "wounded",
+  "mauled",
+  "crippled",
+  "incapacitated",
+]
 export class VampireActor extends Actor {
-  /**
-     * Augment the basic actor data with additional dynamic data.
-     */
+
   prepareData () {
     super.prepareData()
 
-    // const actorData = this.data
-    // const data = actorData.data;
-    // const flags = actorData.flags;
+    const actorData = this.data.data
 
-    // Make separate methods for each Actor type (character, npc, etc.) to keep
-    // things organized.
-    // if (actorData.type === 'character') this._prepareCharacterData(actorData)
+    // Perform migration to new wound format
+    if (actorData.health.max === 5) {
+      actorData.health.max = 7
+    }
+
+    const healthSum = actorData.health.superficial + actorData.health.aggravated + actorData.health.lethal
+    console.log(healthSum, WoundLevels[healthSum])
+    actorData.health.state = WoundLevels[healthSum] ? WoundLevels[healthSum] : 'Outside Bounds'
   }
 
   /**

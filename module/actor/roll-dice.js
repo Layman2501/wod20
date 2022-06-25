@@ -6,28 +6,27 @@ export async function rollDice (
   actor,
   label = '',
   difficulty = 0,
-  useHunger,
   specialty,
   wound
 ) {
+  console.log(wound)
   function healthModifier (wound) {
-      // pick health value from ordered key (see health.html for the order)
-      switch(true) {
-        case wound == 'hurt':
-          return -1
-        case wound == 'injured':
-          return -1
-        case wound == 'wounded':
-          return -2
-        case wound == 'mauled':
-          return -2 
-        case wound == 'crippled':
-          return -5
-        case wound == 'incapacitated' :
-          return -10000000
-        default: 
-          return 0
-      }
+    // pick health value from ordered key (see health.html for the order)
+    if (wound === 'hurt') {
+      return -1
+    } else if (wound === 'injured') {
+      return -1
+    } else if (wound === 'wounded') {
+      return -2
+    } else if (wound === 'mauled') {
+      return -2
+    } else if (wound === 'crippled') {
+      return -5
+    } else if (wound === 'incapacitated') {
+      return -10000000
+    } else {
+      return 0
+    }
   }
   const chanceDie = numDice + healthModifier(wound) <= 0
   const dice = chanceDie ? 1 : parseInt(numDice) + healthModifier(wound)
@@ -36,20 +35,21 @@ export async function rollDice (
   let difficultyResult = '<span></span>'
   let success = 0
   let chanceDieSuccess = false
-
+  console.log(dice, numDice, healthModifier(wound))
   roll.terms[0].results.forEach((dice) => {
     if (numDice + healthModifier(wound) <= 0 && dice.result === 10) {
       chanceDieSuccess = true
       success++
     } else {
-      if (dice.result >= difficulty) {
+      if (dice.result >= difficulty && dice.result > 1) {
         if (specialty && dice.result === 10) {
           success += 2
-        } else
-        if (dice.result === 1) {
-          success--
         } else {
           success++
+        }
+      } else {
+        if (dice.result === 1) {
+          success--
         }
       }
     }
@@ -69,14 +69,6 @@ export async function rollDice (
   }
 
   label = `<p class="roll-label uppercase">${label}</p>`
-
-  // if (critSuccess > 0) {
-  //   label =
-  //     label +
-  //     `<p class="roll-content result-critical">${game.i18n.localize(
-  //       'VTM5E.CriticalSuccess'
-  //     )}</p>`
-  // }
 
   if (chanceDie) {
     label = label +
