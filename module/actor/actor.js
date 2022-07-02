@@ -5,14 +5,14 @@
  * @extends {Actor}
  */
 const WoundLevels = [
-  "healthy",
-  "bruised",
-  "hurt",
-  "injured",
-  "wounded",
-  "mauled",
-  "crippled",
   "incapacitated",
+  "crippled",
+  "mauled",
+  "wounded",
+  "injured",
+  "hurt",
+  "bruised",
+  "healthy",
 ]
 export class VampireActor extends Actor {
 
@@ -26,8 +26,12 @@ export class VampireActor extends Actor {
       actorData.health.max = 7
     }
 
-    const healthSum = actorData.health.superficial + actorData.health.aggravated + actorData.health.lethal
-    console.log(healthSum, WoundLevels[healthSum])
+    let healthSum = actorData.health.max - (actorData.health.superficial + actorData.health.aggravated + actorData.health.lethal)
+    if (healthSum >= 6 && healthSum < actorData.health.max) {
+      healthSum = 6
+    } else if (healthSum === actorData.health.max) {
+      healthSum = 7
+    }
     actorData.health.state = WoundLevels[healthSum] ? WoundLevels[healthSum] : 'Outside Bounds'
   }
 

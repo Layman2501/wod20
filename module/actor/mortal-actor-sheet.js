@@ -228,13 +228,12 @@ export class MortalActorSheet extends CoterieActorSheet {
    * @private
    */
   _onRoll(event) {
-    event.preventDefault();
-    const element = event.currentTarget;
-    const dataset = element.dataset;
-    const useHunger = this.hunger && dataset.useHunger === "1";
-    const numDice = dataset.roll;
-    console.log(dataset.roll);
-    rollDice(numDice, this.actor, `${dataset.label}`, 0);
+    event.preventDefault()
+    const element = event.currentTarget
+    const dataset = element.dataset
+    const numDice = dataset.roll
+    console.log(dataset.roll)
+    rollDice(numDice, this.actor, `${dataset.label}`, 0)
   }
 
   _onCustomVampireRoll(event) {
