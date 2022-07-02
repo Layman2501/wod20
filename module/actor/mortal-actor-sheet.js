@@ -177,9 +177,9 @@ export class MortalActorSheet extends CoterieActorSheet {
               <label>${game.i18n.localize("VTM5E.Modifier")}</label>
               <input type="text" id="inputMod" value="0">
           </div>  
-          <div class="form-group">
+          <div class="form-group">F
               <label>${game.i18n.localize("VTM5E.Difficulty")}</label>
-              <input type="text" min="0" id="inputDif" value="0">
+              <input type="text" min="0" id="inputDif" value="6">
           </div>
           ` + wounded + specialty +`
       </form>`;
