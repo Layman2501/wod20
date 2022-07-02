@@ -7,10 +7,14 @@ export async function rollDice (
   label = '',
   difficulty = 0,
   specialty,
+  useWound,
   wound
 ) {
   console.log(wound)
-  function healthModifier (wound) {
+  function healthModifier (useWound, wound) {
+    if (!useWound) {
+      return 0
+    }
     // pick health value from ordered key (see health.html for the order)
     if (wound === 'hurt') {
       return -1
@@ -28,8 +32,8 @@ export async function rollDice (
       return 0
     }
   }
-  const chanceDie = numDice + healthModifier(wound) <= 0
-  const dice = chanceDie ? 1 : parseInt(numDice) + healthModifier(wound)
+  const chanceDie = numDice + healthModifier(useWound, wound) <= 0
+  const dice = chanceDie ? 1 : parseInt(numDice) + healthModifier(useWound, wound)
   const roll = new Roll(dice + 'dvcs>11 + ' + 0 + 'dhcs>11', actor.data.data)
   await roll.evaluate()
   let difficultyResult = '<span></span>'
@@ -57,7 +61,7 @@ export async function rollDice (
 
   let successRoll = false
   if (difficulty !== 0) {
-    successRoll = success || chanceDieSuccess
+    successRoll = (success > 0) || chanceDieSuccess
     difficultyResult = `( <span class="danger">${game.i18n.localize(
       'VTM5E.Fail'
     )}</span> )`

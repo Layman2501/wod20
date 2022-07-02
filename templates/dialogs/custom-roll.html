@@ -1,4 +1,4 @@
-<form>
+<form xmlns="http://www.w3.org/1999/html">
     {{#unless noability}}
     <div class="form-group">
         <label> {{localize "VTM5E.SelectAbility"}} </label>
@@ -18,7 +18,7 @@
         <input type="text" min="0" id="inputDif" value="0">
     </div>
     {{#unless noability}}
-        {{!-- Automatically apply health level to roll? --}}
+        <input id="useWound" type="checkbox" checked> Apply Wounds? </input>
         <input id="specialty" type="checkbox"> Specialty </input>
     {{/unless}}
 
