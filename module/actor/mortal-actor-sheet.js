@@ -188,8 +188,8 @@ export class MortalActorSheet extends CoterieActorSheet {
             );
           const modifier = parseInt(html.find("#inputMod")[0].value || 0);
           const difficulty = parseInt(html.find("#inputDif")[0].value || 0);
-          const useWound = parseInt(html.find("#useWound")[0]?.checked || false);
-          const specialty = parseInt(html.find("#specialty")[0]?.checked || false);
+          const useWound = (html.find("#useWound")[0]?.checked || false)
+          const specialty = (html.find("#specialty")[0]?.checked || false)
           const numDice = dataset.noability!=="true" ? abilityVal + parseInt(dataset.roll) + modifier : parseInt(dataset.roll) + modifier;
 
           console.log(useWound)
