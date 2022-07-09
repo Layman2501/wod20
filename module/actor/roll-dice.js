@@ -5,7 +5,7 @@ export async function rollDice (
   numDice,
   actor,
   label = '',
-  difficulty = 0,
+  difficulty = 6,
   specialty,
   useWound,
   wound

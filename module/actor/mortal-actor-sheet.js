@@ -34,22 +34,23 @@ export class MortalActorSheet extends CoterieActorSheet {
   }
 
   /** @override */
-  get template() {
-    if (!game.user.isGM && this.actor.limited)
-      return "systems/wod20/templates/actor/limited-sheet.html";
-    return "systems/wod20/templates/actor/mortal-sheet.html";
+  get template () {
+    if (!game.user.isGM && this.actor.limited) {
+      return 'systems/wod20/templates/actor/limited-sheet.html'
+    }
+    return 'systems/wod20/templates/actor/mortal-sheet.html'
   }
 
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
+  getData () {
     const data = super.getData();
     // TODO: confirm that I can finish and use this list
-    data.sheetType = `${game.i18n.localize("VTM5E.Mortal")}`;
+    data.sheetType = `${game.i18n.localize('VTM5E.Mortal')}`;
 
     // Prepare items.
-    if (this.actor.data.type === "mortal") {
+    if (this.actor.data.type === 'mortal') {
       this._prepareItems(data);
     }
 
@@ -75,13 +76,13 @@ export class MortalActorSheet extends CoterieActorSheet {
     // Iterate through items, allocating to containers
     for (const i of sheetData.items) {
       i.img = i.img || DEFAULT_TOKEN;
-      if (i.type === "specialty") {
+      if (i.type === 'specialty') {
         // Append to specialties.
         specialties.push(i);
-      } else if (i.type === "boon") {
+      } else if (i.type === 'boon') {
         // Append to boons.
         boons.push(i);
-      } else if (i.type === "customRoll") {
+      } else if (i.type === 'customRoll') {
         // Append to custom rolls.
         customRolls.push(i);
       }
@@ -106,37 +107,37 @@ export class MortalActorSheet extends CoterieActorSheet {
 
     // Ressource squares (Health, Willpower)
     html
-      .find(".resource-counter > .resource-counter-step")
+      .find('.resource-counter > .resource-counter-step')
       .click(this._onSquareCounterChange.bind(this));
-    html.find(".resource-plus").click(this._onResourceChange.bind(this));
-    html.find(".resource-minus").click(this._onResourceChange.bind(this));
+    html.find('.resource-plus').click(this._onResourceChange.bind(this));
+    html.find('.resource-minus').click(this._onResourceChange.bind(this));
 
     // Rollable abilities.
-    html.find(".rollable").click(this._onRoll.bind(this));
-    html.find(".custom-rollable").click(this._onCustomVampireRoll.bind(this));
+    html.find('.rollable').click(this._onRoll.bind(this));
+    html.find('.custom-rollable').click(this._onCustomVampireRoll.bind(this));
     html
-      .find(".specialty-rollable")
+      .find('.specialty-rollable')
       .click(this._onCustomVampireRoll.bind(this));
     // Rollable abilities.
-    html.find(".vrollable").click(this._onRollDialog.bind(this));
+    html.find('.vrollable').click(this._onRollDialog.bind(this));
   }
   
   /**   * Handle clickable Vampire rolls.
    * @param {Event} event   The originating click event
    * @private
    */
-  _onRollDialog(event) {
+  _onRollDialog (event) {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
     
-  let options = "";
+  let options = '';
   for (const [key, value] of Object.entries(this.actor.data.data.abilities)) {
       options = options.concat(
         `<option value="${key}">${game.i18n.localize(value.name)}</option>`
         );
       }
-  let healthOptions = ""
+  let healthOptions = ''
   for (const [key, value] of Object.entries(this.actor.data.data.woundPenalties)) {
         healthOptions = healthOptions.concat(
           `<option value="${key}">${game.i18n.localize(value.name)}</option>`
@@ -147,50 +148,43 @@ export class MortalActorSheet extends CoterieActorSheet {
   let selectAbility;
 
   //    If rolling Rötschreck, the pop up won't have any select Ability 
-  if (dataset.noability=="true") 
-   {
-    selectAbility =  ""
-    specialty =  ``
-    wounded = ""
- 
-  }
-
-  else 
-   {
-    selectAbility =  `<div class="form-group">
-                      <label>${game.i18n.localize("VTM5E.SelectAbility")}</label>
-                      <select id="abilitySelect">${options}</select>
-                    </div>`;
-    specialty =  `<input id="specialty" type="checkbox"> Specialty </input>`
-    wounded = `<div class="form-group">
-                <label>${game.i18n.localize("VTM5E.SelectWound")}</label>
-                <select id="woundSelect">${healthOptions}</select>
-              </div>`
-  }
+    if (dataset.noability === 'true') {
+      selectAbility =  ''
+      specialty =  ''
+      wounded = ''
+    } else {
+      selectAbility =  `<div class="form-group">
+                        <label>${game.i18n.localize("VTM5E.SelectAbility")}</label>
+                        <select id="abilitySelect">${options}</select>
+                      </div>`;
+      specialty =  `<input id="specialty" type="checkbox"> Specialty </input>`
+      wounded = `<div class="form-group">
+                  <label>${game.i18n.localize("VTM5E.SelectWound")}</label>
+                  <select id="woundSelect">${healthOptions}</select>
+                </div>`
+    }
     const template = 'systems/wod20/templates/dialogs/custom-roll.html'
-
-    let buttons = {};
+    let buttons = {}
     buttons = {
-      
       draw: {
         icon: '<i class="fas fa-check"></i>',
-        label: game.i18n.localize("VTM5E.Roll"),
+        label: game.i18n.localize('VTM5E.Roll'),
         callback: async (html) => {
-          const ability = html.find("#abilitySelect")[0]?.value;
+          const ability = html.find('#abilitySelect')[0]?.value;
           const abilityVal = this.actor.data.data.abilities[ability]?.value;
           const abilityName = game.i18n.localize(
             this.actor.data.data.abilities[ability]?.name
             );
-          const woundPenalty = html.find("#woundSelect")[0]?.value;
+          const woundPenalty = html.find('#woundSelect')[0]?.value;
           const woundPenaltyVal = this.actor.data.data.woundPenalties[woundPenalty]?.value;
           const woundName = game.i18n.localize(
             this.actor.data.data.woundPenalties[woundPenalty]?.name
             );
-          const modifier = parseInt(html.find("#inputMod")[0].value || 0);
-          const difficulty = parseInt(html.find("#inputDif")[0].value || 0);
-          const useWound = (html.find("#useWound")[0]?.checked || false)
-          const specialty = (html.find("#specialty")[0]?.checked || false)
-          const numDice = dataset.noability!=="true" ? abilityVal + parseInt(dataset.roll) + modifier : parseInt(dataset.roll) + modifier;
+          const modifier = parseInt(html.find('#inputMod')[0].value || 0);
+          const difficulty = parseInt(html.find('#inputDif')[0].value || 6);
+          const useWound = (html.find('#useWound')[0]?.checked || false)
+          const specialty = (html.find('#specialty')[0]?.checked || false)
+          const numDice = dataset.noability !== 'true' ? abilityVal + parseInt(dataset.roll) + modifier : parseInt(dataset.roll) + modifier;
 
           console.log(useWound)
 
@@ -215,7 +209,7 @@ export class MortalActorSheet extends CoterieActorSheet {
     }
 
     const abilities = Object.keys(this.actor.data.data.abilities)
-    console.log(abilities);
+    console.log(abilities)
     renderTemplate(template, { noability: dataset.noability, abilities }).then((content) => {
       new Dialog({
         title: game.i18n.localize('VTM5E.Rolling') + ` ${dataset.label}...`,
@@ -231,16 +225,16 @@ export class MortalActorSheet extends CoterieActorSheet {
    * @param {Event} event   The originating click event
    * @private
    */
-  _onRoll(event) {
+  _onRoll (event) {
     event.preventDefault()
     const element = event.currentTarget
     const dataset = element.dataset
     const numDice = dataset.roll
     console.log(dataset.roll)
-    rollDice(numDice, this.actor, `${dataset.label}`, 0)
+    rollDice(numDice, this.actor, `${dataset.label}`, 6)
   }
 
-  _onCustomVampireRoll(event) {
+  _onCustomVampireRoll (event) {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
@@ -256,114 +250,108 @@ export class MortalActorSheet extends CoterieActorSheet {
       const dice2 =
         this.actor.data.data.skills[dataset.dice2.toLowerCase()].value;
       const dicePool = dice1 + dice2;
-      rollDice(dicePool, this.actor, `${dataset.name}`, 0);
+      rollDice(dicePool, this.actor, `${dataset.name}`, 6);
     }
   }
 
-  _onSquareCounterChange(event) {
-
-    event.preventDefault();
-    const element = event.currentTarget;
-    const index = Number(element.dataset.index);
-    const oldState = element.dataset.state || "";
-    const parent = $(element.parentNode);
-    const data = parent[0].dataset;
-    const states = parseCounterStates(data.states);
-    const fields = data.name.split(".");
-    const steps = parent.find(".resource-counter-step");
-    const humanity = data.name === "data.humanity";
-    const fulls = Number(data[states["-"]]) || 0;
-    const halfs = Number(data[states["/"]]) || 0;
-    const crossed = Number(data[states.x]) || 0;
-    const star = Number(data[states["*"]]) || 0;
+  _onSquareCounterChange (event) {
+    event.preventDefault()
+    const element = event.currentTarget
+    const index = Number(element.dataset.index)
+    const oldState = element.dataset.state || ''
+    const parent = $(element.parentNode)
+    const data = parent[0].dataset
+    const states = parseCounterStates(data.states)
+    const fields = data.name.split('.')
+    const steps = parent.find('.resource-counter-step')
+    const humanity = data.name === 'data.humanity'
+    const fulls = Number(data[states['-']]) || 0
+    const halfs = Number(data[states['/']]) || 0
+    const crossed = Number(data[states.x]) || 0
     if (index < 0 || index > steps.length) {
-      return;
+      return
     }
-  
-    const allStates = ["", ...Object.keys(states)];
-    const currentState = allStates.indexOf(oldState);
+    const allStates = ['', ...Object.keys(states)]
+    const currentState = allStates.indexOf(oldState)
     if (currentState < 0) {
-      return;
+      return
     }
     console.log(currentState)
-    const newState = allStates[(currentState + 1) % allStates.length];
-    steps[index].dataset.state = newState;
+    const newState = allStates[(currentState + 1) % allStates.length]
+    steps[index].dataset.state = newState
 
     if (
-      (oldState !== "" && oldState !== "-") ||
-      (oldState !== "" && humanity)
+      (oldState !== '' && oldState !== '-') ||
+      (oldState !== '' && humanity)
     ) {
-      data[states[oldState]] = Number(data[states[oldState]]) - 1;
+      data[states[oldState]] = Number(data[states[oldState]]) - 1
     }
 
     // If the step was removed we also need to subtract from the maximum.
-    if (oldState !== "" && newState === "" && !humanity) {
-      data[states["-"]] = Number(data[states["-"]]) - 1;
+    if (oldState !== '' && newState === '' && !humanity) {
+      data[states['-']] = Number(data[states['-']]) - 1
     }
 
-    if (newState !== "") {
+    if (newState !== '') {
       data[states[newState]] =
         Number(data[states[newState]]) +
-        Math.max(index + 1 - fulls - halfs - crossed, 1);
+        Math.max(index + 1 - fulls - halfs - crossed, 1)
     }
 
     const newValue = Object.values(states).reduce(function (obj, k) {
-      obj[k] = Number(data[k]) || 0;
-      return obj;
-    }, {});
-    this._assignToActorField(fields, newValue);
+      obj[k] = Number(data[k]) || 0
+      return obj
+    }, {})
+    this._assignToActorField(fields, newValue)
   }
 
   _setupSquareCounters(html) {
-    html.find(".resource-counter").each(function () {
+    html.find('.resource-counter').each(function () {
       const data = this.dataset;
       const states = parseCounterStates(data.states);
-      const humanity = data.name === "data.humanity";
+      const humanity = data.name === 'data.humanity';
 
-      const fulls = Number(data[states["-"]]) || 0;
-      const halfs = Number(data[states["/"]]) || 0;
+      const fulls = Number(data[states['-']]) || 0;
+      const halfs = Number(data[states['/']]) || 0;
       const crossed = Number(data[states.x]) || 0;
 
       const values = humanity
         ? new Array(fulls + halfs)
-        : new Array(halfs + crossed + fulls );
+        : new Array(halfs + crossed + fulls)
 
       if (humanity) {
-        values.fill("-", 0, fulls);
-        values.fill("/", fulls, fulls + halfs);
+        values.fill('-', 0, fulls);
+        values.fill('/', fulls, fulls + halfs)
       } else {
-        values.fill("/", 0, halfs);
-        values.fill("-", halfs, halfs + fulls )
-        values.fill("x", halfs + fulls, halfs + fulls + crossed);
-
+        values.fill('/', 0, halfs);
+        values.fill('-', halfs, halfs + fulls)
+        values.fill('x', halfs + fulls, halfs + fulls + crossed)
       }
 
       $(this)
-        .find(".resource-counter-step")
+        .find('.resource-counter-step')
         .each(function () {
-          this.dataset.state = "";
+          this.dataset.state = '';
           if (this.dataset.index < values.length) {
-            this.dataset.state = values[this.dataset.index];
+            this.dataset.state = values[this.dataset.index]
           }
-        });
-    });
-    
- 
+        })
+    })
   }
 
   _onResourceChange(event) {
-    event.preventDefault();
-    const actorData = duplicate(this.actor);
-    const element = event.currentTarget;
-    const dataset = element.dataset;
-    const resource = dataset.resource;
-    if (dataset.action === "plus") {
-      actorData.data[resource].max++;
-    } else if (dataset.action === "minus") {
+    event.preventDefault()
+    const actorData = duplicate(this.actor)
+    const element = event.currentTarget
+    const dataset = element.dataset
+    const resource = dataset.resource
+    if (dataset.action === 'plus') {
+      actorData.data[resource].max++
+    } else if (dataset.action === 'minus') {
       actorData.data[resource].max = Math.max(
         actorData.data[resource].max - 1,
         0
-      );
+      )
     }
 
     if (
@@ -372,20 +360,20 @@ export class MortalActorSheet extends CoterieActorSheet {
       actorData.data[resource].max
     ) {
       actorData.data[resource].aggravated =
-        actorData.data[resource].max - actorData.data[resource].superficial;
+        actorData.data[resource].max - actorData.data[resource].superficial
       if (actorData.data[resource].aggravated <= 0) {
-        actorData.data[resource].aggravated = 0;
-        actorData.data[resource].superficial = actorData.data[resource].max;
+        actorData.data[resource].aggravated = 0
+        actorData.data[resource].superficial = actorData.data[resource].max
       }
     }
-    this.actor.update(actorData);
+    this.actor.update(actorData)
   }
 }
 
-function parseCounterStates(states) {
-  return states.split(",").reduce((obj, state) => {
-    const [k, v] = state.split(":");
-    obj[k] = v;
-    return obj;
-  }, {});
+function parseCounterStates (states) {
+  return states.split(',').reduce((obj, state) => {
+    const [k, v] = state.split(':')
+    obj[k] = v
+    return obj
+  }, {})
 }

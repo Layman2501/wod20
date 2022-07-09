@@ -386,7 +386,7 @@ function rerollDie(actor) {
 
   // If there is at least 1 die selected and aren't any more than 3 die selected, reroll the total number of die and generate a new message.
   if (diceSelected > 0 && diceSelected < 4) {
-    rollDice(diceSelected, actor, "Willpower Reroll", 0, false);
+    rollDice(diceSelected, actor, "Willpower Reroll", 6, false);
   }
 }
 
