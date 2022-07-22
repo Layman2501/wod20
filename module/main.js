@@ -31,7 +31,7 @@ Hooks.once("init", async function () {
       hint: "Enable this if you want to divide your experience assigned to different pools",
       scope: "world",
       config: true,
-      default: true,
+      default: false,
       type: Boolean,
   });
 
