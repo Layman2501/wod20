@@ -49,8 +49,10 @@
       <div class="resource grid grid-4col flex-center">
         <label class="resource-label">{{localize "VTM5E.Discipline"}}: </label>
         <select name="data.discipline" data-type="String">
-          {{#select data.data.discipline}} {{>
-          "systems/wod20/templates/item/parts/disciplines.html"}}
+          {{#select data.data.discipline}} 
+            {{#each item.disciplines as |discipline key|}}
+              <option value="{{key}}">{{localize discipline.name}}</option>
+            {{/each}}
           {{/select}}
         </select>
 
@@ -62,22 +64,25 @@
           {{#select data.data.dice1}} {{>
           "systems/wod20/templates/item/parts/attributes.html"}}
           <option value="discipline">
-            {{localize (getDisciplineName item.data.data.discipline)}}
+            {{localize (getDisciplineName item.data.data.discipline false item.disciplines)}}
           </option>
           {{/select}}
         </select>
         <label class="resource-label">+</label>
         {{#if data.data.skill}}
-        <select name="data.dice2" data-type="String">
-          {{#select data.data.dice2}} {{>
-          "systems/wod20/templates/item/parts/skills.html"}} {{/select}}
-        </select>
+          <select name="data.dice2" data-type="String">
+              {{#select data.data.dice2}}                        
+                  {{#each item.skillsArray as |skill|}}
+                      <option value="{{skill.name}}">{{localize skill.loc}}</option>
+                  {{/each}}
+              {{/select}}
+          </select>
         {{else}}
         <select name="data.dice2" data-type="String">
           {{#select data.data.dice2}} {{>
           "systems/wod20/templates/item/parts/attributes.html"}}
           <option value="discipline">
-            {{localize (getDisciplineName item.data.data.discipline)}}
+            {{localize (getDisciplineName item.data.data.discipline false item.disciplines)}}
           </option>
           {{/select}}
         </select>
@@ -88,8 +93,7 @@
           type="checkbox"
           id="data.rollable"
           name="data.rollable"
-          {{checked
-          data.data.rollable}}
+          {{checked data.data.rollable}}
         />
 
         <label class="resource-label">{{localize "VTM5E.UseSkill"}}: </label>
@@ -97,9 +101,28 @@
           type="checkbox"
           id="data.skill"
           name="data.skill"
-          {{checked
-          data.data.skill}}
+          {{checked data.data.skill}}
         />
+
+        <label class="resource-label">{{localize "VTM5E.Difficulty"}}: </label>
+        <input
+          type="number"
+          id="data.difficulty"
+          name="data.difficulty"
+          value={{data.data.difficulty}}
+          min=0
+          max=10
+          placeholder="6"
+        />
+
+        <label class="resource-label">{{localize "VTM5E.ApplyWounds"}}:</label>
+        <input 
+          type="checkbox"
+          id="data.applywounds"
+          name="data.applywounds"
+          {{checked data.data.applywounds}}
+        />
+
       </div>
     </div>
   </section>

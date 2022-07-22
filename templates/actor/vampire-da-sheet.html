@@ -1,35 +1,19 @@
-<form
-  class="{{cssClass}} flexcol {{#if locked}}locked{{/if}} vampire-sheet"
-  autocomplete="off"
->
+<form class="{{cssClass}} flexcol {{#if locked}}locked{{/if}} vampire-sheet" autocomplete="off">
   {{!-- Vampire Sheet Header --}}
   <header class="sheet-header">
     {{> "systems/wod20/templates/actor/parts/profile-img.html"}}
     <div class="header-fields">
       <div class="grid grid-3col flexrow">
         <h1 class="charname">
-          <input
-            name="name"
-            type="text"
-            value="{{actor.name}}"
-            placeholder="{{localize 'VTM5E.Name'}}"
-          />
+          <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'VTM5E.Name'}}" />
         </h1>
         <h1 class="charname">
-          <input
-            name="data.clan.value"
-            type="text"
-            value="{{data.data.clan.value}}"
-            placeholder="{{localize 'VTM5E.Clan'}}"
-          />
+          <input name="data.clan.value" type="text" value="{{data.data.clan.value}}"
+            placeholder="{{localize 'VTM5E.Clan'}}" />
         </h1>
         <h1 class="charname">
-          <input
-            name="data.headers.nature"
-            type="text"
-            value="{{data.data.headers.nature}}"
-            placeholder="{{localize 'VTM5E.Ambition'}}"
-          />
+          <input name="data.headers.nature" type="text" value="{{data.data.headers.nature}}"
+            placeholder="{{localize 'VTM5E.Ambition'}}" />
         </h1>
       </div>
       {{!-- The grid classes are defined in scss/global/_grid.scss. To use, use
@@ -48,9 +32,14 @@
       both the "grid" and "grid-Ncol" class where "N" can be any number from 1
       to 12 and will create that number of columns. --}}
       <div class="resources grid grid-3col">
-        {{> "systems/wod20/templates/actor/parts/exp.html"}} 
-         {{> "systems/wod20/templates/actor/parts/frenzy.html"}}
-        {{>"systems/wod20/templates/actor/parts/rotschreck.html"}}
+        {{setDividedExp}}
+        {{#unless isDividedExp}}
+        {{> "systems/wod20/templates/actor/parts/exp.html"}}
+        {{else}}
+        {{> "systems/wod20/templates/actor/parts/dividedExp.html"}}
+        {{/unless}}
+        {{> "systems/wod20/templates/actor/parts/frenzy-rot-combined.html"}}
+        {{> "systems/wod20/templates/actor/parts/soak-init-combined.html"}}
       </div>
     </div>
   </header>
@@ -68,17 +57,11 @@
 
   {{!-- Vampire Sheet Body --}}
   <section class="sheet-body">
-    {{!-- Stats Tab --}} {{>
-    "systems/wod20/templates/actor/parts/stats.html"}} {{!-- Owned Powers
-    Tab --}} {{> "systems/wod20/templates/actor/parts/disciplines.html"}}
-    {{!-- Owned Features Tab --}} {{>
-    "systems/wod20/templates/actor/parts/features.html"}} {{!-- Blood Tab
-    --}}
-    {{!-- Biography
-    Tab --}} {{> "systems/wod20/templates/actor/parts/biography.html"}}
-    {{! -- Combat --}} 
-    {{> "systems/wod20/templates/actor/parts/combat.html"}}
-     {{!-- Other Tab
-    --}} {{> "systems/wod20/templates/actor/parts/other.html"}}
+    {{!-- Stats Tab --}} {{> "systems/wod20/templates/actor/parts/stats.html"}} {{!-- Owned Powers Tab --}} {{>
+    "systems/wod20/templates/actor/parts/disciplines.html"}} {{!-- Owned Features Tab --}} {{>
+    "systems/wod20/templates/actor/parts/features.html"}} {{!-- Blood Tab --}} {{!-- Biography Tab --}} {{>
+    "systems/wod20/templates/actor/parts/biography.html"}} {{! -- Combat --}} {{>
+    "systems/wod20/templates/actor/parts/combat.html"}} {{!-- Other Tab --}} {{>
+    "systems/wod20/templates/actor/parts/other.html"}}
   </section>
 </form>

@@ -4,20 +4,52 @@
  * Extend the base Actor type by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
  */
+const WoundLevels = [
+  "Healthy",
+  "Bruised",
+  "Hurt",
+  "Injured",
+  "Wounded",
+  "Mauled",
+  "Crippled",
+  "Incapacitated",
+]
+
+const WoundModifierText = [
+  "",
+  "",
+  " (-1)",
+  " (-1)",
+  " (-2)",
+  " (-2)",
+  " (-5)",
+  "",
+]
+
 export class VampireActor extends Actor {
-  /**
-     * Augment the basic actor data with additional dynamic data.
-     */
+
   prepareData () {
     super.prepareData()
 
-    // const actorData = this.data
-    // const data = actorData.data;
-    // const flags = actorData.flags;
+    const actorData = this.data.data
 
-    // Make separate methods for each Actor type (character, npc, etc.) to keep
-    // things organized.
-    // if (actorData.type === 'character') this._prepareCharacterData(actorData)
+    if(actorData.health) {
+      // Perform migration to new wound format
+      if (actorData.health.max === 5) {
+        actorData.health.max = 7
+      }
+  
+      const allDamage = actorData.health.superficial + actorData.health.aggravated + actorData.health.lethal;
+      const dmgSum = Math.max(allDamage - (actorData.health.max - 7), 0)
+      // console.log(dmgSum, WoundLevels[dmgSum])
+      if (dmgSum === 0 && allDamage !== 0) {
+        /* Forced bruised */
+        actorData.health.state = WoundLevels[1]
+      } else {
+        /* "Outside Bounds" should never happen */
+        actorData.health.state = WoundLevels[dmgSum] ? WoundLevels[dmgSum] + WoundModifierText[dmgSum] : 'Outside Bounds'
+      }
+    }
   }
 
   /**

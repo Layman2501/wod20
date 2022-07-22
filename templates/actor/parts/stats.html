@@ -1,20 +1,18 @@
 <div class="tab flex-center" data-group="primary" data-tab="stats">
   <label class="resource-label">{{localize "VTM5E.Attributes"}}</label>
     {{setVar "generation" data.data.headers.generation}}
-    {{#le generation 7}}
-      {{setVar "loopLength" 10}}
-      {{setVar "colNum" 3}}
-    {{else}}
-      {{setVar "loopLength" 5 }}
-      {{setVar "colNum" 3}}
-    {{/le}}
+    {{setVar "loopLength" 5 }}
+    
+    {{setDotsFromGen "loopLength" generation}}
+    {{setVar "colNum" 3}}
   <div class="abilities grid grid-{{colNum}}col flex-group-center">
     {{#each data.data.abilities as |ability key|}}
     <div>
     <div class="resource-label">    
-    {{equal key "strength" "Physical"}}
-    {{equal key "charisma" "Social"}}
-    {{equal key "perception" "Mental"}} </div>
+      {{equal key "strength" "Physical"}}
+      {{equal key "charisma" "Social"}}
+      {{equal key "perception" "Mental"}}
+    </div>
     <div class="ability flexrow flex-center" style={{equal key "null" "display:none"}}  >
       <label
         for="data.data.abilities.{{key}}.value"
@@ -22,58 +20,78 @@
         data-roll="{{ability.value}}"
         data-label="{{localize ability.name}}"
         data-ability="true"
-        >{{localize ability.name}}</label
-      >
-      <div
+        data-sheettype="{{../sheetType}}"
+        >{{localize ability.name}}</label>
+      <div 
         class="resource-value"
         data-value="{{ability.value}}"
         data-name="data.abilities.{{key}}.value"
       >
         <span class="resource-value-empty"></span>
-      
+
         {{#numLoop ../loopLength}}
         <span class="resource-value-step" data-index="{{this}}"></span>
         {{/numLoop}}
       </div>
     </div>
+    {{#ifEquals ../sheetType "Mortal"}}
+    {{else}}
+    <div class="ability flexrow flex-center" style={{notequalarray key "strength,dexterity,stamina" "display:none"}}  >
+      <label
+        for="data.data.abilities.{{key}}.buff"
+        class="resource-label"
+        data-buff-label="Quickening"
+        >Buff</label>
+      <div 
+        class="resource-value"
+        data-value="{{ability.buff}}"
+        data-name="data.abilities.{{key}}.buff"
+      >
+        <span class="resource-value-empty"></span>
+
+        {{#numLoop ../loopLength}}
+        <span class="resource-value-step" data-index="{{this}}"></span>
+        {{/numLoop}}
+      </div>
+    </div>
+    {{/ifEquals}}
     </div>
     {{/each}}
   </div>
 
   <label class="resource-label">{{localize "VTM5E.Skills"}}</label>
   <div class="skills grid grid-{{colNum}}col flex-group-center">
-    {{#each data.data.skills as |skill key|}}
-    <div>
-    <div class="resource-label">
-    {{equal key "alertness" "Talents"}}
-    {{equal key "animal ken" "Skills"}}
-    {{equal key "academics" "Knowledges"}}
+    {{setSkillsArray "skillsArray" data.data.headers.sheetsystem skillsModern skillsDa skillsWild}}
 
-    </div>
-
-    <div class="skill flexrow flex-center">
-      <label
-        for="data.data.skills.{{key}}.value"
-        class="resource-label vrollable"
-        data-roll="{{skill.value}}"
-        data-label="{{localize skill.name}}"
-        >{{localize skill.name}}</label
-      >
-      <div
-        class="resource-value"
-        data-value="{{skill.value}}"
-        data-name="data.skills.{{key}}.value"
-      >
-        <span class="resource-value-empty"></span>
-        {{#numLoop ../loopLength}}
-        <span class="resource-value-step" data-index="{{this}}"></span>
-        {{/numLoop}}
+    {{#each skillsArray as |skill|}}
+      <div>
+        <div class="resource-label">
+          {{equal skill.name "alertness" "Talents"}}
+          {{equal skill.name "animal ken" "Skills"}}
+          {{equal skill.name "academics" "Knowledges"}}
+        </div>
+        <div class="skill flexrow flex-center">
+          <label
+            for="data.data.skills.{{skill.name}}.value"
+            class="resource-label vrollable"
+            data-roll="{{getSkillValue skill.name ../data.data.skills}}"
+            data-label="{{localize skill.loc}}"
+            >{{localize skill.loc}}</label
+          >
+          <div
+            class="resource-value"
+            data-value="{{getSkillValue skill.name ../data.data.skills}}"
+            data-name="data.skills.{{skill.name}}.value"
+          >
+            <span class="resource-value-empty"></span>
+            {{#numLoop ../loopLength}}
+            <span class="resource-value-step" data-index="{{this}}"></span>
+            {{/numLoop}}
+          </div>
+        </div>
       </div>
-    </div>
-    </div>
     {{/each}}
   </div>
-  {{log 'virtue' data.data.virtues }}
   <label class="resource-label">{{localize "VTM5E.Virtues"}}</label>
   <div class="skills grid grid-3col flex-group-center">
     {{#each data.data.virtues as |virtue key|}}
@@ -104,20 +122,41 @@
     <li class="item flexrow item-header">
       <div class="item-image"></div>
       <div class="item-name">{{localize "VTM5E.Specialty"}}</div>
-      <div class="item-name">{{localize "VTM5E.Skill"}}</div>
+      <div class="item-name">{{localize "VTM5E.Ability"}}/{{localize "VTM5E.Attribute"}}</div>
       <div class="item-controls">
         <a
           class="item-control item-create"
           title="{{localize 'VTM5E.AddItem'}}"
           data-type="specialty"
+          data-sheettype="{{sheetType}}"
           ><i class="fas fa-plus"></i> {{localize "VTM5E.AddItem"}}
         </a>
       </div>
     </li>
     {{#each actor.specialties as |item id|}}
     <li class="item flexrow" data-item-id="{{item._id}}">
+      {{#if item.data.useattributes}}
       <div
-        class="item-image custom-rollable"
+        class="item-image"
+        data-dice1=""
+        data-dice2="{{item.data.attribute}}"
+        data-name="{{item.name}}"
+      >
+        <img
+          src="{{item.img}}"
+          title="{{item.name}}"
+          width="24"
+          height="24"
+          alt="{{item.name}}"
+        />
+      </div>
+      <h4 class="item-name">{{item.name}}</h4>
+      <h4 class="item-name">
+        {{localize (generateSkillLabel item.data.attribute)}}
+      </h4>
+      {{else}}
+      <div
+        class="item-image"
         data-dice1=""
         data-dice2="{{item.data.skill}}"
         data-name="{{item.name}}"
@@ -134,6 +173,7 @@
       <h4 class="item-name">
         {{localize (generateSkillLabel item.data.skill)}}
       </h4>
+      {{/if}}
       <div class="item-controls">
         <a class="item-control item-edit" title="{{localize 'VTM5E.Edit'}}"
           ><i class="fas fa-edit"></i
@@ -152,12 +192,13 @@
       <div class="item-image"></div>
       <div class="item-name">{{localize "VTM5E.Name"}}</div>
       <div class="item-name">{{localize "VTM5E.Attribute"}}</div>
-      <div class="item-name">{{localize "VTM5E.Skill"}}</div>
+      <div class="item-name">{{localize "VTM5E.Ability"}}</div>
       <div class="item-controls">
         <a
           class="item-control item-create"
           title="{{localize 'VTM5E.AddItem'}}"
           data-type="customRoll"
+          data-sheettype="{{sheetType}}"
           ><i class="fas fa-plus"></i> {{localize "VTM5E.AddItem"}}
         </a>
       </div>
@@ -169,6 +210,9 @@
         data-dice1="{{roll.data.dice1}}"
         data-dice2="{{roll.data.dice2}}"
         data-name="{{roll.name}}"
+        data-difficulty="{{roll.data.difficulty}}"
+        data-applywounds="{{roll.data.applywounds}}"
+        data-specialty="{{roll.data.specialty}}""
       >
         <img
           src="{{roll.img}}"
