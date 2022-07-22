@@ -1,0 +1,33 @@
+<form>
+    <div class="form-group">
+        <label>{{localize "VTM5E.RollStrength"}}:</label>
+        <input id="rollstrength" type="checkbox" checked>
+    </div>
+    {{#ifEquals sheettype "Mortal"}}
+    {{else}}
+    <div class="form-group">
+        <label>{{localize "VTM5E.RollPotence"}}:</label>
+        <input id="rollpotence" type="checkbox" checked>
+    </div>
+    {{/ifEquals}}
+    <div class="form-group">
+        <label>{{localize "VTM5E.WeaponDamage"}}:</label>
+        <input type="text" id="weaponDamage" value="{{damage}}">
+    </div>
+    <div class="form-group">
+        <label>{{localize "VTM5E.Modifier"}}:</label>
+        <input type="text" id="inputMod" value="0">
+    </div>
+    <div class="form-group">
+        <label>{{localize "VTM5E.Difficulty"}}:</label>
+        <input type="text" min="0" id="inputDif" value="6">
+    </div>
+    <div class="form-group">
+        <label>{{localize "VTM5E.Specialty"}}:</label>
+        <input id="specialty" type="checkbox" />
+    </div>
+    <div class="form-group">
+        <label>{{localize "VTM5E.ApplyWounds"}}:</label>
+        <input id="applyWounds" type="checkbox" />
+    </div>
+</form>

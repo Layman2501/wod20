@@ -45,9 +45,39 @@
         </select>
         <label class="resource-label">{{localize "VTM5E.Skill"}}: </label>
         <select name="data.dice2" data-type="String">
-          {{#select data.data.dice2}} {{>
-          "systems/wod20/templates/item/parts/skills.html"}} {{/select}}
+            {{#select data.data.dice2}}                        
+                {{#each item.skillsArray as |skill|}}
+                    <option value="{{skill.name}}">{{localize skill.loc}}</option>
+                {{/each}}
+            {{/select}}
         </select>
+        
+        <label class="resource-label">{{localize "VTM5E.Difficulty"}}: </label>
+        <input
+          type="number"
+          id="data.difficulty"
+          name="data.difficulty"
+          value={{data.data.difficulty}}
+          min=0
+          max=10
+          placeholder="6"
+        />
+
+        <label class="resource-label">{{localize "VTM5E.Specialty"}}:</label>
+        <input 
+          type="checkbox"
+          id="data.specialty"
+          name="data.specialty"
+          {{checked data.data.specialty}}
+        />
+
+        <label class="resource-label">{{localize "VTM5E.ApplyWounds"}}:</label>
+        <input 
+          type="checkbox"
+          id="data.applywounds"
+          name="data.applywounds"
+          {{checked data.data.applywounds}}
+        />
       </div>
     </div>
   </section>

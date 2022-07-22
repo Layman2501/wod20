@@ -13,6 +13,10 @@
   font-family: "Roboto", sans-serif;
 }
 
+.soakrollable:hover,
+.soakrollable:focus,
+.initrollable:hover,
+.initrollable:focus,
 .rollable:hover,
 .rollable:focus,
 .vrollable:hover,
@@ -91,6 +95,26 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
+.flex-group-exp {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1px;
+}
+
+.full-height {
+  height: 100%
+}
+
+.flex-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.resource-container {
+  flex: 1;
+  margin: 0 5px;
+}
+
 .flex-group-center,
 .flex-group-left,
 .flex-group-right {
@@ -151,6 +175,7 @@
   background: #faf5ed;
   font-family: "cormorantLight", sans-serif;
   font-weight: 600;
+  padding-bottom: 20px;
 }
 
 .vtm5e .profile-img,
@@ -176,9 +201,24 @@
   font-weight: bold;
 }
 
+.resource-label-exp {
+  padding-top: 5px;
+  text-align: center;
+  width: 190px;
+}
+
+.rollable-button-table {
+  width: 30px;
+}
+
 .vtm5e .window-content .resource-label {
   text-transform: initial;
   font-size: 16px;
+}
+
+.vtm5e .window-content .resource-label-exp-small {
+  padding-top: 7px;
+  font-size: 14px;
 }
 
 .vtm5e .window-content .abilities .ability .resource-label {
@@ -191,12 +231,14 @@
   color: #790813;
   font-size: 16px;
   margin-bottom: 20px;
-  height: 41px;
+  height: 50px;
+  flex:unset
 }
 
 .vtm5e .window-content nav.sheet-tabs a.item.active {
   background: #faf5ed;
-  text-decoration: none;
+  text-decoration: underline;
+  border-radius: 10px;
 }
 
 .vtm5e .resource .resource-control:hover,
@@ -224,6 +266,15 @@
   text-transform: uppercase;
 }
 
+.vtm5e .window-content .sheet-body .tab .resource-container > .resource-label {
+  color: #790813;
+  border-bottom: 1px solid #790813;
+  width: 100%;
+  display: block;
+  text-transform: uppercase;
+}
+
+
 /* Styles limited to vtm5e sheets */
 
 /* .vtm5e .item-form {
@@ -250,16 +301,14 @@
   margin-bottom: 10px;
 }
 
-.vtm5e .coterie-sheet .sheet-header,
-.vtm5e .mortal-sheet .sheet-header,
-.vtm5e .ghoul-sheet .sheet-header {
+.vtm5e .coterie-sheet .sheet-header {
   flex: 0 0 155px;
 }
 
 .vtm5e .sheet-header .profile-img-zone {
   max-width: 100px; /* .profile-img width */
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   margin-right: 10px;
@@ -271,6 +320,9 @@
   font-family: "cormorantlight", sans-serif;
   font-weight: bold;
   border: none;
+  margin: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 .vtm5e .sheet-header .profile-img {
@@ -282,6 +334,8 @@
   height: auto;
   width: 100px;
   margin-right: 0;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 .vtm5e .sheet-header .profile-img-zone h1 {
@@ -348,9 +402,10 @@
 }
 
 .vtm5e .tabs .item {
-  line-height: 40px;
+  line-height: 35px;
   font-weight: bold;
   flex: 1;
+  margin: 0 10px;
 }
 
 .vtm5e .tabs .item.active {
@@ -424,7 +479,6 @@
 }
 
 /* Resource boxes CSS */
-
 .vtm5e .resource-value .resource-value-step {
   height: 14px;
   width: 14px;
@@ -541,6 +595,17 @@
   font-size: 130%;
 }
 
+.roll-speciality-label {
+  margin: 0;
+  margin-top: -10px;
+  font-size: 12px;
+}
+
+.roll-speciality-label-applied {
+  text-decoration: underline
+}
+
+
 .roll-label .danger {
   color: #831515;
 }
@@ -557,6 +622,12 @@
   text-transform: uppercase;
 }
 
+.roll-group {
+  display:flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
 .roll-img {
   max-width: 80%;
   margin: 1px;
@@ -564,10 +635,26 @@
   border-radius: 3px;
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%) !important;
   border: unset !important;
-
 }
 
+.roll-group .roll-die {
+  position: relative;
+  width: fit-content;
+  height: 35px;
+  margin-right: 2px;
+}
 
+.roll-group .roll-die .roll-die-background {
+  border: unset;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.chat-message .roll-group .roll-die .roll-img {
+  background: unset;
+  max-width:30px;
+}
 
 .roll-img.hunger-dice {
   background: rgba(255, 230, 230, 0.5);
@@ -587,6 +674,10 @@
   cursor: default;
 }
 
+.resource-value-background-margin {
+  margin-left: -17px;
+}
+
 .willpowerReroll .die {
   margin-left: 3px;
 }
@@ -600,6 +691,108 @@
   margin-top: -2px;
 }
 
+.extra-status-label {
+  position:absolute;
+  right: 2px;
+  bottom: 0;
+}
+
+.relative-group {
+  position:relative;
+}
+
+.pool-label {
+  flex: 3;
+}
+
+.aura-label {
+  margin-top: 3px;
+  margin-right: 5px;
+}
+
+.aura-val {
+  margin-top: 3px;
+  margin-left: 5px;
+}
+
+.aura-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 5px;
+}
+
+.aura-input {
+  min-width: 80px;
+}
+
 #sidebar.app {
   background: rgba(20, 0, 0, 0.9);
+}
+
+.vtm5e .mortal-sheet .sheet-header,
+.vtm5e .ghoul-sheet .sheet-header,
+.vtm5e .vampire-sheet .sheet-header {
+  flex: none;
+  margin-bottom: 0px;
+  align-items: flex-start;
+}
+
+.vtm5e .damage-rollable,
+.vtm5e .weapon-rollable {
+  cursor: pointer;
+}
+
+.vtm5e .damage-rollable img,
+.vtm5e .weapon-rollable img {
+  padding: 3px;
+}
+
+.vtm5e .number-width-table {
+  width: 60px;
+}
+
+.vtm5e .number-width-table {
+  width: 60px;
+}
+
+.vtm5e .mid-width-table {
+  width: 120px;
+}
+
+.vtm5e .sheet-header .profile-img-zone .sheetsystem-select {
+  background: #790813;
+  color: white;
+  font-family: "cormorantlight", sans-serif;
+  font-weight: bold;
+  border: none;
+  margin: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.vtm5e .sheet-header .profile-img-zone .sheetsystem-select option {
+  background: #790813;
+}
+
+.vtm5e .sheet-header .profile-img-zone .sheetsystem-label-group {
+  display:flex;
+  flex-direction: row;
+}
+
+.vtm5e .sheet-header .profile-img-zone .sheetsystem-label-group .sheetsystem-label {
+  color: #790813;
+  font-size: 12px;
+  font-family: "cormorantlight", sans-serif;
+  font-weight: bold;
+  margin-top: 19px;
+  margin-bottom: 1px;
+  margin-right: 5px;
+  flex: 0;
+}
+
+.vtm5e .sheet-header .profile-img-zone .sheetsystem-label-group .sheetsystem-select-label {
+  flex: 1
 }

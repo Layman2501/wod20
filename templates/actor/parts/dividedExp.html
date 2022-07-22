@@ -1,0 +1,31 @@
+<div class="resource flex-group-center exp">
+    <div class="flex-group-exp">
+        <label class="resource-label resource-label-exp">{{localize "VTM5E.ExpGroup"}}</label>
+        <label class="resource-label resource-label-exp">{{localize "VTM5E.ExpSpent"}}</label>
+        <label class="resource-label resource-label-exp">{{localize "VTM5E.ExpEarned"}}</label>
+    </div>
+    <div class="flex-group-exp">
+        <label for="data.data.expAttribute" class="resource-label resource-label-exp resource-label-exp-small">{{localize "VTM5E.ExpAttributes"}}</label>
+        <div class="resource-content flexrow flex-center flex-between">
+            <input type="number" name="data.expAttribute.value" value="{{data.data.expAttribute.value}}" data-dtype="Number" placeholder="0">
+            /
+            <input type="number" name="data.expAttribute.max" value="{{data.data.expAttribute.max}}" data-dtype="Number" placeholder="0">
+        </div>
+    </div>
+    <div class="flex-group-exp">
+        <label for="data.data.expAbilities" class="resource-label resource-label-exp resource-label-exp-small">{{localize "VTM5E.ExpAbilities"}}</label>
+        <div class="resource-content flexrow flex-center flex-between">
+            <input type="number" name="data.expAbilities.value" value="{{data.data.expAbilities.value}}" data-dtype="Number" placeholder="0">
+            /
+            <input type="number" name="data.expAbilities.max" value="{{data.data.expAbilities.max}}" data-dtype="Number" placeholder="0">
+        </div>
+    </div>
+    <div class="flex-group-exp">
+        <label for="data.data.expOther" class="resource-label resource-label-exp resource-label-exp-small">{{localize "VTM5E.ExpOther"}}</label>
+        <div class="resource-content flexrow flex-center flex-between">
+            <input type="number" name="data.expOther.value" value="{{data.data.expOther.value}}" data-dtype="Number" placeholder="0">
+            /
+            <input type="number" name="data.expOther.max" value="{{data.data.expOther.max}}" data-dtype="Number" placeholder="0">
+        </div>
+    </div>
+</div>

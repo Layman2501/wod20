@@ -4,6 +4,7 @@
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
+import { skillsModern, skillsDa, skillsWild} from "../../assets/skills/skills.js";
 
 export class CoterieActorSheet extends ActorSheet {
   /** @override */
@@ -46,6 +47,9 @@ export class CoterieActorSheet extends ActorSheet {
     data.sheetType = `${game.i18n.localize("VTM5E.Coterie")}`;
 
     data.dtypes = ["String", "Number", "Boolean"];
+    data.skillsModern = skillsModern
+    data.skillsDa = skillsDa
+    data.skillsWild = skillsWild
 
     // Prepare items.
     if (this.actor.data.type === "coterie") {
@@ -101,6 +105,8 @@ export class CoterieActorSheet extends ActorSheet {
     // lock button
     html.find(".lock-btn").click(this._onToggleLocked.bind(this));
 
+    html.find(".sheet-system").select(this._onSheetSystemSelect.bind(this))
+
     // ressource dots
     html
       .find(".resource-value > .resource-value-step")
@@ -133,7 +139,10 @@ export class CoterieActorSheet extends ActorSheet {
     // Update Inventory Item
     html.find(".item-edit").click((ev) => {
       const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.getEmbeddedDocument('Item',li.data("itemId"));
+      const item = this.actor.getEmbeddedDocument('Item', li.data("itemId"));
+
+      item.skillsArray = this._getSkillArray() 
+      item.disciplines = this._getDisciplines() 
       item.sheet.render(true);
     });
 
@@ -159,6 +168,30 @@ export class CoterieActorSheet extends ActorSheet {
         }
       });
     }
+  }
+
+  _getSkillArray() {
+    let skillsArray = skillsModern
+    switch(this.actor.data.data.headers.sheetsystem) {
+      case "darkages":
+        skillsArray = skillsDa
+        break;
+      case "wildwest":
+        skillsArray = skillsWild
+        break;
+    }
+    return skillsArray
+  }
+
+  _getDisciplines() {
+    let customDisciplines = {}
+    let i
+    for(i = 0; i < this.actor.customDisciplines.length; i++) {
+      if( this.actor.customDisciplines[i]) {
+        customDisciplines[this.actor.customDisciplines[i].name] = this.actor.customDisciplines[i].data
+      }
+    }
+    return {...this.actor.data.data.disciplines, ...customDisciplines}
   }
 
   _setupDotCounters(html) {
@@ -187,6 +220,11 @@ export class CoterieActorSheet extends ActorSheet {
   _onToggleLocked(event) {
     event.preventDefault();
     this.locked = !this.locked;
+    this._render();
+  }
+
+  _onSheetSystemSelect(event) {
+    event.preventDefault();
     this._render();
   }
 
@@ -239,10 +277,12 @@ export class CoterieActorSheet extends ActorSheet {
     const header = event.currentTarget;
     // Get the type of item to create.
     const type = header.dataset.type;
+    const sheettype = header.dataset.sheettype;
     // Grab any data associated with this control.
+
     const data = duplicate(header.dataset);
     if (type === "specialty") {
-      data.skill = "academics";
+      data.skill = "alertness";
     }
     if (type === "boon") {
       data.boontype = "Trivial";
@@ -251,13 +291,16 @@ export class CoterieActorSheet extends ActorSheet {
       data.dice1 = "strength";
       data.dice2 = "athletics";
     }
+  
     // Initialize a default name.
-    const name = this.getItemDefaultName(type, data);
+    const name = header.dataset.customname ? header.dataset.customname : this.getItemDefaultName(type, data)
+    // console.log(header, type, sheettype, data, name)
     // Prepare the item object.
     const itemData = {
       name: name,
       type: type,
       data: data,
+      sheettype: sheettype
     };
     // Remove the type from the dataset since it's in the itemData.type prop.
     delete itemData.data.type;
@@ -287,10 +330,67 @@ export class CoterieActorSheet extends ActorSheet {
           break;
         }
       }
+    } else if (fields.length === 3 && fields[0] === "items" && fields[1] === "disciplines") {
+      for (const i of actorData.items) {
+        if (fields[2] === i._id) {
+          i.data.value = value;
+          break;
+        }
+      }
+    } else if (fields.length >= 2 && fields[1] === "skills") {
+      let foundSkill = false
+      for (const skillKey of Object.keys(actorData.data.skills)) {
+        if (fields[2] === skillKey) {
+          actorData.data.skills[skillKey].value = value;
+          foundSkill = true
+          break;
+        }
+      }
+      if(!foundSkill) {
+        actorData.data.skills[fields[2]] = this._getNewSkillDefinition(fields[2], value)
+      }
     } else {
       const lastField = fields.pop();
       fields.reduce((data, field) => data[field], actorData)[lastField] = value;
     }
     this.actor.update(actorData);
+  }
+
+  _getNewSkillDefinition(skillName, skillValue) {
+    let localization = ''
+    skillsModern.forEach((skill) => {
+      if(skill && skill.name === skillName) {
+        localization = skill.loc
+      }
+    })
+
+    if(localization === '') {
+      skillsDa.forEach((skill) => {
+        if(skill && skill.name === skillName) {
+          localization = skill.loc
+        }
+      })    
+      
+      if(localization === '') {
+        skillsWild.forEach((skill) => {
+          if(skill && skill.name === skillName) {
+            localization = skill.loc
+          }
+        })
+      }
+    }
+
+    return {value: skillValue, name: localization}
+  }
+
+  _onRenderDialog(template, extraFields, title, buttons) {
+    renderTemplate(template, extraFields).then((content) => {
+      new Dialog({
+        title:title,
+        content,
+        buttons: buttons,
+        default: 'draw'
+      }).render(true)
+    })
   }
 }

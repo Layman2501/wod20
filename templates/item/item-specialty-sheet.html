@@ -27,21 +27,40 @@
 
   {{!-- Sheet Body --}}
   <section class="sheet-body">
-    {{log data}} {{!-- Description Tab --}}
+    {{!-- Description Tab --}}
     <div class="tab" data-group="primary" data-tab="description">
       {{editor content=data.data.description target="data.description"
       button=true owner=owner editable=editable}}
     </div>
-
     {{!-- Attributes Tab --}}
     <div class="tab attributes" data-group="primary" data-tab="attributes">
       {{!-- As you add new fields, add them in here! --}}
       <div class="resource grid grid-2col flex-center">
-        <label class="resource-label">{{localize "VTM5E.Skill"}}: </label>
-        <select name="data.skill" data-type="String">
-          {{#select data.data.skill}} {{>
-          "systems/wod20/templates/item/parts/skills.html"}} {{/select}}
-        </select>
+        {{#if data.data.useattributes}}
+          <label class="resource-label">{{localize "VTM5E.Attribute"}}: </label>
+          <select name="data.attribute" data-type="String">
+              {{#select data.data.attribute}}
+                {{> "systems/wod20/templates/item/parts/attributes.html"}}
+              {{/select}}
+          </select>
+        {{else}}
+          <label class="resource-label">{{localize "VTM5E.Skill"}}: </label>
+          <select name="data.skill" data-type="String">
+              {{#select data.data.skill}}
+                  {{#each item.skillsArray as |skill|}}
+                      <option value="{{skill.name}}">{{localize skill.loc}}</option>
+                  {{/each}}
+              {{/select}}
+          </select>
+        {{/if}}
+        
+        <label class="resource-label">{{localize "VTM5E.UseAttributes"}}: </label>
+        <input
+          type="checkbox"
+          id="data.useattributes"
+          name="data.useattributes"
+          {{checked data.data.useattributes}}
+        />
       </div>
     </div>
   </section>

@@ -62,13 +62,13 @@
                 <h4 class="item-name collapsible">{{item.name}}</h4>
                 {{#if (ne key "background")}}
                 <div class="resource-value-static" data-value="{{item.data.points}}" data-name="items.{{item._id}}">
-                    {{#numLoop 5}}
+                    {{#numLoop 7}}
                     <span class="resource-value-static-step" data-index="{{this}}"></span>
                     {{/numLoop}}
                 </div>
                 {{else}}
                 <div class="resource-value" data-value="{{item.data.points}}" data-name="items.{{item._id}}">
-                    <span class="resource-value-empty"></span>
+                    <span class="resource-value-empty resource-value-background-margin"></span>
                     {{#numLoop 5}}
                     <span class="resource-value-step" data-index="{{this}}"></span>
                     {{/numLoop}}
