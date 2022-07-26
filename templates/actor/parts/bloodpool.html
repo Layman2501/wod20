@@ -1,7 +1,11 @@
-<div class="resource flex-group-center Bloodpool">
+<div class="resource flex-group-center Bloodpool relative-group">
+    {{setVar "generation" data.data.headers.generation}}
+    {{setBloodFromGen "bloodPool" generation}}
+    {{setBloodPerTurnFromGen "bloodTurn" generation}}
+    {{setGenLabelFromGen "genLabel" generation}}
     <div class="flexrow">
         <i class="fas fa-minus resource-control resource-minus" data-resource="bloodpool" data-action="minus"></i>
-        <label for="data.data.bloodpool" class="resource-label">{{localize "VTM5E.Bloodpool"}}</label>
+        <label for="data.data.bloodpool" class="resource-label pool-label">{{localize "VTM5E.Bloodpool"}} ({{data.data.bloodpool.max}})</label>
         <i class="fas fa-plus resource-control resource-plus" data-resource="bloodpool" data-action="plus"></i>
     </div>
     <div class="resource-content flexrow flex-center flex-between">
@@ -11,4 +15,5 @@
             {{/numLoop}}
         </div>
     </div>
+    <span> {{genLabel}} {{bloodPool}} blood - {{bloodTurn}} per turn</span>
 </div>

@@ -1,4 +1,5 @@
 <div class="resource flex-group-center humanity">
+    {{setAuraStrength "auraVal" data.data.humanity.value}}
     <label for="data.data.humanityLabel.value" class="resource-label" 
     data-label="{{localize 'VTM5E.RollingRemorse'}}"><input  name="data.humanityLabel.value" value="{{data.data.humanityLabel.value}}" /></label>
     <div class="resource-content flexrow flex-center flex-between">
@@ -7,6 +8,10 @@
             <span class="resource-counter-step" data-index="{{this}}" data-state=""></span>
             {{/numLoop}}
         </div>
-        
+    </div>
+    <div class="aura-content">
+        <span class="aura-label">Aura:</span>
+        <input class="aura-input" name="data.humanityAuraLabel.value" value="{{data.data.humanityAuraLabel.value}}" />
+        <span class="aura-val">{{auraVal}}</span>
     </div>
 </div>

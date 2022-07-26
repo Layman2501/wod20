@@ -89,5 +89,61 @@ export class VampireItemSheet extends ItemSheet {
         }
       });
     }
+
+    // Apply Wounds Checkbox Handler.
+    const applyWoundsCheckbox = document.querySelector(
+      'input[type="checkbox"][name="data.applywounds"]'
+    );
+
+    if (applyWoundsCheckbox != null) {
+      applyWoundsCheckbox.addEventListener("change", () => {
+        if (applyWoundsCheckbox.checked) {
+          this.item.update({ "data.applywounds": true });
+        } else {
+          this.item.update({ "data.applywounds": false });
+        }
+      });
+    }
+
+    // Skill Checkbox Handler.
+    const useSkillCheckbox = document.querySelector(
+      'input[type="checkbox"][name="data.useskills"]'
+    );
+
+    if (useSkillCheckbox != null) {
+      useSkillCheckbox.addEventListener("change", () => {
+        if (useSkillCheckbox.checked) {
+          this.item.update({ "data.useskills": true });
+        } else {
+          this.item.update({ "data.useskills": false });
+        }
+      });
+    }
+
+    // Skill Checkbox Handler.
+    const useAttributesCheckbox = document.querySelector(
+      'input[type="checkbox"][name="data.useattributes"]'
+    );
+
+    if (useAttributesCheckbox != null) {
+      useAttributesCheckbox.addEventListener("change", () => {
+        if (useAttributesCheckbox.checked) {
+          this.item.update({ "data.useattributes": true });
+        } else {
+          this.item.update({ "data.useattributes": false });
+        }
+      });
+    }
+
+    // Difficulty Input Handler.
+    const difficultyInput = document.querySelector(
+      'input[type="number"][name="data.difficulty"]'
+    );
+
+    if (difficultyInput != null) {
+      difficultyInput.addEventListener("change", () => {
+        this.item.update({ "data.difficulty": difficultyInput.value });
+      });
+    }
   }
 }

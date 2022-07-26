@@ -29,12 +29,12 @@
           "aggravated": 0,
           "superficial": 0,
           "lethal" : 0,
-          "max": 5
+          "max": 7
         },
 
         "bloodpool": {
           "full": 0,
-          "max": 5
+          "max": 10
         },
         "willpower": {
           "aggravated": 0,
@@ -78,6 +78,7 @@
         "abilities": {
           "strength": {
             "value": 1,
+            "buff": 0,
             "name": "VTM5E.Strength"
           },
           "charisma": {
@@ -90,6 +91,7 @@
           },
           "dexterity": {
             "value": 1,
+            "buff": 0,
             "name": "VTM5E.Dexterity"
           },
           "manipulation": {
@@ -102,6 +104,7 @@
           },
           "stamina": {
             "value": 1,
+            "buff": 0,
             "name": "VTM5E.Stamina"
           },
           "Appearance": {
@@ -206,7 +209,7 @@
             "name": "VTM5E.Athletics"
           },
           "archery" : {
-            "value " : 0, 
+            "value" : 0, 
             "name" : "VTM5E.Archery"
           },
           "enigmas" : {
@@ -340,12 +343,12 @@
           "aggravated": 0,
           "superficial": 0,
           "lethal" : 0,
-          "max": 5
+          "max": 7
         },
 
         "bloodpool": {
           "full": 0,
-          "max": 5
+          "max": 10
         },
         "willpower": {
           "aggravated": 0,
@@ -389,6 +392,7 @@
         "abilities": {
           "strength": {
             "value": 1,
+            "buff": 0,
             "name": "VTM5E.Strength"
           },
           "charisma": {
@@ -401,6 +405,7 @@
           },
           "dexterity": {
             "value": 1,
+            "buff": 0,
             "name": "VTM5E.Dexterity"
           },
           "manipulation": {
@@ -413,6 +418,7 @@
           },
           "stamina": {
             "value": 1,
+            "buff": 0,
             "name": "VTM5E.Stamina"
           },
           "Appearance": {
@@ -498,7 +504,6 @@
           }
         },
         "skills": {
-         
           "alertness": {
             "value": 0,
             "name": "VTM5E.Alertness"
@@ -902,7 +907,7 @@
     }
   },
   "Item": {
-    "types": ["feature", "power", "specialty", "boon", "customRoll"],
+    "types": ["feature", "power", "specialty", "boon", "customDiscipline", "customRoll"],
     "templates": {
       "base": {
         "description": ""
@@ -930,6 +935,9 @@
     "boon": {
       "templates": ["base"],
       "boontype": "Trivial"
+    },
+    "customDisciplines": {
+      "templates": ["base"]
     },
     "customRoll": {
       "templates": ["base"],

@@ -18,12 +18,21 @@ Hooks.once("init", async function () {
   console.log("Initializing Schrecknet...");
 
   game.settings.register("vtm5e", "worldVersion", {
-    name: "world Version",
+    name: "World Version",
     hint: "Automatically upgrades data when the system.json is upgraded.",
     scope: "world",
     config: true,
     default: "1.5",
     type: String,
+  });
+
+  game.settings.register("wod20", "useDividedExp", {
+      name: "Use divided experience fields",
+      hint: "Enable this if you want to divide your experience assigned to different pools",
+      scope: "world",
+      config: true,
+      default: false,
+      type: Boolean,
   });
 
   game.vtm5e = {
@@ -37,7 +46,7 @@ Hooks.once("init", async function () {
    * @type {String}
    */
   CONFIG.Combat.initiative = {
-    formula: "1d20",
+    formula: "1d10",
   };
 
   // Define custom Entity classes
@@ -115,13 +124,143 @@ Hooks.once("init", async function () {
   });
   Handlebars.registerHelper('le', function( a, b ){
     var next =  arguments[arguments.length-1];
-    console.log(a,b);
-    console.log((a <= b)) 
     return (a <= b) ? next.fn(this) : next.inverse(this);
-    
+  });
+  Handlebars.registerHelper("setDividedExp", function(options) {
+    options.data.root['isDividedExp'] =  game.settings.get('wod20', 'useDividedExp')
   });
   Handlebars.registerHelper("setVar", function(varName, varValue, options) {
     options.data.root[varName] = varValue;
+  });
+  
+  Handlebars.registerHelper("setSkillsArray", function(varName, sheetsystem, skillsModern, skillsDa, skillsWild, options) {
+    if(sheetsystem === 'darkages') {
+      options.data.root[varName] = skillsDa;
+    } else if(sheetsystem === 'wildwest') {
+      options.data.root[varName] = skillsWild;
+    } else {
+      options.data.root[varName] = skillsModern;
+    }
+  });
+  Handlebars.registerHelper("setDotsFromGen", function(varName, varValue, options) {
+    var valString = varValue ? varValue.replace(/\D/g, '') : ''
+    var val = parseInt(valString);
+    options.data.root[varName] = Number.isNaN(val) || val <= 0 ? 5 : Math.max(Math.min(13 - val, 10), 5);
+  });
+  Handlebars.registerHelper("setBloodFromGen", function(varName, varValue, options) {
+    var valString = varValue ? varValue.replace(/\D/g, '') : ''
+    var gen = parseInt(valString);
+    var bloodPool = 10
+    switch(gen) {
+      case 12:
+        bloodPool = 11
+        break;
+      case 11:
+        bloodPool = 12
+        break;
+      case 10:
+        bloodPool = 13
+        break;
+      case 9:
+        bloodPool = 14
+        break;
+      case 8:
+        bloodPool = 15
+        break;
+      case 7:
+        bloodPool = 20
+        break;
+      case 6:
+        bloodPool = 30
+        break;
+      case 5:
+        bloodPool = 40
+        break;
+      case 4:
+        bloodPool = 50
+        break;
+      case 3:
+      case 2:
+      case 1:
+        bloodPool = "??"
+        break;
+    }
+    options.data.root[varName] = bloodPool;
+  });
+  Handlebars.registerHelper("setBloodPerTurnFromGen", function(varName, varValue, options) {
+    var valString = varValue ? varValue.replace(/\D/g, '') : ''
+    var gen = parseInt(valString);
+    var blood = 1
+    switch(gen) {
+      case 9:
+        blood = 2
+        break;
+      case 8:
+        blood = 3
+        break;
+      case 7:
+        blood = 4
+        break;
+      case 6:
+        blood = 6
+        break;
+      case 5:
+        blood = 8
+        break;
+      case 4:
+        blood = 10
+        break;
+      case 3:
+      case 2:
+      case 1:
+        blood = "??"
+        break;
+    }
+    options.data.root[varName] = blood;
+  });
+  Handlebars.registerHelper("setGenLabelFromGen", function(varName, varValue, options) {
+    var valString = varValue ? varValue.replace(/\D/g, '') : ''
+    var gen = parseInt(valString);
+    var genLabel = Number.isNaN(gen) ? '' : gen
+    switch(gen) {
+      case 1:
+        genLabel += 'st'
+        break;
+      case 2:
+        genLabel += 'nd'
+        break;
+      case 3:
+        genLabel += 'rd'
+        break;
+      default:
+        genLabel += Number.isNaN(gen) ? '' : 'th'
+        break;
+    }
+    genLabel += Number.isNaN(gen) ? '' : ' Gen:'
+    options.data.root[varName] = genLabel;
+  });
+  Handlebars.registerHelper("setAuraStrength", function(varName, varValue, options) {
+    var road = parseInt(varValue);
+    var auraVal = ""
+    switch(road) {
+      case 10:
+        auraVal += "(-2)"
+        break;
+      case 9:
+      case 8:
+        auraVal += "(-1)"
+        break;
+      case 3:
+      case 2:
+        auraVal += '(+1)'
+        break;
+      case 1:
+        auraVal += "(+2)"
+        break;
+      default:
+        auraVal += "(±0)"
+    }
+    options.data.root[varName] = auraVal;
   });
   const capitalize = (s) => {
     if (typeof s !== "string") return "";
@@ -140,7 +279,36 @@ Hooks.once("init", async function () {
         .join("")
     );
   });
+  /*
+  Handlebars.registerHelper('select', function(value, options) {
+    // Create a select element 
+    var select = document.createElement('select');
 
+    // Populate it with the option HTML
+    select.innerHTML = options.fn(this);
+
+    // Set the value
+    select.value = value;
+
+    console.log(select.value)
+    // Find the selected node, if it exists, add the selected attribute to it
+    if (select.children[select.selectedIndex])
+        select.children[select.selectedIndex].setAttribute('selected', 'selected');
+
+    console.log(select.innerHTML)
+    return select.innerHTML;
+  });
+  */
+  Handlebars.registerHelper("getSkillValue", function(skillName, skillList, options) {
+    var value = 0
+
+    if(skillList && skillList[skillName]) {
+      value = skillList[skillName].value
+    }
+
+    return value
+  });
+  
   // TODO: there exist math helpers for handlebars
   Handlebars.registerHelper(
     "frenzy",
@@ -163,6 +331,16 @@ Hooks.once("init", async function () {
     return 10 - humanity - stain;
   });
 
+  Handlebars.registerHelper('if_eq', function () {
+    const args = Array.prototype.slice.call(arguments, 0, -1);
+      const options = arguments[arguments.length - 1];
+    const allEqual = args.every(function (expression) {
+        return args[0] === expression;
+      });
+      
+      return allEqual ? options.fn(this) : options.inverse(this);
+  });
+
   Handlebars.registerHelper("numLoop", function (num, options) {
     let ret = "";
 
@@ -175,55 +353,28 @@ Hooks.once("init", async function () {
   Handlebars.registerHelper("minus", function (a, b) {
     return a - b;
   });
+  Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+    return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+  });
   Handlebars.registerHelper("equal", function (a, b, label) {
     return a == b ? label : "";
   });
-  Handlebars.registerHelper("getDisciplineName", function (key, roll = false) {
-    const disciplines = {
-      abombwe: "VTM5E.Abombwe",
-      animalism: "VTM5E.Animalism",
-      auspex: "VTM5E.Auspex",
-      bardo: "VTM5E.Bardo",
-      celerity: "VTM5E.Celerity",
-      chimerstry: "VTM5E.Chimerstry",
-      daimonion: "VTM5E.Daimonion",
-      dementation: "VTM5E.Dementation",
-      dominate: "VTM5E.Dominate",
-      flight: "VTM5E.Flight",
-      fortitude: "VTM5E.Fortitude",
-      melpominee: "VTM5E.Melpominee",
-      mytherceria: "VTM5E.Mytherceria",
-      obeah: "VTM5E.Obeah",
-      obfuscate: "VTM5E.Obfuscate",
-      obtenebration: "VTM5E.Obtenebration",
-      potence: "VTM5E.Potence",
-      presence: "VTM5E.Presence",
-      protean: "VTM5E.Protean",
-      quietus: "VTM5E.Quietus",
-      sanguinus: "VTM5E.Sanguinus",
-      serpentis: "VTM5E.Serpentis",
-      spiritus: "VTM5E.Spiritus",
-      temporis: "VTM5E.Temporis",
-      thanatosis: "VTM5E.Thanatosis",
-      valeren: "VTM5E.Valeren",
-      vicissitude: "VTM5E.Vicissitude",
-      visceratika: "VTM5E.Visceratika",
-      thaumaturgy: "VTM5E.Thaumaturgy",
-      necromancy: "VTM5E.Necromancy",
-      oblivion: "VTM5E.Oblivion",
-      rituals: "VTM5E.Rituals",
-      ceremonies: "VTM5E.Ceremonies",
-      
-    };
-    // if (roll) {
-    //   // if (key === "rituals") {
-    //   //   return disciplines.sorcery;
-    //   // } else
-    //   if (key === "ceremonies") {
-    //     return disciplines.oblivion;
-    //   }
-    // }
-    return disciplines[key];
+  Handlebars.registerHelper("notequal", function (a, b, label) {
+    return a == b ? "" : label;
+  });
+  Handlebars.registerHelper("notequalarray", function (a, b, label) {
+    var splitted = b.split(',')
+    var foundMatch = false
+
+    splitted.forEach((item) => {
+      if(item === a) {
+        foundMatch = true
+      }
+    })
+    return foundMatch ? "" : label;
+  });
+  Handlebars.registerHelper("getDisciplineName", function (key, roll = false, disciplineList) {
+    return disciplineList[key] ? disciplineList[key].name : key;
   });
 });
 
@@ -386,7 +537,7 @@ function rerollDie(actor) {
 
   // If there is at least 1 die selected and aren't any more than 3 die selected, reroll the total number of die and generate a new message.
   if (diceSelected > 0 && diceSelected < 4) {
-    rollDice(diceSelected, actor, "Willpower Reroll", 0, false);
+    rollDice(diceSelected, actor, "Willpower Reroll", 6, false, false);
   }
 }
 

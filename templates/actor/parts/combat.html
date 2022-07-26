@@ -1,16 +1,23 @@
 <div class="tab combat" data-group="primary" data-tab="combat">
   <table>
     <tr>
+      <th class="rollable-button-table"></th>
       <th>{{ localize "VTM5E.Weapon"}}</th>
-      <th>{{ localize "VTM5E.Diff"}}</th>
-      <th>{{ localize "VTM5E.Damage"}}</th>
-      <th>{{ localize "VTM5E.Range"}}</th>
-      <th>{{ localize "VTM5E.Rate"}}</th>
-      <th>{{ localize "VTM5E.Clip"}}</th>
-      <th>{{ localize "VTM5E.Conceal"}}</th>
+      <th class="number-width-table">{{ localize "VTM5E.Diff"}}</th>
+      <th class="number-width-table">{{ localize "VTM5E.Damage"}}</th>
+      <th class="rollable-button-table"></th>
+      <th class="mid-width-table">{{ localize "VTM5E.Range"}}</th>
+      <th class="number-width-table">{{ localize "VTM5E.Rate"}}</th>
+      <th class="number-width-table">{{ localize "VTM5E.Clip"}}</th>
+      <th class="mid-width-table">{{ localize "VTM5E.Conceal"}}</th>
     </tr>
     {{#each data.data.weapons}}
     <tr>
+      <td class="rollable-button-table">
+        <div class="item-image weapon-rollable" data-id="weapon_{{@key}}" data-type="attack" data-label="Attack with {{this.attack}}" data-diff="{{this.diff}}">
+          <img src="icons/svg/d10-grey.svg" width="24" height="24" alt="{{this.attack}}" />
+        </div>
+      </td>
       <td>
         <input
           name="data.weapons.{{@key}}.attack"
@@ -19,7 +26,7 @@
           placeholder="{{localize 'VTM5E.Weapon'}}"
         />
       </td>
-      <td>
+      <td class="number-width-table">
         <input
           name="data.weapons.{{@key}}.diff"
           type="text"
@@ -27,7 +34,7 @@
           placeholder="{{localize 'VTM5E.Diff'}}"
         />
       </td>
-      <td>
+      <td class="number-width-table">
         <input
           name="data.weapons.{{@key}}.damage"
           type="text"
@@ -35,7 +42,13 @@
           placeholder="{{localize 'VTM5E.Damage'}}"
         />
       </td>
-      <td>
+      <td class="rollable-button-table">
+        <div class="item-image damage-rollable" data-id="{{this.id}}" data-type="damage" data-label="Damage"  data-dmg="{{this.damage}}">
+          <img src="icons/svg/d10-grey.svg" title="{{this.damage}}" width="24" height="24" alt="{{this.damage}}" />
+        </div>
+      </td>
+      </td>
+      <td class="mid-width-table">
         <input
           name="data.weapons.{{@key}}.range"
           type="text"
@@ -43,7 +56,7 @@
           placeholder="{{localize 'VTM5E.Range'}}"
         />
       </td>
-      <td>
+      <td class="number-width-table">
         <input
           name="data.weapons.{{@key}}.rate"
           type="text"
@@ -51,7 +64,7 @@
           placeholder="{{localize 'VTM5E.Rate'}}"
         />
       </td>
-      <td>
+      <td  class="number-width-table">
         <input
           name="data.weapons.{{@key}}.clip"
           type="text"
@@ -59,7 +72,7 @@
           placeholder="{{localize 'VTM5E.Clip'}}"
         />
       </td>
-      <td>
+      <td class="mid-width-table">
         <input
           name="data.weapons.{{@key}}.conceal"
           type="text"
@@ -80,7 +93,7 @@
   />
   <input
           name="data.armor.rating"
-          type="text"
+          type="number"
           value="{{data.data.armor.rating}}"
           placeholder="{{localize 'VTM5E.Rating'}}"
   />

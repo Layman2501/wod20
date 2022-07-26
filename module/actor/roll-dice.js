@@ -1,128 +1,167 @@
 /* global ChatMessage, Roll, game */
 
 // Function to roll dice
-export async  function rollDice(
+export async function rollDice (
   numDice,
   actor,
-  label = "",
-  difficulty = 0,
-  useHunger, 
-  specialty, 
-  wound
-  ) {
-  
+  label = '',
+  difficulty = 6,
+  specialty,
+  wound,
+  applyWounds,
+  specialtyLabel,
+) {
+  // console.log(wound, applyWounds)
   function healthModifier (wound) {
-      // pick health value from ordered key (see health.html for the order)
-      switch(true) {
-        case wound=="hurt": 
-          return -1
-        case wound=="injured": 
-          return -1
-        case wound=="wounded": 
-          return -2
-        case wound=="mauled": 
-          return -2 
-        case wound=="crippled": 
-          return -5
-        case wound=="incapacitated" : 
-          return -10000000
-        default: 
-          return 0
-      }
+    if(applyWounds) {   
+      if(wound.includes('-1'))
+        return -1
+      else if(wound.includes('-2'))
+        return -2
+      else if(wound.includes('-5'))
+        return -5
+      else if(wound.includes('Incapacitated'))
+        return -10000
+    }
+
+    return 0
   }
-  let chanceDie = numDice + healthModifier(wound) <= 0
-  let dice = chanceDie ? 1 : parseInt(numDice) + healthModifier(wound);
-  const roll = new Roll(dice + "dvcs>11 + " + 0 + "dhcs>11", actor.data.data);
-  await roll.evaluate();
-  let difficultyResult = "<span></span>";
-  let success = 0;
-  let critSuccess = 0;
-  let hungerCritSuccess = 0;
-  let fail = 0;
-  let hungerFail = 0;
-  let hungerCritFail = 0;
-  let chanceDieSuccess = false; 
+  const chanceDie = numDice + healthModifier(wound) <= 0
+  const dice = chanceDie ? 1 : parseInt(numDice) + healthModifier(wound)
+  const roll = new Roll(dice + 'dvcs>11 + ' + 0 + 'dhcs>11', actor.data.data)
+  await roll.evaluate()
+  let difficultyResult = '<span></span>'
+  let success = 0
+  let hadASuccess = false
+  let hadAOne = false
+  let chanceDieSuccess = false
   roll.terms[0].results.forEach((dice) => {
-    if (numDice+healthModifier(wound) <= 0 && dice.result===10)
-    { 
-      chanceDieSuccess=true
-      success++;
-    }
-    else
-    if (dice.result >= difficulty) {
-      if (specialty && dice.result === 10) {
-        critSuccess += 2;
-      } else
-      if (dice.result===1) {
-        success==success-1
-      }
-      else {
-        success++;
-      }
-
+    if (numDice + healthModifier(wound) <= 0 && dice.result === 10) {
+      chanceDieSuccess = true
+      success++
+      hadASuccess = true
     } else {
-      fail++;
+      if (dice.result >= difficulty && dice.result > 1) {
+        if (specialty && dice.result === 10) {
+          success += 2
+        } else {
+          success++
+        }
+        hadASuccess = true
+      } else {
+        if (dice.result === 1) {
+          success--
+          hadAOne = true
+        }
+      }
     }
-  });
+  })
 
-  const totalSuccess = critSuccess + success;
-
-  let successRoll = false;
+  let successRoll = false
   if (difficulty !== 0) {
-    successRoll = totalSuccess || chanceDieSuccess;
+    successRoll = success > 0 || chanceDieSuccess
     difficultyResult = `( <span class="danger">${game.i18n.localize(
-      "VTM5E.Fail"
-    )}</span> )`;
+      'VTM5E.Fail'
+    )}</span> )`
     if (successRoll) {
       difficultyResult = `( <span class="success">${game.i18n.localize(
-        "VTM5E.Success"
-      )}</span> )`;
+        'VTM5E.Success'
+      )}</span> )`
+    } else if(!hadASuccess && hadAOne) {
+      difficultyResult = `( <span class="danger">${game.i18n.localize(
+        'VTM5E.BestialFailure'
+      )}</span> )`
     }
   }
 
-  label = `<p class="roll-label uppercase">${label}</p>`;
+  label = `<p class="roll-label uppercase">${label}</p>`
 
-  if (critSuccess > 0) {
-    label =
-      label +
-      `<p class="roll-content result-critical">${game.i18n.localize(
-        "VTM5E.CriticalSuccess"
-      )}</p>`;
+  if(specialtyLabel && specialtyLabel !== '') {
+    label += `<p class="roll-speciality-label ${specialty ? 'roll-speciality-label-applied' : ''}">${specialtyLabel}</p>`
   }
-  //if (!successRoll && difficulty > 0) {
-  //label =
-    //  label +
-      //`<p class="roll-content result-bestial">${game.i18n.localize(
-      //  "VTM5E.BestialFailure"
-      //)}</p>`;
-    //  }
-  //if (!successRoll && difficulty === 0) {
-    //label =
-      //label +
-      ///`<p class="roll-content result-bestial result-possible">${game.i18n.localize(
-      //  "VTM5E.PossibleBestialFailure"
-      //)}</p>`;
-  //}
-  if ( chanceDie )  {
-    label = label + 
-    `<p class="roll-content result-bestial"> Chance die </p>`;
+
+  if (chanceDie) {
+    label +=
+    '<p class="roll-content result-bestial"> Chance die </p>'
   }
-  label =
-    label +
-    `<p class="roll-label result-success">${game.i18n.localize(
-      "VTM5E.Successes"
-    )}: ${totalSuccess} ${difficultyResult}</p>`;
-
-  roll.terms[0].results.forEach((dice) => {
-    label =
-      label +
-      `<img src="systems/wod20/assets/images/diceimg_${dice.result}.png" alt="Normal Fail" class="roll-img normal-dice" />`;
-  });
-
-  label = label + "<br>";
+  
+  label += _getRollContentStyle(game.i18n.localize('VTM5E.Successes'), success + ' ' + difficultyResult, roll)
 
   roll.toMessage({
     speaker: ChatMessage.getSpeaker({ actor: actor }),
     content: label,
-  });
+  })
+}
+
+// Function to roll dice
+export async function rollInit (
+  modifier,
+  actor,
+) {
+
+  const dice = 1
+  const roll = new Roll(dice + 'dvcs>11 + ' + 0 + 'dhcs>11', actor.data.data)
+  await roll.evaluate()
+
+  let finalValue = modifier
+  roll.terms[0].results.forEach((dice) => {
+    finalValue += dice.result
+  })
+
+  let label = _getRollContentStyle(game.i18n.localize('VTM5E.Initiative'), finalValue, roll)
+
+  roll.toMessage({
+    speaker: ChatMessage.getSpeaker({ actor: actor }),
+    content: label,
+  })
+  
+  let foundToken = false
+  let foundEncounter = true
+  let rolledInitiative = false;
+
+  let token = await canvas.tokens.placeables.find(t => t.data.actorId === actor.id);
+  if (token) {
+   foundToken = true
+  }
+
+  if (game.combat == null) {
+    foundEncounter = false
+  }
+
+  if (foundToken && foundEncounter) {
+    if (!_inTurn(token)) {
+      await token.toggleCombat();
+    }
+    if (token.combatant && token.combatant.data.initiative == undefined) {
+      await token.combatant.update({initiative: finalValue});
+      rolledInitiative = true;
+    }
+  }		
+}
+
+function _getRollContentStyle (header, finalValue, roll) {
+  let label = `<p class="roll-label result-success">${header}: ${finalValue}</p>`
+
+  label +=  `<div class="roll-group">`
+  roll.terms[0].results.forEach((dice) => {
+    label +=
+      `<div class="roll-die">
+        <img src="icons/svg/d10-grey.svg" alt="none" class="roll-die-background" />
+        <img src="systems/wod20/assets/images/diceimg_${dice.result}.png" alt="Normal Fail" class="roll-img normal-dice" />
+      </div>`
+  })
+
+  label +=  `</div>`
+
+  return label
+}
+
+function _inTurn(token) {
+  for (let count = 0; count < game.combat.combatants.size; count++) {
+    if (token.id == game.combat.combatants.contents[count].token.id) {
+      return true;
+    }
+  }
+
+  return false;
 }

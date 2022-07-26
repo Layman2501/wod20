@@ -1,0 +1,37 @@
+<form>
+    <div class="form-group">
+        <label> {{localize "VTM5E.SelectAttributes"}}: </label>
+        <select id="attributesSelect" name="attributesSelect" selected="dexterity">
+            {{#select data.attributesSelect}} 
+                {{> "systems/wod20/templates/item/parts/attributes.html"}} 
+            {{/select}}
+            <option value="null">{{localize "VTM5E.None"}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label> {{localize "VTM5E.SelectAbility"}}:</label>
+        <select id="abilitySelect" name="abilitySelect" selected="melee">
+            {{#select data.abilitySelect}}                        
+                {{#each skillsArray as |skill|}}
+                    <option value={{skill.name}}>{{localize skill.loc}}</option>
+                {{/each}}
+            {{/select}}
+        </select>
+    </div>
+    <div class="form-group">
+        <label>{{localize "VTM5E.Modifier"}}:</label>
+        <input type="text" id="inputMod" value="0">
+    </div>
+    <div class="form-group">
+        <label>{{localize "VTM5E.Difficulty"}}:</label>
+        <input type="text" min="0" id="inputDif" value="{{difficulty}}">
+    </div>
+    <div class="form-group">
+        <label>{{localize "VTM5E.Specialty"}}:</label>
+        <input id="specialty" type="checkbox" />
+    </div>
+    <div class="form-group">
+        <label>{{localize "VTM5E.ApplyWounds"}}:</label>
+        <input id="applyWounds" type="checkbox" checked />
+    </div>
+</form>
