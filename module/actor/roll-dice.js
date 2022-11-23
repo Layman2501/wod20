@@ -28,7 +28,7 @@ export async function rollDice (
   }
   const chanceDie = numDice + healthModifier(wound) <= 0
   const dice = chanceDie ? 1 : parseInt(numDice) + healthModifier(wound)
-  const roll = new Roll(dice + 'dvcs>11 + ' + 0 + 'dhcs>11', actor.data.data)
+  const roll = new Roll(dice + 'dvcs>11 + ' + 0 + 'dhcs>11', actor.system)
   await roll.evaluate()
   let difficultyResult = '<span></span>'
   let success = 0
@@ -100,7 +100,7 @@ export async function rollInit (
 ) {
 
   const dice = 1
-  const roll = new Roll(dice + 'dvcs>11 + ' + 0 + 'dhcs>11', actor.data.data)
+  const roll = new Roll(dice + 'dvcs>11 + ' + 0 + 'dhcs>11', actor.system)
   await roll.evaluate()
 
   let finalValue = modifier

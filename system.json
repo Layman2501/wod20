@@ -1,12 +1,39 @@
 {
-  "name": "wod20",
+  "id": "wod20",
   "title": "Vampire 20th Anniversay Edition",
   "description": "Vampire 20th system for Foundry VTT!",
-  "version": "1.5",
-  "minimumCoreVersion": "0.9.0",
-  "compatibleCoreVersion": "0.9.0",
+  "version": "1.6",
+  "compatibility": {
+    "minimum": 10,
+    "verified": "10.290"
+  },
   "templateVersion": 3,
-  "author": "Majid, Mal, Ray Ji",
+  "author": [
+    {
+      "name": "Majid",
+      "url": "",
+      "email": "",
+      "discord": ""
+    },
+    {
+      "name": "Mal",
+      "url": "",
+      "email": "",
+      "discord": ""
+    },
+    {
+      "name": "Ray Ji",
+      "url": "",
+      "email": "",
+      "discord": ""
+    },
+    {
+      "name": "TheAziraphale",
+      "url": "",
+      "email": "",
+      "discord": ""
+    }
+  ],
   "esmodules": ["module/main.js"],
   "styles": ["css/vtm5e.css"],
   "scripts": [],

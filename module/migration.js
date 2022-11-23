@@ -3,7 +3,7 @@
 let worldVersion
 
 export const migrateWorld = async () => {
-  const currentVersion = game.data.system.data.version
+  const currentVersion = game.data.system.version
   try {
     worldVersion = game.settings.get('vtm5e', 'worldVersion')
   } catch (e) {
@@ -17,7 +17,7 @@ export const migrateWorld = async () => {
     ui.notifications.info('New version detected; Updating SchreckNet, please wait.')
     const updates = []
     for (const a of game.actors) {
-      if (a.data.type !== 'character') continue
+      if (a.value.type !== 'character') continue
       updates.push({ _id: a.id, type: 'vampire' })
     }
     await Actor.updateDocuments(updates)

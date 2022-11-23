@@ -48,14 +48,14 @@ export class MortalActorSheet extends CoterieActorSheet {
     const data = super.getData();
     // TODO: confirm that I can finish and use this list
     data.sheetType = `${game.i18n.localize("VTM5E.Mortal")}`;
-    if(this.actor.data.type !== "vampire-da" && 
+    if(this.actor.type !== "vampire-da" && 
       (data?.data?.data?.headers?.sheetsystem === undefined || data.data.data.headers.sheetsystem === "")
     ) {
       data.data.data.headers.sheetsystem = "modern"
     }
 
     // Prepare items.
-    if (this.actor.data.type === "mortal") {
+    if (this.actor.type === "mortal") {
       this._prepareItems(data);
     }
 
@@ -158,8 +158,8 @@ export class MortalActorSheet extends CoterieActorSheet {
           let numDice = 0
 
           if(rollStrength) {
-            let strength = this.actor.data.data.abilities['strength']?.value + (this.actor.data.data.abilities['strength']?.buff ? 
-              this.actor.data.data.abilities['strength']?.buff : 0)
+            let strength = this.actor.system.abilities['strength']?.value + (this.actor.system.abilities['strength']?.buff ? 
+              this.actor.system.abilities['strength']?.buff : 0)
 
             if(Number.isNaN(strength)) {
               strength = 0
@@ -168,7 +168,7 @@ export class MortalActorSheet extends CoterieActorSheet {
           }
 
           if(rollPotence) {
-            let potence = this.actor.data.data.disciplines && this.actor.data.data.disciplines['potence'] ? this.actor.data.data.disciplines['potence']?.value : 0
+            let potence = this.actor.system.disciplines && this.actor.system.disciplines['potence'] ? this.actor.system.disciplines['potence']?.value : 0
             if(Number.isNaN(potence)) {
               potence = 0
             }
@@ -205,7 +205,7 @@ export class MortalActorSheet extends CoterieActorSheet {
             name,
             difficulty,
             specialty,
-            this.actor.data.data.health.state,
+            this.actor.system.health.state,
             applyWounds,
             specialtyLabel
           )
@@ -247,8 +247,8 @@ export class MortalActorSheet extends CoterieActorSheet {
 
           const attribute = html.find("#attributesSelect")[0]?.value
           let attributesVal = parseInt(!attribute || attribute === 'null' || attribute === '' ? '0' : 
-            this.actor.data.data.abilities[attribute]?.value + (this.actor.data.data.abilities[attribute]?.buff ? 
-            this.actor.data.data.abilities[attribute]?.buff : 
+            this.actor.system.abilities[attribute]?.value + (this.actor.system.abilities[attribute]?.buff ? 
+            this.actor.system.abilities[attribute]?.buff : 
           0))
           if(Number.isNaN(attributesVal)) {
             attributesVal = 0
@@ -256,13 +256,13 @@ export class MortalActorSheet extends CoterieActorSheet {
 
           const ability = html.find("#abilitySelect")[0]?.value
           let abilityVal = parseInt(!ability || ability === 'null'|| ability === ''  ? '0' : 
-            this.actor.data.data.skills[ability]?.value)
+            this.actor.system.skills[ability]?.value)
           if(Number.isNaN(abilityVal)) {
             abilityVal = 0
           }
 
-          const attributesLabel = game.i18n.localize(this.actor.data.data.abilities[attribute]?.name) 
-          const abilitiesLabel = game.i18n.localize(this.actor.data.data.skills[ability]?.name)
+          const attributesLabel = game.i18n.localize(this.actor.system.abilities[attribute]?.name) 
+          const abilitiesLabel = game.i18n.localize(this.actor.system.skills[ability]?.name)
 
           let modifier = parseInt(html.find("#inputMod")[0].value || 0) 
           if(Number.isNaN(modifier)) {
@@ -287,7 +287,7 @@ export class MortalActorSheet extends CoterieActorSheet {
             `${attributesLabel} + ${abilitiesLabel}`,
             difficulty,
             specialty,
-            this.actor.data.data.health.state,
+            this.actor.system.health.state,
             applyWounds,
             specialtyLabel
           )
@@ -327,13 +327,13 @@ export class MortalActorSheet extends CoterieActorSheet {
         icon: '<i class="fas fa-check"></i>',
         label: game.i18n.localize("VTM5E.Roll"),
         callback: async (html) => {
-          let dexterity = this.actor.data.data.abilities['dexterity']?.value + (this.actor.data.data.abilities['dexterity']?.buff ? 
-          this.actor.data.data.abilities['dexterity']?.buff :  0)
+          let dexterity = this.actor.system.abilities['dexterity']?.value + (this.actor.system.abilities['dexterity']?.buff ? 
+          this.actor.system.abilities['dexterity']?.buff :  0)
           if(Number.isNaN(dexterity)) {
             dexterity = 0
           }
 
-          let wits = parseInt(this.actor.data.data.abilities['wits']?.value);
+          let wits = parseInt(this.actor.system.abilities['wits']?.value);
           if(Number.isNaN(wits)) {
             wits = 0
           }
@@ -385,8 +385,8 @@ export class MortalActorSheet extends CoterieActorSheet {
           let numDice = 0
 
           if(rollStamina) {
-            let stamina = this.actor.data.data.abilities['stamina']?.value + (this.actor.data.data.abilities['stamina']?.buff ? 
-              this.actor.data.data.abilities['stamina']?.buff : 0)
+            let stamina = this.actor.system.abilities['stamina']?.value + (this.actor.system.abilities['stamina']?.buff ? 
+              this.actor.system.abilities['stamina']?.buff : 0)
 
             if(Number.isNaN(stamina)) {
               stamina = 0
@@ -395,7 +395,7 @@ export class MortalActorSheet extends CoterieActorSheet {
           }
 
           if(rollFortitude) {
-            let fortitude = this.actor.data.data.disciplines && this.actor.data.data.disciplines['fortitude'] ? this.actor.data.data.disciplines['fortitude']?.value : 0
+            let fortitude = this.actor.system.disciplines && this.actor.system.disciplines['fortitude'] ? this.actor.system.disciplines['fortitude']?.value : 0
             if(Number.isNaN(fortitude)) {
               fortitude = 0
             }
@@ -404,7 +404,7 @@ export class MortalActorSheet extends CoterieActorSheet {
           }
 
           if(rollArmor) {
-            let armor = this.actor.data.data.armor.rating ? parseInt(this.actor.data.data.armor.rating) : 0
+            let armor = this.actor.system.armor.rating ? parseInt(this.actor.system.armor.rating) : 0
             if(Number.isNaN(armor)) {
               armor = 0
             }
@@ -427,7 +427,7 @@ export class MortalActorSheet extends CoterieActorSheet {
             name,
             difficulty,
             specialty,
-            this.actor.data.data.health.state,
+            this.actor.system.health.state,
             false,
             specialtyLabel
           )
@@ -462,27 +462,27 @@ export class MortalActorSheet extends CoterieActorSheet {
         callback: async (html) => {
           const ability = html.find("#abilitySelect")[0]?.value
           let abilityVal = parseInt(!ability || ability === 'null'|| ability === ''  ? '0' : 
-            this.actor.data.data.skills[ability]?.value)
+            this.actor.system.skills[ability]?.value)
           if(Number.isNaN(abilityVal)) {
             abilityVal = 0
           }
 
           const attribute = html.find("#attributesSelect")[0]?.value
           let attributesVal = parseInt(!attribute || attribute === 'null' || attribute === '' ? '0' : 
-            this.actor.data.data.abilities[attribute]?.value + (this.actor.data.data.abilities[attribute]?.buff ? 
-            this.actor.data.data.abilities[attribute]?.buff : 
+            this.actor.system.abilities[attribute]?.value + (this.actor.system.abilities[attribute]?.buff ? 
+            this.actor.system.abilities[attribute]?.buff : 
           0))
           if(Number.isNaN(attributesVal)) {
             attributesVal = 0
           }
           const clickedRollName = dataset.label.toLowerCase()
 
-          let actorsOwnBuff = parseInt(dataset.ability && this.actor.data.data.abilities[clickedRollName]?.buff ? this.actor.data.data.abilities[clickedRollName]?.buff : '0')
+          let actorsOwnBuff = parseInt(dataset.ability && this.actor.system.abilities[clickedRollName]?.buff ? this.actor.system.abilities[clickedRollName]?.buff : '0')
           if(Number.isNaN(actorsOwnBuff)) {
             actorsOwnBuff = 0
           }
 
-          const name = attribute ? game.i18n.localize(this.actor.data.data.abilities[attribute]?.name) : game.i18n.localize(this.actor.data.data.skills[ability]?.name)
+          const name = attribute ? game.i18n.localize(this.actor.system.abilities[attribute]?.name) : game.i18n.localize(this.actor.system.skills[ability]?.name)
           const modifier = parseInt(html.find("#inputMod")[0].value || 0)
           const difficulty = parseInt(html.find("#inputDif")[0].value || 6)
           const specialty = html.find("#specialty")[0]?.checked || false
@@ -503,7 +503,7 @@ export class MortalActorSheet extends CoterieActorSheet {
               : `${dataset.label}`,
             difficulty,
             specialty,
-            this.actor.data.data.health.state,
+            this.actor.system.health.state,
             applyWounds,
             specialtyLabel
           )
@@ -516,7 +516,7 @@ export class MortalActorSheet extends CoterieActorSheet {
       }
     }
 
-    const abilities = Object.keys(this.actor.data.data.abilities, dataset, buttons)
+    const abilities = Object.keys(this.actor.system.abilities, dataset, buttons)
     this._onRenderDialogInternal(template, { noability: dataset.noability, rollingattributes: dataset.ability, skillsArray: this._getSkillArray(), abilities }, dataset, buttons)
   }
 
@@ -528,12 +528,12 @@ export class MortalActorSheet extends CoterieActorSheet {
       if (specialty.data.useattributes) {
         foundMatch = specialty.data.attribute === attibuteValue || specialty.data.attribute === wildcardValue
         if(foundMatch) {
-          specialitySource = game.i18n.localize(this.actor.data.data.abilities[specialty.data.attribute === attibuteValue ? attibuteValue : wildcardValue]?.name)
+          specialitySource = game.i18n.localize(this.actor.system.abilities[specialty.data.attribute === attibuteValue ? attibuteValue : wildcardValue]?.name)
         }
       } else {
         foundMatch = specialty.data.skill === abilityValue || specialty.data.skill === wildcardValue
         if(foundMatch) {
-          specialitySource = game.i18n.localize(this.actor.data.data.skills[specialty.data.skill === abilityValue ? abilityValue : wildcardValue]?.name)
+          specialitySource = game.i18n.localize(this.actor.system.skills[specialty.data.skill === abilityValue ? abilityValue : wildcardValue]?.name)
         }
       }
       if (foundMatch) {
@@ -552,7 +552,7 @@ export class MortalActorSheet extends CoterieActorSheet {
 
   _getSkillArray() {
     let skillsArray = skillsModern
-    switch(this.actor.data.data.headers.sheetsystem) {
+    switch(this.actor.system.headers.sheetsystem) {
       case "darkages":
         skillsArray = skillsDa
         break;
@@ -586,12 +586,12 @@ export class MortalActorSheet extends CoterieActorSheet {
     event.preventDefault()
     const element = event.currentTarget
     const dataset = element.dataset
-    const attributes = this.actor.data.data.abilities
-    const skills = this.actor.data.data.skills
+    const attributes = this.actor.system.abilities
+    const skills = this.actor.system.skills
 
     if (dataset.dice1 === "") {
       const dice2 =
-        this.actor.data.data.skills[dataset.dice2.toLowerCase()].value;
+        this.actor.system.skills[dataset.dice2.toLowerCase()].value;
       dataset.roll = dice2
       dataset.label = dataset.name;
       this._onRollDialog(event);
@@ -604,7 +604,7 @@ export class MortalActorSheet extends CoterieActorSheet {
 
       const difficulty = dataset.difficulty ? parseInt(dataset.difficulty) : 6
 
-      rollDice(dicePool, this.actor, `${dataset.name}`, Number.isNaN(difficulty) ? 6 : difficulty, dataset.specialty, this.actor.data.data.health.state, dataset.applywounds);
+      rollDice(dicePool, this.actor, `${dataset.name}`, Number.isNaN(difficulty) ? 6 : difficulty, dataset.specialty, this.actor.system.health.state, dataset.applywounds);
     }
   }
 
