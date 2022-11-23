@@ -49,8 +49,8 @@
   "gridUnits": "ft",
   "primaryTokenAttribute": "",
   "secondaryTokenAttribute": "",
-  "url": "https://github.com/TheAziraphale/wod20",
-  "manifest": "https://raw.githubusercontent.com/TheAziraphale/wod20/temp-azi/system.json",
-  "download": "https://github.com/TheAziraphale/wod20/archive/refs/heads/temp-azi.zip",
+  "url": "https://github.com/Layman2501/wod20",
+  "manifest": "https://raw.githubusercontent.com/Layman2501/wod20/main/system.json",
+  "download": "https://github.com/Layman2501/wod20/archive/refs/heads/main.zip",
   "license": "LICENSE.txt"
 }
