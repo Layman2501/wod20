@@ -42,7 +42,7 @@ export class GhoulActorSheet extends MortalActorSheet {
     data.sheetType = `${game.i18n.localize("VTM5E.Ghoul")}`;
 
     // Prepare items.
-    if (this.actor.data.type === "ghoul") {
+    if (this.actor.type === "ghoul") {
       this._prepareItems(data);
     }
 
@@ -106,8 +106,8 @@ export class GhoulActorSheet extends MortalActorSheet {
             disciplines[i.data.discipline] = []
           }
           disciplines[i.data.discipline].push(i);
-//          console.log(i.data.discipline, this.actor.data.data.disciplines[i.data.discipline], this.actor.data.data.disciplines[i.data.discipline] && !this.actor.data.data.disciplines[i.data.discipline].visible)
-          if (this.actor.data.data.disciplines[i.data.discipline] && !this.actor.data.data.disciplines[i.data.discipline].visible) {
+//          console.log(i.data.discipline, this.actor.system.disciplines[i.data.discipline], this.actor.system.disciplines[i.data.discipline] && !this.actor.system.disciplines[i.data.discipline].visible)
+          if (this.actor.system.disciplines[i.data.discipline] && !this.actor.system.disciplines[i.data.discipline].visible) {
 //            console.log("set it to visible", i.data.discipline)
             this.actor.update({
               [`data.disciplines.${i.data.discipline}.visible`]: true,
@@ -149,7 +149,7 @@ export class GhoulActorSheet extends MortalActorSheet {
     event.preventDefault();
     let options = "";
     for (const [key, value] of Object.entries(
-      this.actor.data.data.disciplines
+      this.actor.system.disciplines
     )) {
       let localizedName = game.i18n.localize(value.name)
       if(value.isCustom) {
@@ -285,8 +285,8 @@ export class GhoulActorSheet extends MortalActorSheet {
     const dataset = element.dataset;
     const item = this.actor.items.get(dataset.id);
     let disciplineValue = 0
-    if(this.actor.data.data.disciplines[item.data.data.discipline]) {
-      disciplineValue = this.actor.data.data.disciplines[item.data.data.discipline].value
+    if(this.actor.system.disciplines[item.data.data.discipline]) {
+      disciplineValue = this.actor.system.disciplines[item.data.data.discipline].value
     } else {
       let i
       for(i = 0; i < this.actor.customDisciplines.length > 0; i++) {
@@ -299,24 +299,24 @@ export class GhoulActorSheet extends MortalActorSheet {
     const dice1 =
       item.data.data.dice1 === "discipline"
         ? disciplineValue : item.data.data.dice1 === "thaumaturgy" ?
-        this.actor.data.data.disciplines["thaumaturgy"]?.value !== undefined ? this.actor.data.data.disciplines["thaumaturgy"].value : 0
-        : (this.actor.data.data.abilities[item.data.data.dice1]?.value !== undefined ? this.actor.data.data.abilities[item.data.data.dice1].value : 0) + 
-        (this.actor.data.data.abilities[item.data.data.dice1]?.buff !== undefined ? this.actor.data.data.abilities[item.data.data.dice1].buff : 0)
+        this.actor.system.disciplines["thaumaturgy"]?.value !== undefined ? this.actor.system.disciplines["thaumaturgy"].value : 0
+        : (this.actor.system.abilities[item.data.data.dice1]?.value !== undefined ? this.actor.system.abilities[item.data.data.dice1].value : 0) + 
+        (this.actor.system.abilities[item.data.data.dice1]?.buff !== undefined ? this.actor.system.abilities[item.data.data.dice1].buff : 0)
 
     let dice2;
     if (item.data.data.dice2 === "discipline") {
       dice2 = disciplineValue
     } else if (item.data.data.dice1 === "thaumaturgy") {      
-      dice2 = this.actor.data.data.disciplines["thaumaturgy"]?.value !== undefined ? this.actor.data.data.disciplines["thaumaturgy"].value : 0
+      dice2 = this.actor.system.disciplines["thaumaturgy"]?.value !== undefined ? this.actor.system.disciplines["thaumaturgy"].value : 0
     } else if (item.data.data.skill) {
-      dice2 = (this.actor.data.data.skills[item.data.data.dice2]?.value !== undefined ? this.actor.data.data.skills[item.data.data.dice2].value : 0);
+      dice2 = (this.actor.system.skills[item.data.data.dice2]?.value !== undefined ? this.actor.system.skills[item.data.data.dice2].value : 0);
     } else {
-      dice2 = (this.actor.data.data.abilities[item.data.data.dice2]?.value !== undefined ? this.actor.data.data.abilities[item.data.data.dice2].value : 0) + 
-      (this.actor.data.data.abilities[item.data.data.dice2]?.buff !== undefined ? this.actor.data.data.abilities[item.data.data.dice2].buff : 0)
+      dice2 = (this.actor.system.abilities[item.data.data.dice2]?.value !== undefined ? this.actor.system.abilities[item.data.data.dice2].value : 0) + 
+      (this.actor.system.abilities[item.data.data.dice2]?.buff !== undefined ? this.actor.system.abilities[item.data.data.dice2].buff : 0)
     }
 
     const dicePool = dice1 + dice2;
     const difficulty = item.data.data.difficulty ? parseInt(item.data.data.difficulty) : 6
-    rollDice(dicePool, this.actor, `${item.data.name}`, Number.isNaN(difficulty) ? 6 : difficulty, false, this.actor.data.data.health.state, item.data.data.applywounds);
+    rollDice(dicePool, this.actor, `${item.data.name}`, Number.isNaN(difficulty) ? 6 : difficulty, false, this.actor.system.health.state, item.data.data.applywounds);
   }
 }

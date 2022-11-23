@@ -1,12 +1,39 @@
 {
-  "name": "wod20",
+  "id": "wod20",
   "title": "Vampire 20th Anniversay Edition",
   "description": "Vampire 20th system for Foundry VTT!",
-  "version": "1.5",
-  "minimumCoreVersion": "0.9.0",
-  "compatibleCoreVersion": "0.9.0",
+  "version": "1.6",
+  "compatibility": {
+    "minimum": 10,
+    "verified": "10.290"
+  },
   "templateVersion": 3,
-  "author": "Majid, Mal, Ray Ji",
+  "author": [
+    {
+      "name": "Majid",
+      "url": "",
+      "email": "",
+      "discord": ""
+    },
+    {
+      "name": "Mal",
+      "url": "",
+      "email": "",
+      "discord": ""
+    },
+    {
+      "name": "Ray Ji",
+      "url": "",
+      "email": "",
+      "discord": ""
+    },
+    {
+      "name": "TheAziraphale",
+      "url": "",
+      "email": "",
+      "discord": ""
+    }
+  ],
   "esmodules": ["module/main.js"],
   "styles": ["css/vtm5e.css"],
   "scripts": [],
@@ -22,8 +49,8 @@
   "gridUnits": "ft",
   "primaryTokenAttribute": "",
   "secondaryTokenAttribute": "",
-  "url": "https://github.com/Layman2501/wod20",
-  "manifest": "https://raw.githubusercontent.com/Layman2501/wod20/main/system.json",
-  "download": "https://github.com/Layman2501/wod20/archive/refs/heads/main.zip",
+  "url": "https://github.com/TheAziraphale/wod20",
+  "manifest": "https://raw.githubusercontent.com/TheAziraphale/wod20/temp-azi/system.json",
+  "download": "https://github.com/TheAziraphale/wod20/archive/refs/heads/temp-azi.zip",
   "license": "LICENSE.txt"
 }

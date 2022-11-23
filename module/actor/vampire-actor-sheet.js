@@ -53,8 +53,8 @@ export class VampireActorSheet extends GhoulActorSheet {
 
     // Prepare items.
     if (
-      this.actor.data.type === "vampire" ||
-      this.actor.data.type === "character"
+      this.actor.type === "vampire" ||
+      this.actor.type === "character"
     ) {
       this._prepareItems(data);
     }
@@ -73,7 +73,7 @@ export class VampireActorSheet extends GhoulActorSheet {
     super._prepareItems(sheetData);
 
     const actorData = sheetData.actor;
-    actorData.bloodPotencyValue = parseInt(this.actor.data.data.blood.potency);
+    actorData.bloodPotencyValue = parseInt(this.actor.system.blood.potency);
     sheetData.blood_potency_text = getBloodPotencyText(
       actorData.bloodPotencyValue
     );

@@ -52,7 +52,7 @@ export class CoterieActorSheet extends ActorSheet {
     data.skillsWild = skillsWild
 
     // Prepare items.
-    if (this.actor.data.type === "coterie") {
+    if (this.actor.type === "coterie") {
       this._prepareItems(data);
     }
 
@@ -172,7 +172,7 @@ export class CoterieActorSheet extends ActorSheet {
 
   _getSkillArray() {
     let skillsArray = skillsModern
-    switch(this.actor.data.data.headers.sheetsystem) {
+    switch(this.actor.system.headers.sheetsystem) {
       case "darkages":
         skillsArray = skillsDa
         break;
@@ -191,7 +191,7 @@ export class CoterieActorSheet extends ActorSheet {
         customDisciplines[this.actor.customDisciplines[i].name] = this.actor.customDisciplines[i].data
       }
     }
-    return {...this.actor.data.data.disciplines, ...customDisciplines}
+    return {...this.actor.system.disciplines, ...customDisciplines}
   }
 
   _setupDotCounters(html) {
@@ -322,11 +322,18 @@ export class CoterieActorSheet extends ActorSheet {
   // There's gotta be a better way to do this but for the life of me I can't figure it out
   _assignToActorField(fields, value) {
     const actorData = duplicate(this.actor);
+    const newFieldNames = [];
+    fields.forEach((field) =>  {
+      newFieldNames.push(field === 'data' ? 'system' : field)
+    })
+
+    fields = newFieldNames;
+
     // update actor owned items
     if (fields.length === 2 && fields[0] === "items") {
       for (const i of actorData.items) {
         if (fields[1] === i._id) {
-          i.data.points = value;
+          i.system.points = value;
           break;
         }
       }
@@ -339,15 +346,15 @@ export class CoterieActorSheet extends ActorSheet {
       }
     } else if (fields.length >= 2 && fields[1] === "skills") {
       let foundSkill = false
-      for (const skillKey of Object.keys(actorData.data.skills)) {
+      for (const skillKey of Object.keys(actorData.system.skills)) {
         if (fields[2] === skillKey) {
-          actorData.data.skills[skillKey].value = value;
+          actorData.system.skills[skillKey].value = value;
           foundSkill = true
           break;
         }
       }
       if(!foundSkill) {
-        actorData.data.skills[fields[2]] = this._getNewSkillDefinition(fields[2], value)
+        actorData.system.skills[fields[2]] = this._getNewSkillDefinition(fields[2], value)
       }
     } else {
       const lastField = fields.pop();

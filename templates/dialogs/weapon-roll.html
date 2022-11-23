@@ -2,7 +2,7 @@
     <div class="form-group">
         <label> {{localize "VTM5E.SelectAttributes"}}: </label>
         <select id="attributesSelect" name="attributesSelect" selected="dexterity">
-            {{#select data.attributesSelect}} 
+            {{#select system.attributesSelect}} 
                 {{> "systems/wod20/templates/item/parts/attributes.html"}} 
             {{/select}}
             <option value="null">{{localize "VTM5E.None"}}</option>
