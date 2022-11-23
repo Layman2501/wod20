@@ -15,13 +15,14 @@
       {{!-- The grid classes are defined in scss/global/_grid.scss. To use, use
       both the "grid" and "grid-Ncol" class where "N" can be any number from 1
       to 12 and will create that number of columns. --}}
-      <div class="resources grid grid-3col">
+      <div class="resources grid grid-4col">
         {{!-- "flex-group-center" is also defined in the _grid.scss file and it
         will add a small amount of padding, a border, and will center all of its
         child elements content and text. --}}
         {{> "systems/wod20/templates/actor/parts/health.html"}}
         {{> "systems/wod20/templates/actor/parts/willpower.html"}}
-        {{> "systems/wod20/templates/actor/parts/humanity.html"}}
+        {{> "systems/wod20/templates/actor/parts/humanity.html"}} {{>
+          "systems/wod20/templates/actor/parts/bloodpool.html"}}
       </div>
       <div class="grid grid-3col flexrow">
         <div class="resource flex-group-center exp">
