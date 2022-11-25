@@ -340,7 +340,7 @@ export class CoterieActorSheet extends ActorSheet {
     } else if (fields.length === 3 && fields[0] === "items" && fields[1] === "disciplines") {
       for (const i of actorData.items) {
         if (fields[2] === i._id) {
-          i.data.value = value;
+          i.system.value = value;
           break;
         }
       }

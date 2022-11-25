@@ -374,7 +374,7 @@ Hooks.once("init", async function () {
     return foundMatch ? "" : label;
   });
   Handlebars.registerHelper("getDisciplineName", function (key, roll = false, disciplineList) {
-    return disciplineList[key] ? disciplineList[key].name : key;
+    return disciplineList && disciplineList[key] ? disciplineList[key].name : key;
   });
 });
 

@@ -920,7 +920,7 @@
     },
     "power": {
       "templates": ["base"],
-      "discipline": "rituals",
+      "discipline": "abombwe",
       "duration": "",
       "dice1": "discipline",
       "dice2": "discipline",
@@ -936,7 +936,7 @@
       "templates": ["base"],
       "boontype": "Trivial"
     },
-    "customDisciplines": {
+    "customDiscipline": {
       "templates": ["base"]
     },
     "customRoll": {
