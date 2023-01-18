@@ -2,7 +2,7 @@
   "id": "wod20",
   "title": "Vampire 20th Anniversary Edition",
   "description": "Vampire 20th system for Foundry VTT!",
-  "version": "1.8",
+  "version": "1.9",
   "compatibility": {
     "minimum": 10,
     "verified": "10.290"
