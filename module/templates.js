@@ -10,6 +10,7 @@ export const preloadHandlebarsTemplates = async function () {
   const templatePaths = [
     // Actor Sheet Partials
     'systems/wod20/templates/actor/parts/biography.html',
+    'systems/wod20/templates/actor/parts/biography-mortal.html',
     'systems/wod20/templates/actor/parts/disciplines.html',
     'systems/wod20/templates/actor/parts/exp.html',
     'systems/wod20/templates/actor/parts/dividedExp.html',
